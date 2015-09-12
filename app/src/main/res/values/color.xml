@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <drawable name="img_selected">#44aaaaaa</drawable>
+    <drawable name="img_defaul">#00000000</drawable>
+    <color name="common_top_bar_blue">#22292c</color>
+    <color name="select_item">#39BCED</color>
+
+    <!-- 白色 -->
+    <color name="white">#ffffff</color>
+    <color name="bar_color">#232325</color>
+    <color name="nickname_color">#4A4A4A</color>
+    <color name="filter_text_color">#4A4A4A</color>
+    <color name="bottom_text_color_normal">#ffffffff</color>
+    <color name="diver">#ffdfe2e7</color>
+    <color name="color1">#ffd2fbff</color>
+    <color name="color2">#ff2a2f37</color>
+    <color name="color3">#ff9b9b9b</color>
+    <color name="color4">#ff3188c2</color>
+    <color name="color5">#ffeb0021</color>
+    <color name="color6">#fff3f3f3</color>
+    <color name="color7">#ff1c1c1c</color>
+    <color name="color8">#ffb7b7b7</color>
+    <color name="color9">#ffbde0f8</color>
+    <color name="color10">#ff878787</color>
+    <color name="color11">#ff000000</color>
+    <color name="color12">#ff2c2c2c</color>
+    <color name="color13">#ffdedede</color>
+    <color name="color14">#ffc2c2c2</color>
+    <color name="text_white">#ffffffff</color>
+    <color name="text_gray">#ffb7b7b7</color>
+    <color name="text_name">#ff1c1c1c</color>
+    <color name="title_bg_blue">#ff3188c2</color>
+
+    <color name="table_head_text">#ffffff</color>
+    <color name="table_head_bg">#3762ad</color>
+    <color name="app_first_head">#3762ad</color>
+</resources>

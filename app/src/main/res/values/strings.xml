@@ -1,0 +1,79 @@
+<resources>
+    <string name="app_name">Member</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="xlistview_header_hint_normal">下拉刷新</string>
+    <string name="xlistview_header_hint_ready">松开刷新数据</string>
+    <string name="xlistview_header_hint_loading">正在加载...</string>
+    <string name="xlistview_header_last_time">上次更新时间：</string>
+    <string name="xlistview_footer_hint_normal">查看更多</string>
+    <string name="xlistview_footer_hint_over">没有更多内容</string>
+    <string name="xlistview_footer_hint_ready">松开载入更多</string>
+
+    <string name="lifecycle_all">所有</string>
+    <string name="lifecycle_visible">可见</string>
+    <string name="lifecycle_frontdeskoperation">前台运行</string>
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
+    <string name="protocol_log">协议log</string>
+    <string name="activity_period">activity周期</string>
+    <string name="float_window_setting">浮窗设置</string>
+    <string name="open_float_view">开启悬浮窗</string>
+    <string name="close_float_view">关闭悬浮窗</string>
+    <string name="simulate_3g_network">模拟3G网络</string>
+    <string name="simulate_2g_network">模拟2G网络</string>
+    <string name="complain">投诉</string>
+    <string name="please_later_on">请稍后...</string>
+    <string name="password">密码</string>
+    <string name="mobile_phone">手机号</string>
+    <string name="login">登录</string>
+    <string name="no_account_now_signup">没有账户？现在注册</string>
+    <string name="please_input_mobile_phone">手机号码不能为空</string>
+    <string name="please_input_password">密码不能为空</string>
+    <string name="wrong_mobile_phone">手机号码输入不正确</string>
+    <string name="please_enter_correct_password_format">请输入正确格式的密码</string>
+    <string name="mobile_phone_or_password_error">手机号或密码错误</string>
+    <string name="exit_again">再按一次退出</string>
+    <string name="verify_code">验证码</string>
+    <string name="get_vetify_code">获取验证码</string>
+    <string name="next">下一步</string>
+    <string name="haved_account_login_now">已有账户？现在登录</string>
+    <string name="please_input_verify_code">验证码不能为空</string>
+    <string name="get_verify_code_again">重新获取验证码</string>
+    <string name="resend_after">秒后重新发送</string>
+    <string name="nickname">昵称</string>
+    <string name="confirm_password">确认密码</string>
+    <string name="complete_signup">完成注册</string>
+    <string name="please_input_nickname">昵称不能为空</string>
+    <string name="nickname_wrong_format_hint">"昵称一般由1-16位字符组成</string>
+    <string name="password_wrong_format_hint">"密码必须有6-20位字符组成"</string>
+    <string name="two_passwords_differ_hint">"请注意两次密码输入不一致哦"</string>
+    <string name="experience_edition_test">测试版体验</string>
+    <string name="meter">"米"</string>
+    <string name="kilometre">"千米"</string>
+    <string name="publish_order">保存</string>
+    <string name="good_evaluate_prior">好评优先</string>
+    <string name="price_lowest">价格最低</string>
+    <string name="most_expensive">价格最高</string>
+    <string name="nearest_me">离我最近</string>
+    <string name="request_he_help">请他帮忙</string>
+    <string name="yuan_start">元起</string>
+    <string name="good_reputation_proportion">好评率</string>
+    <string name="client_evaluate">客户评价</string>
+    <string name="look_up_all">查看全部</string>
+    <string name="none_content">没有内容</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="title_activity_member_card">会员办卡</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_mcard_add">McardAddActivity</string>
+    <string name="btn_add">新增</string>
+    <string name="title_activity_d0__mcardyc">D0_McardycActivity</string>
+    <string name="title_activity_d1__mcardcc">D1_McardccActivity</string>
+
+</resources>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <View android:background="@color/diver" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+    <RelativeLayout android:layout_width="fill_parent" android:layout_height="40.0dip">
+        <TextView android:textSize="16.0dip" android:textColor="@color/color10" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="18.0dip" android:text="消费项目:" android:layout_centerVertical="true" />
+        <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_alignParentRight="true">
+            <ImageView android:background="@drawable/add_blue_selector" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+            <TextView android:textSize="16.0dip" android:textColor="@color/title_bg_blue" android:gravity="center" android:id="@+id/add_goods" android:clickable="true" android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="添加项目" android:onClick="toAddGoods" />
+            <ImageView android:id="@+id/del_goods_icon" android:background="@mipmap/del_red_disable" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="30.0dip" />
+            <TextView android:textSize="16.0dip" android:textColor="@color/color10" android:gravity="center" android:id="@+id/delete_goods" android:clickable="true" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_marginRight="10.0dip" android:text="删除" android:onClick="deleteGoods" />
+        </LinearLayout>
+    </RelativeLayout>
+    <View android:background="@color/diver" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+    <ListView android:id="@+id/listview_goods" android:background="@color/bottom_text_color_normal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:divider="@color/diver" android:visibility="gone" android:dividerHeight="0.5dip" />
+    <TextView android:textSize="18.0dip" android:textColor="@color/color7" android:gravity="center" android:id="@+id/no_data" android:background="@color/bottom_text_color_normal"  android:layout_width="fill_parent" android:layout_height="68.0dip" android:text="当前没有消费项目" android:layout_centerInParent="true" />
+    <View android:background="@color/diver" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+    <View android:background="@color/diver" android:layout_width="fill_parent" android:layout_height="0.5dip" android:layout_marginTop="15.0dip" />
+    <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:background="@color/bottom_text_color_normal" android:layout_width="fill_parent" android:layout_height="51.0dip">
+        <TextView android:textSize="18.0dip" android:textColor="@color/color7" android:gravity="center_vertical" android:paddingLeft="10.0dip" android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="短信通知:" />
+        <RadioGroup android:orientation="horizontal" android:id="@+id/rg_sms_notic" android:layout_width="wrap_content" android:layout_height="wrap_content" android:contentDescription="性别">
+            <RadioButton android:textSize="18.0dip" android:textColor="@color/color7" android:id="@+id/rb_yes" android:layout_width="wrap_content" android:layout_height="wrap_content" android:checked="true" android:button="@drawable/sex_radiobutton_selector" android:text="是" />
+            <RadioButton android:textSize="18.0dip" android:textColor="@color/color7" android:id="@+id/rb_no" android:layout_width="wrap_content" android:layout_height="wrap_content" android:button="@drawable/sex_radiobutton_selector" android:text="否" />
+        </RadioGroup>
+        <TextView android:id="@+id/txv_sms_notic" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="true" />
+        <EditText android:textSize="18.0dip" android:textColor="@color/color7" android:textColorHint="@color/color8" android:gravity="center_vertical" android:id="@+id/edt_phone_num" android:background="@mipmap/bg_edittext2" android:paddingLeft="10.0dip" android:paddingRight="10.0dip" android:layout_width="fill_parent" android:layout_height="38.0dip" android:layout_marginLeft="16.0dip" android:layout_marginRight="7.0dip" android:hint="请输入手机号码" android:singleLine="true" android:layout_toLeftOf="@+id/btn_ok" android:layout_centerVertical="true" android:inputType="phone" />
+    </LinearLayout>
+    <View android:background="@color/diver" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+
+</LinearLayout>

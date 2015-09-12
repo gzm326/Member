@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/home_need_help_item_two"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:id="@+id/left"
+            android:padding="15dp"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_gravity="center"
+                android:id="@+id/mcard_add"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@mipmap/card_icon_media"/>
+            <TextView
+                android:id="@+id/sevice_title_left"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal"
+                android:text="会员办卡"
+                android:textSize="15dp"
+                android:textColor="#343434"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="#EAEAEA" />
+        <LinearLayout
+            android:id="@+id/center"
+            android:padding="15dp"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+        <ImageView
+            android:layout_gravity="center"
+            android:id="@+id/home_need_help_item_center"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@mipmap/card_icon_speedup"/>
+        <TextView
+            android:id="@+id/sevice_title_center"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal"
+            android:text="会员管理"
+            android:textSize="15dp"
+            android:textColor="#343434"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="fill_parent"
+        android:background="#EAEAEA" />
+    <LinearLayout
+        android:id="@+id/right"
+        android:padding="15dp"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_gravity="center"
+            android:id="@+id/home_need_help_item_right"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@mipmap/card_icon_trash"/>
+        <TextView
+            android:id="@+id/sevice_title_right"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal"
+            android:text="会员预存"
+            android:textSize="15dp"
+            android:textColor="#343434"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:id="@+id/left2"
+            android:padding="0dp"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_gravity="center"
+                android:id="@+id/home_need_help_item_left2"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@mipmap/card_icon_media"/>
+            <TextView
+                android:id="@+id/sevice_title_left2"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal"
+                android:text="会员充次"
+                android:textSize="15dp"
+                android:textColor="#343434"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="#EAEAEA" />
+        <LinearLayout
+            android:id="@+id/center2"
+            android:padding="0dp"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_gravity="center"
+                android:id="@+id/home_need_help_item_center2"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@mipmap/card_icon_speedup"/>
+            <TextView
+                android:id="@+id/sevice_title_center2"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal"
+                android:text="跑腿快递"
+                android:textSize="15dp"
+                android:textColor="#343434"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="#EAEAEA" />
+        <LinearLayout
+            android:id="@+id/right2"
+            android:padding="0dp"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_gravity="center"
+                android:id="@+id/home_need_help_item_right2"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@mipmap/card_icon_trash"/>
+            <TextView
+                android:id="@+id/sevice_title_right2"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal"
+                android:text="跑腿快递"
+                android:textSize="15dp"
+                android:textColor="#343434"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

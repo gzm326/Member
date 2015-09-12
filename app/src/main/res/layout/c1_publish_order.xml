@@ -1,0 +1,628 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="#fcfcfc" >
+
+        <ImageView
+            android:id="@+id/top_view_back"
+            android:layout_width="52dp"
+            android:layout_height="48dp"
+            android:background="@drawable/img_select"
+            android:padding="14dp"
+            android:src="@drawable/a2_back_button" />
+
+        <LinearLayout
+            android:id="@+id/top_view_title_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/top_view_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="会员办卡"
+                android:textColor="@color/select_item"
+                android:textSize="20dp"
+                />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/top_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="@string/publish_order"
+            android:textColor="@color/select_item"
+            android:textSize="18dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="13dp"
+            />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layout_gravity="bottom"
+            android:background="@color/select_item" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+             >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@mipmap/feed_item_bg"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="1dp"
+                    android:text="会员卡号"
+                    android:textColor="#666666"
+                    android:textSize="16dp" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="#cccccccc" />
+                <EditText
+                    android:id="@+id/mcard_kh"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="center_vertical|right"
+                    android:paddingRight="20dp"
+                    android:singleLine="true"
+                    android:textColor="#333333"
+                    android:textSize="16dp"
+
+                    />
+
+            </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@mipmap/feed_item_bg"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="1dp"
+                        android:text="会员姓名"
+                        android:textColor="#666666"
+                        android:textSize="16dp" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#cccccccc" />
+                    <EditText
+                        android:id="@+id/mcard_xm"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="1dp"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:gravity="center_vertical|right"
+                        android:paddingRight="20dp"
+                        android:singleLine="true"
+                        android:textColor="#333333"
+                        android:textSize="16dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@mipmap/feed_item_bg"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="1dp"
+                        android:text="手机号码"
+                        android:textColor="#666666"
+                        android:textSize="16dp" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#cccccccc" />
+                    <EditText
+                        android:id="@+id/mcard_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="1dp"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:gravity="center_vertical|right"
+                        android:paddingRight="20dp"
+                        android:singleLine="true"
+                        android:textColor="#333333"
+                        android:textSize="16dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@mipmap/feed_item_bg"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="1dp"
+                        android:text="会员级别"
+                        android:textColor="#666666"
+                        android:textSize="16dp" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#cccccccc" />
+                    <TextView
+                        android:id="@+id/mcard_jb"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="1dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:textColor="#333333"
+                        android:textSize="16dp"
+                        android:hint="请选择"
+                        android:singleLine="true"
+                        android:drawableRight="@mipmap/dropdown_arrow" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@mipmap/feed_item_bg"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="1dp"
+                        android:text="会员生日"
+                        android:textColor="#666666"
+                        android:textSize="16dp" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#cccccccc" />
+
+                    <TextView
+                        android:id="@+id/mcard_sr"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="1dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:singleLine="true"
+                        android:textColor="#333333"
+                        android:textSize="16dp"
+                        android:hint="请选择"
+                        android:drawableRight="@mipmap/dropdown_arrow"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@mipmap/feed_item_bg"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="1dp"
+                        android:text="初始存款"
+                        android:textColor="#666666"
+                        android:textSize="16dp" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#cccccccc" />
+
+                    <EditText
+                        android:id="@+id/mcard_yc"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:gravity="center_vertical|right"
+                        android:inputType="numberDecimal"
+                        android:paddingRight="5dp"
+                        android:singleLine="true"
+                        android:hint="0"
+                        android:textColor="#333333"
+                        android:textSize="16dp"
+                        android:maxLength="8"
+                        android:textCursorDrawable="@null"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:text="元"
+                        android:textColor="#333333"
+                        android:textSize="16dp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/mcard_xtkz_layout"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/mcard_xtkz"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="1dp"
+                        android:text="--点击填写更多选填项--"
+                        android:textColor="#3762ad"
+                        android:textSize="16dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/mcard_xtkz_view"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    >
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@mipmap/feed_item_bg"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginTop="1dp"
+                            android:text="电子邮箱"
+                            android:textColor="#666666"
+                            android:textSize="16dp" />
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="#cccccccc" />
+                        <EditText
+                            android:id="@+id/mcard_email"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="1dp"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:gravity="center_vertical|right"
+                            android:paddingRight="20dp"
+                            android:singleLine="true"
+                            android:textColor="#333333"
+                            android:textSize="16dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@mipmap/feed_item_bg"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginTop="1dp"
+                            android:text="推荐卡号"
+                            android:textColor="#666666"
+                            android:textSize="16dp" />
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="#cccccccc" />
+                        <EditText
+                            android:id="@+id/mcard_tjrkh"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="1dp"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:gravity="center_vertical|right"
+                            android:paddingRight="20dp"
+                            android:singleLine="true"
+                            android:textColor="#333333"
+                            android:textSize="16dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@mipmap/feed_item_bg"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginTop="1dp"
+                            android:text="联系地址"
+                            android:textColor="#666666"
+                            android:textSize="16dp" />
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="#cccccccc" />
+                        <EditText
+                            android:id="@+id/mcard_dz"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="1dp"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:gravity="center_vertical|right"
+                            android:paddingRight="20dp"
+                            android:singleLine="true"
+                            android:textColor="#333333"
+                            android:textSize="16dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@mipmap/feed_item_bg"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginTop="1dp"
+                            android:text="工作单位"
+                            android:textColor="#666666"
+                            android:textSize="16dp" />
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="#cccccccc" />
+                        <EditText
+                            android:id="@+id/mcard_dw"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="1dp"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:gravity="center_vertical|right"
+                            android:paddingRight="20dp"
+                            android:singleLine="true"
+                            android:textColor="#333333"
+                            android:textSize="16dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@mipmap/feed_item_bg"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginTop="1dp"
+                            android:text="ID卡表面号"
+                            android:textColor="#666666"
+                            android:textSize="16dp" />
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="#cccccccc" />
+                        <EditText
+                            android:id="@+id/mcard_idkh"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="1dp"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:gravity="center_vertical|right"
+                            android:paddingRight="20dp"
+                            android:singleLine="true"
+                            android:textColor="#333333"
+                            android:textSize="16dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@mipmap/feed_item_bg"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginTop="1dp"
+                            android:text="会员备注"
+                            android:textColor="#666666"
+                            android:textSize="16dp" />
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="#cccccccc" />
+                        <EditText
+                            android:id="@+id/mcard_bz"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="1dp"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:gravity="center_vertical|right"
+                            android:paddingRight="20dp"
+                            android:singleLine="true"
+                            android:textColor="#333333"
+                            android:textSize="16dp" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="25dp"
+                    android:layout_margin="20dp"
+                    />
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:alpha="0.15"
+                android:background="#000000"/>
+
+            <TextView
+                android:id="@+id/c0_publish_button"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/c1_apply_btn_select"
+                android:gravity="center"
+                android:text="@string/publish_order"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp"/>
+        </FrameLayout>
+
+    </FrameLayout>
+
+
+
+</LinearLayout>

@@ -1,0 +1,168 @@
+
+<LinearLayout android:orientation="vertical" android:background="@color/bottom_text_color_normal" android:layout_width="wrap_content" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--<include layout="@layout/top_bar" />-->
+    <ScrollView android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <LinearLayout android:orientation="vertical" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <TextView android:textSize="16.0dip" android:textColor="@color/color5" android:gravity="center_vertical" android:background="@color/color6" android:paddingLeft="14.0dip" android:layout_width="fill_parent" android:layout_height="40.0dip" android:text="必填:" />
+                <View android:background="@color/diver" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+                <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="51.0dip">
+                    <TextView android:textSize="18.0dip" android:textColor="@color/color7" android:gravity="center_vertical" android:paddingLeft="14.0dip" android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="会员卡号:" />
+                    <TextView android:textSize="18.0dip" android:textColor="@color/color4" android:textColorHint="@color/color8" android:gravity="center_vertical" android:id="@+id/txv_card_num" android:paddingLeft="5.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginLeft="4.0dip" android:layout_marginRight="18.0dip" android:singleLine="true" android:layout_weight="1.0" />
+                </LinearLayout>
+                <View android:background="@color/diver" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+                <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="51.0dip">
+                    <TextView android:textSize="18.0dip" android:textColor="@color/color7" android:gravity="center_vertical" android:paddingLeft="14.0dip" android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="会员姓名:" />
+                    <EditText android:textSize="18.0dip" android:textColor="@color/color4" android:textColorHint="@color/color8" android:gravity="center_vertical" android:id="@+id/edt_name" android:background="@mipmap/ic_input_bottom_line" android:paddingLeft="5.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginLeft="4.0dip" android:layout_marginRight="18.0dip" android:singleLine="true" android:layout_weight="1.0" />
+                </LinearLayout>
+                <View android:background="@color/diver" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+                <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="51.0dip">
+                    <TextView android:textSize="18.0dip" android:textColor="@color/color7" android:gravity="center_vertical" android:paddingLeft="14.0dip" android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="会员类别:" />
+                    <TextView android:textSize="18.0dip" android:textColor="@color/color4" android:gravity="center_vertical" android:id="@+id/txv_type" android:paddingLeft="5.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginLeft="4.0dip" android:layout_marginRight="18.0dip" android:hint="请选择会员类别" android:singleLine="true" android:drawableRight="@mipmap/dropdown_arrow" />
+                </LinearLayout>
+                <View android:background="@color/diver" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+                <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="51.0dip">
+                    <TextView android:textSize="18.0dip" android:textColor="@color/color7" android:gravity="center_vertical" android:paddingLeft="14.0dip" android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="会员密码:" />
+                    <EditText android:textSize="18.0dip" android:textColor="@color/color4" android:textColorHint="@color/color8" android:gravity="center_vertical" android:id="@+id/edt_passwrod1" android:background="@mipmap/ic_input_bottom_line" android:paddingLeft="5.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginLeft="4.0dip" android:layout_marginRight="18.0dip" android:password="true" android:layout_weight="1.0" android:inputType="textPassword" />
+                </LinearLayout>
+                <View android:background="@color/diver" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+                <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="51.0dip">
+                    <TextView android:textSize="18.0dip" android:textColor="@color/color7" android:gravity="center_vertical" android:paddingLeft="14.0dip" android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="确认密码:" />
+                    <EditText android:textSize="18.0dip" android:textColor="@color/color4" android:textColorHint="@color/color8" android:gravity="center_vertical" android:id="@+id/edt_password2" android:background="@mipmap/ic_input_bottom_line" android:paddingLeft="5.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginLeft="4.0dip" android:layout_marginRight="18.0dip" android:password="true" android:singleLine="true" android:layout_weight="1.0" android:inputType="textPassword" />
+                </LinearLayout>
+                <View android:background="@color/diver" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+                <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="51.0dip">
+                    <TextView android:textSize="18.0dip" android:textColor="@color/color7" android:gravity="center_vertical" android:paddingLeft="14.0dip" android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="手机号码:" />
+                    <EditText android:textSize="18.0dip" android:textColor="@color/color4" android:textColorHint="@color/color8" android:gravity="center_vertical" android:id="@+id/edt_phone" android:background="@mipmap/ic_input_bottom_line" android:paddingLeft="5.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginLeft="4.0dip" android:layout_marginRight="18.0dip" android:singleLine="true" android:layout_weight="1.0" />
+                </LinearLayout>
+                <View android:background="@color/diver" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+                <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="51.0dip">
+                    <TextView android:textSize="18.0dip" android:textColor="@color/color7" android:gravity="center_vertical" android:paddingLeft="14.0dip" android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="生日:" />
+                    <TextView android:textSize="18.0dip" android:textColor="@color/color4" android:gravity="center_vertical" android:id="@+id/txv_birth" android:paddingLeft="5.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginLeft="4.0dip" android:layout_marginRight="18.0dip" android:hint="请选择" android:singleLine="true" android:drawableRight="@mipmap/dropdown_arrow" />
+                </LinearLayout>
+                <View android:background="@color/diver" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+                <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="51.0dip">
+                    <TextView android:textSize="18.0dip" android:textColor="@color/color7" android:gravity="center_vertical" android:paddingLeft="14.0dip" android:layout_width="85.0dip" android:layout_height="fill_parent" android:text="有效期:" />
+                    <TextView android:textSize="18.0dip" android:textColor="@color/color7" android:gravity="center_vertical" android:paddingLeft="14.0dip" android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="从" />
+                    <TextView android:textSize="18.0dip" android:textColor="@color/color4" android:gravity="center_vertical" android:id="@+id/txv_start_date" android:paddingLeft="5.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginLeft="4.0dip" android:layout_marginRight="18.0dip" android:text="请选择" android:singleLine="true" />
+                </LinearLayout>
+                <View android:background="@color/diver" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+                <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="51.0dip">
+                    <TextView android:textSize="18.0dip" android:textColor="@color/color7" android:gravity="center_vertical" android:paddingLeft="14.0dip" android:layout_width="85.0dip" android:layout_height="fill_parent" />
+                    <TextView android:textSize="18.0dip" android:textColor="@color/color7" android:gravity="center_vertical" android:paddingLeft="14.0dip" android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="至" />
+                    <TextView android:textSize="18.0dip" android:textColor="@color/color4" android:gravity="center_vertical" android:id="@+id/txv_end_date" android:paddingLeft="5.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginLeft="4.0dip" android:layout_marginRight="18.0dip" android:text="请选择" android:singleLine="true" />
+                </LinearLayout>
+                <View android:background="@color/diver" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+            </LinearLayout>
+            <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <TextView android:textSize="16.0sp" android:textColor="@color/color4" android:gravity="center_vertical" android:id="@+id/propertys" android:background="@color/color6" android:paddingLeft="14.0dip" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="40.0dip" android:text="自定义属性:" />
+                <View android:background="@color/diver" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+                <LinearLayout android:orientation="vertical" android:id="@+id/property1_ll" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="51.0dip">
+                        <TextView android:textSize="18.0sp" android:textColor="@color/color7" android:gravity="center_vertical" android:id="@+id/tv_property1" android:paddingLeft="14.0dip" android:layout_width="wrap_content" android:layout_height="fill_parent" />
+                        <EditText android:textSize="18.0sp" android:textColor="@color/color4" android:textColorHint="@color/color8" android:gravity="center_vertical" android:id="@+id/edt_property1" android:background="@mipmap/ic_input_bottom_line" android:paddingLeft="5.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginLeft="4.0dip" android:layout_marginRight="18.0dip" android:singleLine="true" />
+                    </LinearLayout>
+                    <View android:background="@color/diver" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+                </LinearLayout>
+                <LinearLayout android:orientation="vertical" android:id="@+id/property2_ll" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="51.0dip">
+                        <TextView android:textSize="18.0sp" android:textColor="@color/color7" android:gravity="center_vertical" android:id="@+id/tv_property2" android:paddingLeft="14.0dip" android:layout_width="wrap_content" android:layout_height="fill_parent" />
+                        <EditText android:textSize="18.0sp" android:textColor="@color/color4" android:textColorHint="@color/color8" android:gravity="center_vertical" android:id="@+id/edt_property2" android:background="@mipmap/ic_input_bottom_line" android:paddingLeft="5.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginLeft="4.0dip" android:layout_marginRight="18.0dip" android:singleLine="true" />
+                    </LinearLayout>
+                    <View android:background="@color/diver" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+                </LinearLayout>
+                <LinearLayout android:orientation="vertical" android:id="@+id/property3_ll" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="51.0dip">
+                        <TextView android:textSize="18.0sp" android:textColor="@color/color7" android:gravity="center_vertical" android:id="@+id/tv_property3" android:paddingLeft="14.0dip" android:layout_width="wrap_content" android:layout_height="fill_parent" />
+                        <EditText android:textSize="18.0sp" android:textColor="@color/color4" android:textColorHint="@color/color8" android:gravity="center_vertical" android:id="@+id/edt_property3" android:background="@mipmap/ic_input_bottom_line" android:paddingLeft="5.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginLeft="4.0dip" android:layout_marginRight="18.0dip" android:singleLine="true" />
+                    </LinearLayout>
+                    <View android:background="@color/diver" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+                </LinearLayout>
+                <LinearLayout android:orientation="vertical" android:id="@+id/property4_ll" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="51.0dip">
+                        <TextView android:textSize="18.0sp" android:textColor="@color/color7" android:gravity="center_vertical" android:id="@+id/tv_property4" android:paddingLeft="14.0dip" android:layout_width="wrap_content" android:layout_height="fill_parent" />
+                        <EditText android:textSize="18.0sp" android:textColor="@color/color4" android:textColorHint="@color/color8" android:gravity="center_vertical" android:id="@+id/edt_property4" android:background="@mipmap/ic_input_bottom_line" android:paddingLeft="5.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginLeft="4.0dip" android:layout_marginRight="18.0dip" android:singleLine="true" />
+                    </LinearLayout>
+                    <View android:background="@color/diver" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+                </LinearLayout>
+                <LinearLayout android:orientation="vertical" android:id="@+id/property5_ll" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="51.0dip">
+                        <TextView android:textSize="18.0sp" android:textColor="@color/color7" android:gravity="center_vertical" android:id="@+id/tv_property5" android:paddingLeft="14.0dip" android:layout_width="wrap_content" android:layout_height="fill_parent" />
+                        <EditText android:textSize="18.0sp" android:textColor="@color/color4" android:textColorHint="@color/color8" android:gravity="center_vertical" android:id="@+id/edt_property5" android:background="@mipmap/ic_input_bottom_line" android:paddingLeft="5.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginLeft="4.0dip" android:layout_marginRight="18.0dip" android:singleLine="true" />
+                    </LinearLayout>
+                    <View android:background="@color/diver" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+                </LinearLayout>
+                <LinearLayout android:orientation="vertical" android:id="@+id/property6_ll" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="51.0dip">
+                        <TextView android:textSize="18.0sp" android:textColor="@color/color7" android:gravity="center_vertical" android:id="@+id/tv_property6" android:paddingLeft="14.0dip" android:layout_width="wrap_content" android:layout_height="fill_parent" />
+                        <EditText android:textSize="18.0sp" android:textColor="@color/color4" android:textColorHint="@color/color8" android:gravity="center_vertical" android:id="@+id/edt_property6" android:background="@mipmap/ic_input_bottom_line" android:paddingLeft="5.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginLeft="4.0dip" android:layout_marginRight="18.0dip" android:singleLine="true" />
+                    </LinearLayout>
+                    <View android:background="@color/diver" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+                </LinearLayout>
+                <TextView android:textSize="16.0dip" android:textColor="@color/color4" android:gravity="center_vertical" android:background="@color/color6" android:paddingLeft="14.0dip" android:layout_width="fill_parent" android:layout_height="40.0dip" android:text="可填:" />
+                <View android:background="@color/diver" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+                <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="51.0dip">
+                    <TextView android:textSize="18.0dip" android:textColor="@color/color7" android:gravity="center_vertical" android:paddingLeft="14.0dip" android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="ID卡号表:" />
+                    <EditText android:textSize="18.0dip" android:textColor="@color/color4" android:textColorHint="@color/color8" android:gravity="center_vertical" android:id="@+id/edt_id_card_num" android:background="@mipmap/ic_input_bottom_line" android:paddingLeft="5.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginLeft="4.0dip" android:layout_marginRight="18.0dip" android:hint="可以通过表面号搜索会员信息" android:singleLine="true" />
+                </LinearLayout>
+                <View android:background="@color/diver" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+                <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="51.0dip">
+                    <TextView android:textSize="18.0dip" android:textColor="@color/color7" android:gravity="center_vertical" android:paddingLeft="14.0dip" android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="会员性别:" />
+                    <RadioGroup android:orientation="horizontal" android:id="@+id/rg_sex" android:layout_width="wrap_content" android:layout_height="wrap_content" android:contentDescription="性别">
+                        <RadioButton android:textSize="18.0dip" android:textColor="@color/color7" android:id="@+id/rb_male" android:layout_width="wrap_content" android:layout_height="wrap_content" android:checked="true" android:button="@drawable/sex_radiobutton_selector" android:text="男" />
+                        <RadioButton android:textSize="18.0dip" android:textColor="@color/color7" android:id="@+id/rb_female" android:layout_width="wrap_content" android:layout_height="wrap_content" android:button="@drawable/sex_radiobutton_selector" android:text="女" />
+                    </RadioGroup>
+                    <TextView android:id="@+id/txv_sex" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="fill_parent" />
+                </LinearLayout>
+                <View android:background="@color/diver" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+                <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="51.0dip">
+                    <TextView android:textSize="18.0dip" android:textColor="@color/color7" android:gravity="center_vertical" android:paddingLeft="14.0dip" android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="可用余额:" />
+                    <TextView android:textSize="18.0dip" android:textColor="@color/color4" android:textColorHint="@color/color8" android:gravity="center_vertical" android:id="@+id/edt_init_deposit" android:paddingLeft="5.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginLeft="4.0dip" android:layout_marginRight="18.0dip" android:singleLine="true" />
+                </LinearLayout>
+                <View android:background="@color/diver" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+                <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="51.0dip">
+                    <TextView android:textSize="18.0dip" android:textColor="@color/color7" android:gravity="center_vertical" android:paddingLeft="14.0dip" android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="赠送存款:" />
+                    <TextView android:textSize="18.0dip" android:textColor="@color/color4" android:gravity="center_vertical" android:paddingLeft="5.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginLeft="4.0dip" android:layout_marginRight="18.0dip" android:text="无" android:singleLine="true" />
+                </LinearLayout>
+                <View android:background="@color/diver" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+                <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="51.0dip">
+                    <TextView android:textSize="18.0dip" android:textColor="@color/color7" android:gravity="center_vertical" android:paddingLeft="14.0dip" android:layout_width="110.0dip" android:layout_height="fill_parent" android:text="证件号码:" />
+                    <TextView android:textSize="18.0dip" android:textColor="@color/color4" android:gravity="center_vertical" android:id="@+id/txv_id_type" android:paddingLeft="5.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginLeft="4.0dip" android:layout_marginRight="18.0dip" android:hint="请选择证件类型" android:singleLine="true" android:drawableRight="@mipmap/dropdown_arrow" />
+                </LinearLayout>
+                <View android:background="@color/diver" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+                <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="51.0dip">
+                    <TextView android:textSize="18.0dip" android:textColor="@color/color7" android:gravity="center_vertical" android:paddingLeft="14.0dip" android:layout_width="110.0dip" android:layout_height="fill_parent" />
+                    <EditText android:textSize="18.0dip" android:textColor="@color/color4" android:textColorHint="@color/color8" android:gravity="center_vertical" android:id="@+id/edt_person_id" android:background="@mipmap/ic_input_bottom_line" android:paddingLeft="5.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginLeft="4.0dip" android:layout_marginRight="18.0dip" />
+                </LinearLayout>
+                <View android:background="@color/diver" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+                <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="51.0dip">
+                    <TextView android:textSize="18.0dip" android:textColor="@color/color7" android:gravity="center_vertical" android:paddingLeft="14.0dip" android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="电子邮箱:" />
+                    <EditText android:textSize="18.0dip" android:textColor="@color/color4" android:textColorHint="@color/color8" android:gravity="center_vertical" android:id="@+id/edt_email" android:background="@mipmap/ic_input_bottom_line" android:paddingLeft="5.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginLeft="4.0dip" android:layout_marginRight="18.0dip" android:singleLine="true" />
+                </LinearLayout>
+                <View android:background="@color/diver" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+                <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="51.0dip">
+                    <TextView android:textSize="18.0dip" android:textColor="@color/color7" android:gravity="center_vertical" android:paddingLeft="14.0dip" android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="推荐人卡号:" />
+                    <EditText android:textSize="18.0dip" android:textColor="@color/color4" android:textColorHint="@color/color8" android:gravity="center_vertical" android:id="@+id/edt_recommend_num" android:background="@mipmap/ic_input_bottom_line" android:paddingLeft="5.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginLeft="4.0dip" android:layout_marginRight="18.0dip" android:singleLine="true" />
+                </LinearLayout>
+                <View android:background="@color/diver" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+                <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="51.0dip">
+                    <TextView android:textSize="18.0dip" android:textColor="@color/color7" android:gravity="center_vertical" android:paddingLeft="14.0dip" android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="联系地址:" />
+                    <EditText android:textSize="18.0dip" android:textColor="@color/color4" android:textColorHint="@color/color8" android:gravity="center_vertical" android:id="@+id/edt_addr" android:background="@mipmap/ic_input_bottom_line" android:paddingLeft="5.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginLeft="4.0dip" android:layout_marginRight="18.0dip" android:singleLine="true" />
+                </LinearLayout>
+                <View android:background="@color/diver" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+                <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="51.0dip">
+                    <TextView android:textSize="18.0dip" android:textColor="@color/color7" android:gravity="center_vertical" android:paddingLeft="14.0dip" android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="工作单位:" />
+                    <EditText android:textSize="18.0dip" android:textColor="@color/color4" android:textColorHint="@color/color8" android:gravity="center_vertical" android:id="@+id/edt_work" android:background="@mipmap/ic_input_bottom_line" android:paddingLeft="5.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginLeft="4.0dip" android:layout_marginRight="18.0dip" android:singleLine="true" />
+                </LinearLayout>
+                <View android:background="@color/diver" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+                <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="51.0dip">
+                    <TextView android:textSize="18.0dip" android:textColor="@color/color7" android:gravity="center_vertical" android:paddingLeft="14.0dip" android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="会员备注:" />
+                    <EditText android:textSize="18.0dip" android:textColor="@color/color4" android:textColorHint="@color/color8" android:gravity="center_vertical" android:id="@+id/edt_remark" android:background="@mipmap/ic_input_bottom_line" android:paddingLeft="5.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginLeft="4.0dip" android:layout_marginRight="18.0dip" android:singleLine="true" />
+                </LinearLayout>
+                <View android:background="@color/diver" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+                <Button android:textSize="18.0dip" android:textColor="@color/bottom_text_color_normal" android:layout_gravity="center_horizontal" android:id="@+id/btn_del" android:background="@drawable/del_selector" android:layout_width="300.0dip" android:layout_height="48.0dip" android:layout_marginTop="27.0dip" android:layout_marginBottom="10.0dip" android:text="删除会员" android:layout_alignParentRight="true" android:layout_centerVertical="true" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
