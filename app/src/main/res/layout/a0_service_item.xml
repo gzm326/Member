@@ -138,7 +138,7 @@
                 android:id="@+id/sevice_title_center2"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center_horizontal"
-                android:text="跑腿快递"
+                android:text="计次消费"
                 android:textSize="15dp"
                 android:textColor="#343434"
                 android:layout_width="wrap_content"

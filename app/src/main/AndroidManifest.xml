@@ -170,6 +170,16 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustPan" >
         </activity>
+        <activity
+            android:name=".Activity.E1_McardjcxfActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustPan"  >
+        </activity>
+        <activity
+            android:name=".Activity.SpecificationActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/dialog"  >
+        </activity>
     </application>
 
 </manifest>
