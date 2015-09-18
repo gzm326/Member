@@ -46,6 +46,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SpecificationActivity extends Activity implements BusinessResponse
 {
@@ -80,30 +81,27 @@ public class SpecificationActivity extends Activity implements BusinessResponse
         specificationListView.setAdapter(listAdapter);
 
 
-        specificationListView.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                ToastShow("123");
-            }
-        });
-
-
-        
         ok = (TextView) findViewById(R.id.shop_car_item_ok);
         ok.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
 
-                productA3 = initProduct();
-                /*Intent intent = new Intent();
+                //productA3 =
+                HashMap<String,Product> hm;
+
+                SpecificationAdapter sf=(SpecificationAdapter)specificationListView.getAdapter();
+                hm=sf.getHm();
+                //productA3=sf.getCheckedAll();
+
+                Intent intent = new Intent();
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("product", productA3);
+                //bundle.putSerializable("product", productA3);
+                bundle.putSerializable("product", hm);
                 intent.putExtras(bundle);
                 setResult(Activity.RESULT_OK, intent);
                 finish();
-                overridePendingTransition(R.anim.my_alpha_action, R.anim.my_scale_finish);*/
+                overridePendingTransition(R.anim.my_alpha_action, R.anim.my_scale_finish);
 
             }
         });
@@ -115,31 +113,25 @@ public class SpecificationActivity extends Activity implements BusinessResponse
 
     }
 
-  /*  public ArrayList<Product> getCheckedAll(){
+   /* public ArrayList<Product> getCheckedAll(){
         productA3= new ArrayList<Product>();
 
         int count = specificationListView.getAdapter().getCount();
 
-
-        for (int i = 0; i < count; i++){
-            CheckBox itemCheckBox = (CheckBox) specificationListView.getAdapter()
-                    .getView(i, null, null).findViewById(R.id.select_checkbox);
-            TextView tv2= (TextView) specificationListView.getAdapter()
-                        .getView(i, null, null).findViewById(R.id.txv_name);
-           *//* if(itemCheckBox.isChecked()){
-                ToastShow("1");
+        //ToastShow(Integer.toString(count));
+        for (int i = 1; i < count; i++){
+            TextView tv_ischecked = (TextView) specificationListView.getAdapter()
+                    .getView(i, null, null).findViewById(R.id.txv_ischeck);
+            if(i==2){
+                ToastShow(tv_ischecked.getText().toString());
             }
-            else {
-                itemCheckBox.setChecked(true);
-            }*//*
-            ToastShow(Integer.toString(i));
 
-            if(itemCheckBox.isChecked()){
+            if(tv_ischecked.getText().toString()=="1"){
                 Product productIt=new Product();
                 TextView tv1= (TextView) specificationListView.getAdapter()
                         .getView(i, null, null).findViewById(R.id.txv_productid);
-                *//*TextView tv2= (TextView) specificationListView.getAdapter()
-                        .getView(i, null, null).findViewById(R.id.txv_name);*//*
+                TextView tv2= (TextView) specificationListView.getAdapter()
+                        .getView(i, null, null).findViewById(R.id.txv_name);
                 TextView tv3= (TextView) specificationListView.getAdapter()
                         .getView(i, null, null).findViewById(R.id.txv_cs);
                 int maxnum,num;

@@ -44,7 +44,7 @@ public class AddDelView extends LinearLayout{
         et_goodsy = (TextView)findViewById(R.id.good_sy);
         quantityEditText.setText(String.valueOf(num));
 
-        minusImageView.setOnClickListener(new OnClickListener() {
+       /* minusImageView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (num - 1 > 0) {
@@ -62,6 +62,6 @@ public class AddDelView extends LinearLayout{
                     quantityEditText.setText(String.valueOf(num));
                 }
             }
-        });
+        });*/
     }
 }

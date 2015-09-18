@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class Product implements Serializable{
     private static final long serialVersionUID = 1L;
     public String str_productid,str_productname;
-    public int it_maxnum,it_num;
+    public int it_maxnum,it_num,num=1;
 
     public Product(){};
 
