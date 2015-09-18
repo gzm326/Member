@@ -24,7 +24,10 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -58,6 +61,7 @@ public class SpecificationActivity extends Activity implements BusinessResponse
     private int num;
     private boolean creat_cart;
     private ArrayList<Product> productA2;
+    private ArrayList<Product> productA3;
     private Product product1,product2,product3;
 
 	@Override
@@ -74,8 +78,15 @@ public class SpecificationActivity extends Activity implements BusinessResponse
         productA2=initProduct();
         listAdapter = new SpecificationAdapter(this,productA2 );
         specificationListView.setAdapter(listAdapter);
-        
 
+
+        specificationListView.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                ToastShow("123");
+            }
+        });
 
 
         
@@ -85,22 +96,72 @@ public class SpecificationActivity extends Activity implements BusinessResponse
             @Override
             public void onClick(View v) {
 
-                ArrayList<Product> productA3;
-                productA3= initProduct();
-                Intent intent = new Intent();
+                productA3 = initProduct();
+                /*Intent intent = new Intent();
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("product",productA3);
+                bundle.putSerializable("product", productA3);
                 intent.putExtras(bundle);
                 setResult(Activity.RESULT_OK, intent);
                 finish();
-                overridePendingTransition(R.anim.my_alpha_action, R.anim.my_scale_finish);
+                overridePendingTransition(R.anim.my_alpha_action, R.anim.my_scale_finish);*/
 
             }
         });
 
+
+
         EventBus.getDefault().register(this);
 
 
+    }
+
+  /*  public ArrayList<Product> getCheckedAll(){
+        productA3= new ArrayList<Product>();
+
+        int count = specificationListView.getAdapter().getCount();
+
+
+        for (int i = 0; i < count; i++){
+            CheckBox itemCheckBox = (CheckBox) specificationListView.getAdapter()
+                    .getView(i, null, null).findViewById(R.id.select_checkbox);
+            TextView tv2= (TextView) specificationListView.getAdapter()
+                        .getView(i, null, null).findViewById(R.id.txv_name);
+           *//* if(itemCheckBox.isChecked()){
+                ToastShow("1");
+            }
+            else {
+                itemCheckBox.setChecked(true);
+            }*//*
+            ToastShow(Integer.toString(i));
+
+            if(itemCheckBox.isChecked()){
+                Product productIt=new Product();
+                TextView tv1= (TextView) specificationListView.getAdapter()
+                        .getView(i, null, null).findViewById(R.id.txv_productid);
+                *//*TextView tv2= (TextView) specificationListView.getAdapter()
+                        .getView(i, null, null).findViewById(R.id.txv_name);*//*
+                TextView tv3= (TextView) specificationListView.getAdapter()
+                        .getView(i, null, null).findViewById(R.id.txv_cs);
+                int maxnum,num;
+                String str1;
+                str1=tv3.getText().toString();
+                maxnum=Integer.parseInt(str1.substring(0, str1.indexOf('/')));
+                num=Integer.parseInt(str1.substring(str1.indexOf('/'), str1.length()));
+                productIt.str_productid= tv1.getText().toString();
+                productIt.str_productname=tv2.getText().toString();
+                productIt.it_maxnum=maxnum;
+                productIt.it_num=num;
+                ToastShow(tv2.getText().toString());
+
+            }
+        }
+        return productA3;
+    }*/
+
+    public  void ToastShow(String atr){
+        ToastView toast = new ToastView(SpecificationActivity.this, atr);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
     }
 
     private ArrayList<Product> initProduct(){
@@ -129,14 +190,6 @@ public class SpecificationActivity extends Activity implements BusinessResponse
         productAl.add(product3);
 
         return productAl;
-    }
-
-    private ArrayList<Product> getProduct(){
-
-        ArrayList<Product> productAl = new ArrayList<Product>();
-
-        return productAl;
-
     }
 
     @Override
