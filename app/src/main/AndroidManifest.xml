@@ -173,12 +173,27 @@
         <activity
             android:name=".Activity.E1_McardjcxfActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustPan"  >
+            android:windowSoftInputMode="stateHidden|adjustPan" >
         </activity>
         <activity
             android:name=".Activity.SpecificationActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/dialog"  >
+            android:theme="@style/dialog" >
+        </activity>
+        <activity
+            android:name=".Activity.C2_BuyListActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustPan" >
+        </activity>
+        <activity
+            android:name=".Activity.C2_BuyDetailActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustPan" >
+        </activity>
+        <activity
+            android:name=".Activity.E4_HistoryActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustPan" >
         </activity>
     </application>
 

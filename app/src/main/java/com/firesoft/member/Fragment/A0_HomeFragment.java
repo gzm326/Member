@@ -44,6 +44,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.firesoft.member.Activity.C0_ServiceListActivity;
+import com.firesoft.member.Activity.C2_BuyListActivity;
 import com.firesoft.member.Activity.D0_McardycActivity;
 import com.firesoft.member.Activity.D1_McardccActivity;
 import com.firesoft.member.Activity.E1_McardjcxfActivity;
@@ -59,7 +60,7 @@ import com.firesoft.member.R;
 public class A0_HomeFragment extends Fragment {
 
 	private View view;
-	private LinearLayout mcard_add,mcard_manage,mcard_ycje,mcard_yccc,mcard_jcxf;
+	private LinearLayout mcard_add,mcard_manage,mcard_ycje,mcard_yccc,mcard_jcxf,mcard_xfcx;
 
 
 	
@@ -75,6 +76,7 @@ public class A0_HomeFragment extends Fragment {
 		mcard_ycje=(LinearLayout)view.findViewById(R.id.right);
 		mcard_yccc=(LinearLayout)view.findViewById(R.id.left2);
 		mcard_jcxf=(LinearLayout)view.findViewById(R.id.center2);
+		mcard_xfcx=(LinearLayout)view.findViewById(R.id.right2);
 
 
 		mcard_add.setOnClickListener(new OnClickListener() {
@@ -121,6 +123,16 @@ public class A0_HomeFragment extends Fragment {
 			@Override
 			public void onClick(View view) {
 				Intent intent = new Intent(getActivity(), E1_McardjcxfActivity.class);
+				startActivity(intent);
+				getActivity().overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
+
+			}
+		});
+
+		mcard_xfcx.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent intent = new Intent(getActivity(), C2_BuyListActivity.class);
 				startActivity(intent);
 				getActivity().overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
 

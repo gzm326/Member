@@ -67,15 +67,20 @@
     <string name="understock">次数不足</string>
 
 <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="title_activity_member_card">会员办卡</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="title_activity_mcard_add">McardAddActivity</string>
+
     <string name="btn_add">新增</string>
-    <string name="title_activity_d0__mcardyc">D0_McardycActivity</string>
-    <string name="title_activity_d1__mcardcc">D1_McardccActivity</string>
-    <string name="title_activity_e1__mcardjcxf">E1_McardjcxfActivity</string>
+    <string name="tradeitem_number">订单编号</string>
+    <string name="tradeitem_time">成交时间</string>
+    <string name="balance_transportation">运输费</string>
+    <string name="balance_redpocket">红包</string>
+    <string name="balance_exp">积分</string>
+    <string name="tradeitem_rental">总额</string>
+    <string name="tradeitem_logistics">查看物流</string>
+    <string name="tradeitem_receive">确认收货</string>
+    <string name="pay">付款</string>
+    <string name="balance_cancel">取消订单</string>
 
 </resources>
