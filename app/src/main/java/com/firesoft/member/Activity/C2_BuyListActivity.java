@@ -1,12 +1,10 @@
 package com.firesoft.member.Activity;
 
-import android.app.Activity;
+
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -22,13 +20,13 @@ import com.BeeFramework.view.ToastView;
 import com.external.androidquery.callback.AjaxStatus;
 import com.external.maxwin.view.IXListViewListener;
 import com.external.maxwin.view.XListView;
-import com.firesoft.member.Adapter.C0_ServiceListAdapter;
-import com.firesoft.member.Model.UserListModel;
+import com.firesoft.member.Adapter.C2_BuyListAdapter;
+import com.firesoft.member.Model.MemberListModel;
 import com.firesoft.member.Protocol.ApiInterface;
 import com.firesoft.member.Protocol.ENUM_SEARCH_ORDER;
+import com.firesoft.member.Protocol.SIMPLE_MEMBER;
 import com.firesoft.member.Protocol.SERVICE_TYPE;
-import com.firesoft.member.Protocol.SIMPLE_USER;
-import com.firesoft.member.Protocol.userlistResponse;
+import com.firesoft.member.Protocol.memberlistResponse;
 import com.firesoft.member.R;
 import com.firesoft.member.Utils.LocationManager;
 
@@ -37,9 +35,9 @@ import org.json.JSONObject;
 
 public class C2_BuyListActivity extends BaseActivity implements BusinessResponse, IXListViewListener {
 
-    C0_ServiceListAdapter mListWithServiceAdapter;
+    C2_BuyListAdapter mListWithServiceAdapter;
     XListView mListView;
-    UserListModel mDataModel;
+    MemberListModel mDataModel;
     SERVICE_TYPE mServiceType;
     ImageView mBackButton;
     TextView mTitleTextView;
@@ -60,7 +58,7 @@ public class C2_BuyListActivity extends BaseActivity implements BusinessResponse
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position - 1 >= 0 && position - 1 < mDataModel.dataList.size()) {
-                    SIMPLE_USER user = mDataModel.dataList.get(position - 1);
+                    SIMPLE_MEMBER user = mDataModel.dataList.get(position - 1);
                     Intent intent_profile = new Intent(C2_BuyListActivity.this, E4_HistoryActivity.class);
                     startActivity(intent_profile);
                     C2_BuyListActivity.this.overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
@@ -71,7 +69,7 @@ public class C2_BuyListActivity extends BaseActivity implements BusinessResponse
         });
 
         mBackButton = (ImageView)findViewById(R.id.top_view_back);
-        mBackButton.setOnClickListener(new View.OnClickListener() {
+        mBackButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -87,12 +85,12 @@ public class C2_BuyListActivity extends BaseActivity implements BusinessResponse
             }
         });*/
 
-        mDataModel = new UserListModel(this);
+        mDataModel = new MemberListModel(this);
         mDataModel.addResponseListener(this);
         mServiceType =  new SERVICE_TYPE();
         //mServiceType = (SERVICE_TYPE) getIntent().getSerializableExtra(MemberAppConst.SERVICE_TYPE);
         mServiceType.id=5;
-        mServiceType.title="会员档案";
+        mServiceType.title="消费明细查询";
 
         if (null != mServiceType.title)
         {
@@ -146,12 +144,12 @@ public class C2_BuyListActivity extends BaseActivity implements BusinessResponse
         {
             if (null != jo)
             {
-                userlistResponse response = new userlistResponse();
+                memberlistResponse response = new memberlistResponse();
                 response.fromJson(jo);
 
                 if (null == mListWithServiceAdapter)
                 {
-                    mListWithServiceAdapter = new C0_ServiceListAdapter(this, mDataModel.dataList);
+                    mListWithServiceAdapter = new C2_BuyListAdapter(this, mDataModel.dataList);
                     mListView.setAdapter(mListWithServiceAdapter);
                     footView = new View(this);
                     footView.setEnabled(true);

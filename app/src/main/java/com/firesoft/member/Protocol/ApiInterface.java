@@ -74,5 +74,6 @@ public class ApiInterface
      public static final String ORDER_CANCEL  ="/order/cancel";
      public static final String ORDER_WORK_DONE  ="/order/work-done";
      public static final String ORDER_ACCEPT  ="/order/accept";
+     public static final String MEMBER_LIST="/member/list";
 
 }
