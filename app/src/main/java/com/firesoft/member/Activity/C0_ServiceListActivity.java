@@ -31,12 +31,13 @@
 
 package com.firesoft.member.Activity;
 
-import android.annotation.TargetApi;
+
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Rect;
-import android.os.Build;
+
 import android.os.Bundle;
-import android.util.Log;
+
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,9 +47,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.BeeFramework.Utils.AnimationUtil;
 import com.BeeFramework.Utils.ImageUtil;
 import com.BeeFramework.activity.BaseActivity;
 import com.BeeFramework.model.BusinessResponse;
@@ -57,24 +56,29 @@ import com.external.androidquery.callback.AjaxStatus;
 import com.external.maxwin.view.IXListViewListener;
 import com.external.maxwin.view.XListView;
 import com.firesoft.member.Adapter.C0_ServiceListAdapter;
-import com.firesoft.member.Model.UserListModel;
-import com.firesoft.member.MemberAppConst;
+import com.firesoft.member.Adapter.ProductxfAdapter;
+import com.firesoft.member.Model.MemberListModel;
+
+import com.firesoft.member.Model.Product;
 import com.firesoft.member.Protocol.ApiInterface;
 import com.firesoft.member.Protocol.ENUM_SEARCH_ORDER;
 import com.firesoft.member.Protocol.SERVICE_TYPE;
-import com.firesoft.member.Protocol.SIMPLE_USER;
-import com.firesoft.member.Protocol.userlistResponse;
+import com.firesoft.member.Protocol.SIMPLE_MEMBER;
+import com.firesoft.member.Protocol.memberlistResponse;
 import com.firesoft.member.R;
 import com.firesoft.member.Utils.LocationManager;
-import com.firesoft.member.Utils.StringUtils;
+
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class C0_ServiceListActivity extends BaseActivity implements BusinessResponse, IXListViewListener {
     C0_ServiceListAdapter mListWithServiceAdapter;
     XListView mListView;
-    UserListModel                   mDataModel;
+    MemberListModel     mDataModel;
     SERVICE_TYPE                    mServiceType;
     ImageView                       mFilterButton;
     LinearLayout                    mFilterLayout;
@@ -94,6 +98,7 @@ public class C0_ServiceListActivity extends BaseActivity implements BusinessResp
 
     ENUM_SEARCH_ORDER               search_order = ENUM_SEARCH_ORDER.location_asc;
     View footView               ;
+    public static final int REQUESTCODE1 = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +106,7 @@ public class C0_ServiceListActivity extends BaseActivity implements BusinessResp
         setContentView(R.layout.c0_service_list);
 
         mTitleTextView = (TextView)findViewById(R.id.top_view_title);
+
         mListView = (XListView)findViewById(R.id.c0_user_list);
         mListView.setXListViewListener(this, 0);
         mListView.setPullLoadEnable(true);
@@ -109,15 +115,22 @@ public class C0_ServiceListActivity extends BaseActivity implements BusinessResp
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position - 1 >= 0 && position - 1 < mDataModel.dataList.size()) {
-                    SIMPLE_USER user = mDataModel.dataList.get(position - 1);
+                    SIMPLE_MEMBER member = mDataModel.dataList.get(position - 1);
+
                     Intent intent_profile = new Intent(C0_ServiceListActivity.this, F0_ProfileActivity.class);
-                    startActivity(intent_profile);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("member", member);
+                    intent_profile.putExtras(bundle);
+                    //startActivity(intent_profile);
+                    startActivityForResult(intent_profile, REQUESTCODE1 );
                     C0_ServiceListActivity.this.overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
                 }
-
-
             }
         });
+
+
+
+
 
         mBackButton = (ImageView)findViewById(R.id.top_view_back);
         mBackButton.setOnClickListener(new View.OnClickListener() {
@@ -136,7 +149,7 @@ public class C0_ServiceListActivity extends BaseActivity implements BusinessResp
             }
         });*/
 
-        mDataModel = new UserListModel(this);
+        mDataModel = new MemberListModel(this);
         mDataModel.addResponseListener(this);
         mServiceType =  new SERVICE_TYPE();
         //mServiceType = (SERVICE_TYPE) getIntent().getSerializableExtra(MemberAppConst.SERVICE_TYPE);
@@ -169,6 +182,9 @@ public class C0_ServiceListActivity extends BaseActivity implements BusinessResp
                 /*Intent it = new Intent(C0_ServiceListActivity.this, F0_ProfileActivity.class);
                 it.putExtra(MemberAppConst.SERVICE_TYPE, mServiceType);
                 startActivity(it);*/
+                Intent intent_profile = new Intent(C0_ServiceListActivity.this, C1_PublishOrderActivity.class);
+                startActivity(intent_profile);
+                C0_ServiceListActivity.this.overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
             }
         });
 
@@ -353,11 +369,11 @@ public class C0_ServiceListActivity extends BaseActivity implements BusinessResp
 
     	mListView.stopRefresh();
     	mListView.stopLoadMore();
-        if(url.endsWith(ApiInterface.USER_LIST))
+        if(url.endsWith(ApiInterface.MEMBER_LIST))
         {
             if (null != jo)
             {
-                userlistResponse response = new userlistResponse();
+                memberlistResponse  response = new memberlistResponse();
                 response.fromJson(jo);
 
                 if (null == mListWithServiceAdapter)
@@ -410,5 +426,15 @@ public class C0_ServiceListActivity extends BaseActivity implements BusinessResp
     @Override
     public void onLoadMore(int id) {
         mDataModel.fetNextService(mServiceType.id, search_order);
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        ArrayList<Product> productArrayList;
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == REQUESTCODE1){
+            if(resultCode == Activity.RESULT_OK){
+                mDataModel.fetPreService(mServiceType.id, ENUM_SEARCH_ORDER.location_asc);
+            }
+        }
     }
 }

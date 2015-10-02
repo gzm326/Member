@@ -140,7 +140,7 @@ public class C2_BuyListActivity extends BaseActivity implements BusinessResponse
 
         mListView.stopRefresh();
         mListView.stopLoadMore();
-        if(url.endsWith(ApiInterface.USER_LIST))
+        if(url.endsWith(ApiInterface.MEMBER_LIST))
         {
             if (null != jo)
             {

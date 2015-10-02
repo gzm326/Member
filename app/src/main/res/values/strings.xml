@@ -54,6 +54,7 @@
     <string name="meter">"米"</string>
     <string name="kilometre">"千米"</string>
     <string name="publish_order">保存</string>
+    <string name="del">删除</string>
     <string name="good_evaluate_prior">好评优先</string>
     <string name="price_lowest">价格最低</string>
     <string name="most_expensive">价格最高</string>

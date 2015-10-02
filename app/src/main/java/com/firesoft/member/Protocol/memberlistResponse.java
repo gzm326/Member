@@ -17,17 +17,7 @@ import java.util.ArrayList;
 public class memberlistResponse extends DataBaseModel {
 
     public ArrayList<SIMPLE_MEMBER> members = new ArrayList<SIMPLE_MEMBER>();
-    @Column(name = "id")
-    public int id;
 
-    @Column(name="member_no")
-    public String member_no;
-
-    @Column(name="member_name")
-    public String member_name;
-
-    @Column(name="mobile_no")
-    public String mobile_no;
 
     @Column(name = "total")
     public int total;

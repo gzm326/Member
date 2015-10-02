@@ -75,5 +75,9 @@ public class ApiInterface
      public static final String ORDER_WORK_DONE  ="/order/work-done";
      public static final String ORDER_ACCEPT  ="/order/accept";
      public static final String MEMBER_LIST="/member/list";
+     public static final String MEMBER_ADD="/member/add";
+     public static final String MEMBER_UPDATE="/member/update";
+     public static final String MEMBER_DEL="/member/del";
+     public static final String MEMBER_MINFO="/member/minfo";
 
 }

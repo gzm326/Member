@@ -31,16 +31,21 @@
 
 package com.firesoft.member.Activity;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Message;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -52,18 +57,23 @@ import com.BeeFramework.Utils.Utils;
 import com.BeeFramework.activity.BaseActivity;
 import com.BeeFramework.model.BusinessResponse;
 import com.BeeFramework.view.RoundedWebImageView;
+import com.BeeFramework.view.ToastView;
 import com.external.androidquery.callback.AjaxStatus;
 import com.external.eventbus.EventBus;
+import com.firesoft.member.APIErrorCode;
 import com.firesoft.member.Adapter.F0_ProfileServiceListAdapter;
 import com.firesoft.member.Adapter.F0_ProfileServiceListGridAdapter;
 import com.firesoft.member.Member;
 import com.firesoft.member.MemberAppConst;
 import com.firesoft.member.MessageConstant;
+import com.firesoft.member.Model.MemberModel;
 import com.firesoft.member.Model.UserBalanceModel;
 import com.firesoft.member.Protocol.ApiInterface;
 import com.firesoft.member.Protocol.ENUM_USER_GROUP;
 import com.firesoft.member.Protocol.SERVICE_TYPE;
+import com.firesoft.member.Protocol.SIMPLE_MEMBER;
 import com.firesoft.member.Protocol.USER;
+import com.firesoft.member.Protocol.memberaddReponse;
 import com.firesoft.member.Protocol.userprofileResponse;
 import com.firesoft.member.R;
 import com.firesoft.member.SESSION;
@@ -77,25 +87,49 @@ import org.json.JSONObject;
 public class F0_ProfileActivity extends BaseActivity implements BusinessResponse, View.OnClickListener {
 
 
+    private SIMPLE_MEMBER member;
+    private EditText member_no;
+    private EditText member_name;
+    private EditText mobile_no;
+    private TextView mDelComplete;
+    private LinearLayout mUpdateComplete;
+    private MemberModel mMemberModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.c1_publish_order);
+        setContentView(R.layout.c0_member_update);
+
+        Intent intent = getIntent();
+        member=(SIMPLE_MEMBER)intent.getSerializableExtra("member");
+        init(member);
+
+        mMemberModel = new MemberModel(this);
+        mMemberModel.addResponseListener(this);
 
         EventBus.getDefault().register(this);
     }
 
+    private void init(SIMPLE_MEMBER member){
+        member_no = (EditText) findViewById(R.id.mcard_kh);
+        member_name = (EditText) findViewById(R.id.mcard_xm);
+        mobile_no = (EditText) findViewById(R.id.mcard_phone);
+        mDelComplete = (TextView) findViewById(R.id.c0_del_button);
+        mUpdateComplete = (LinearLayout) findViewById(R.id.top_member_upate);
+
+        mUpdateComplete.setOnClickListener(this);
+        mDelComplete.setOnClickListener(this);
+
+        member_no.setText(member.member_no);
+        member_name.setText(member.member_name);
+        mobile_no.setText(member.mobile_no);
+    }
     @Override
     protected void onResume() {
 
         super.onResume();
     }
 
-    private JSONObject myServiceListJo;
-    @Override
-    public void OnMessageResponse(String url, JSONObject jo, AjaxStatus status) throws JSONException {
 
-    }
 
     @Override
     public void onClick(View v) {
@@ -104,25 +138,57 @@ public class F0_ProfileActivity extends BaseActivity implements BusinessResponse
             case R.id.top_view_back:
                 finish();
                 break;
+            case R.id.top_member_upate:
+                String no = member_no.getText().toString().trim();
+                String name = member_name.getText().toString();
+                String phone = mobile_no.getText().toString();
 
-            /*case R.id.refresh:{
-                if(mUserId ==SESSION.getInstance().uid){
-                    mUserBalance.get();
+                if ("".equals(name)) {
+                    ToastView toast = new ToastView(F0_ProfileActivity.this, "会员名称不能为空！");
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                    member_name.setText("");
+                    member_name.requestFocus();
+                }else if ("".equals(no)) {
+                    ToastView toast = new ToastView(F0_ProfileActivity.this,"会员卡号不能为空！");
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                    member_no.requestFocus();
+                } else if ("".equals(phone)) {
+                    ToastView toast = new ToastView(F0_ProfileActivity.this,"手机号不能为空！");
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                    mobile_no.requestFocus();
+                } else {
+                    mMemberModel.update(no, name, phone, member.id);
+                    CloseKeyBoard();
                 }
-                mUserBalance.getProfile(mUserId);
                 break;
 
-            }*/
+            case R.id.c0_del_button:{
+                mMemberModel.del(member.id);
+                break;
+
+
+            }
         }
     }
 
-
+        // 关闭键盘
+    private void CloseKeyBoard() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(member_no.getWindowToken(), 0);
+    }
     @Override
     protected void onDestroy() {
         EventBus.getDefault().unregister(this);
         super.onDestroy();
     }
-
+    public  void ToastShow(String atr){
+        ToastView toast = new ToastView(F0_ProfileActivity.this, atr);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
+    }
     public void onEvent(Object event) {
         /*SharedPreferences shared = getSharedPreferences(MemberAppConst.USERINFO, 0);
         Message message = (Message) event;
@@ -135,5 +201,40 @@ public class F0_ProfileActivity extends BaseActivity implements BusinessResponse
         }*/
 
 
+    }
+
+    @Override
+    public void OnMessageResponse(String url, JSONObject jo, AjaxStatus status)
+            throws JSONException {
+        // TODO Auto-generated method stub
+        if (url.endsWith(ApiInterface.MEMBER_DEL)) {
+            memberaddReponse response = new memberaddReponse();
+            response.fromJson(jo);
+            if (response.succeed == 1) {
+                Intent intent = new Intent(this, C0_ServiceListActivity.class);
+                //startActivity(intent);
+                setResult(Activity.RESULT_OK, intent);
+                finish();
+                Message msg = new Message();
+                msg.what = MessageConstant.SIGN_UP_SUCCESS;
+                EventBus.getDefault().post(msg);
+            } else {
+                if (response.error_code == APIErrorCode.NICKNAME_EXIST) {
+                    member_no.requestFocus();
+                }
+            }
+        }else if(url.endsWith(ApiInterface.MEMBER_UPDATE)){
+            memberaddReponse response = new memberaddReponse();
+            response.fromJson(jo);
+            if (response.succeed == 1) {
+                Message msg = new Message();
+                msg.what = MessageConstant.SIGN_UP_SUCCESS;
+                EventBus.getDefault().post(msg);
+            } else {
+                if (response.error_code == APIErrorCode.NICKNAME_EXIST) {
+                    member_name.requestFocus();
+                }
+            }
+        }
     }
 }
