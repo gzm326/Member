@@ -6,15 +6,10 @@ import com.BeeFramework.model.BaseModel;
 import com.BeeFramework.model.BeeCallback;
 import com.external.androidquery.callback.AjaxStatus;
 import com.firesoft.member.APIErrorCode;
-import com.firesoft.member.MemberAppConst;
 import com.firesoft.member.Protocol.ApiInterface;
-import com.firesoft.member.Protocol.ENUM_SEARCH_ORDER;
 import com.firesoft.member.Protocol.SIMPLE_MEMBER;
 import com.firesoft.member.Protocol.memberaddRequest;
-import com.firesoft.member.Protocol.memberaddReponse;
-import com.firesoft.member.Protocol.memberlistRequest;
-import com.firesoft.member.Protocol.memberlistResponse;
-import com.firesoft.member.SESSION;
+import com.firesoft.member.Protocol.memberaddResponse;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -45,7 +40,7 @@ public class MemberModel extends BaseModel {
                     MemberModel.this.callback(this, url, jo, status);
 
                     if (null != jo) {
-                        memberaddReponse response = new memberaddReponse();
+                        memberaddResponse response = new memberaddResponse();
                         response.fromJson(jo);
                         if (response.succeed == 1) {
                             MemberModel.this.OnMessageResponse(url, jo, status);
@@ -89,7 +84,7 @@ public class MemberModel extends BaseModel {
                     MemberModel.this.callback(this, url, jo, status);
 
                     if (null != jo) {
-                        memberaddReponse response = new memberaddReponse();
+                        memberaddResponse response = new memberaddResponse();
                         response.fromJson(jo);
                         if (response.succeed == 1) {
                             MemberModel.this.OnMessageResponse(url, jo, status);
@@ -131,7 +126,7 @@ public class MemberModel extends BaseModel {
                     MemberModel.this.callback(this, url, jo, status);
 
                     if (null != jo) {
-                        memberaddReponse response = new memberaddReponse();
+                        memberaddResponse response = new memberaddResponse();
                         response.fromJson(jo);
                         if (response.succeed == 1) {
                             MemberModel.this.OnMessageResponse(url, jo, status);
@@ -166,7 +161,7 @@ public class MemberModel extends BaseModel {
     {
         memberaddRequest memberrequest = new memberaddRequest();
 
-        memberrequest.mobile_no = member_no;
+        memberrequest.member_no = member_no;
 
 
 
@@ -178,7 +173,7 @@ public class MemberModel extends BaseModel {
                     MemberModel.this.callback(this, url, jo, status);
                     if (null != jo)
                     {
-                        memberaddReponse response = new memberaddReponse();
+                        memberaddResponse response = new memberaddResponse();
                         response.fromJson(jo);
 
                         if(response.succeed == 1)
@@ -211,7 +206,7 @@ public class MemberModel extends BaseModel {
         if(isSendingMessage(ApiInterface.MEMBER_MINFO)){
             return;
         }
-        cb.url(ApiInterface.MEMBER_LIST).type(JSONObject.class).params(params);
+        cb.url(ApiInterface.MEMBER_MINFO).type(JSONObject.class).params(params);
         ajaxProgress(cb);
 
     }

@@ -15,14 +15,14 @@
         <Button
             android:textSize="16.0dip"
             android:textColor="@color/bottom_text_color_normal"
-            android:id="@+id/btn_search"
+            android:id="@+id/btn_qd"
             android:background="@drawable/c1_apply_btn_select"
             android:layout_width="68.0dip"
             android:layout_height="38.0dip"
             android:text="确认"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:onClick="search" />
+             />
         <EditText
             android:textSize="16.0dip"
             android:textColor="@color/color7"
@@ -35,9 +35,9 @@
             android:layout_width="fill_parent"
             android:layout_height="38.0dip"
             android:layout_marginRight="7.0dip"
-            android:hint="请输入搜索内容"
+            android:hint="请输入会员卡号"
             android:singleLine="true"
-            android:layout_toLeftOf="@id/btn_search"
+            android:layout_toLeftOf="@id/btn_qd"
             android:layout_centerVertical="true" />
     </RelativeLayout>
 

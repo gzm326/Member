@@ -11,8 +11,8 @@ import org.json.JSONObject;
 /**
  * Created by Administrator on 15-10-1.
  */
-@Table(name = "memberaddReponse")
-public class memberaddReponse extends DataBaseModel
+@Table(name = "memberaddResponse")
+public class memberaddResponse extends DataBaseModel
 {
     @Column(name = "uid")
     public int uid;

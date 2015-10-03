@@ -55,7 +55,7 @@ import com.firesoft.member.APIErrorCode;
 import com.firesoft.member.MessageConstant;
 import com.firesoft.member.Model.MemberModel;
 import com.firesoft.member.Protocol.ApiInterface;
-import com.firesoft.member.Protocol.memberaddReponse;
+import com.firesoft.member.Protocol.memberaddResponse;
 import com.firesoft.member.R;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -156,7 +156,7 @@ public class C1_PublishOrderActivity extends BaseActivity implements BusinessRes
             throws JSONException {
         // TODO Auto-generated method stub
         if (url.endsWith(ApiInterface.MEMBER_ADD)) {
-            memberaddReponse response = new memberaddReponse();
+            memberaddResponse response = new memberaddResponse();
             response.fromJson(jo);
             if (response.succeed == 1) {
                 Intent intent = new Intent(this, MainActivity.class);

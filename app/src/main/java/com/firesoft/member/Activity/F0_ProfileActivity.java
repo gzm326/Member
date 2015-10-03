@@ -34,51 +34,27 @@ package com.firesoft.member.Activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Message;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AbsListView;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.BeeFramework.Utils.ImageUtil;
-import com.BeeFramework.Utils.Utils;
 import com.BeeFramework.activity.BaseActivity;
 import com.BeeFramework.model.BusinessResponse;
-import com.BeeFramework.view.RoundedWebImageView;
 import com.BeeFramework.view.ToastView;
 import com.external.androidquery.callback.AjaxStatus;
 import com.external.eventbus.EventBus;
 import com.firesoft.member.APIErrorCode;
-import com.firesoft.member.Adapter.F0_ProfileServiceListAdapter;
-import com.firesoft.member.Adapter.F0_ProfileServiceListGridAdapter;
-import com.firesoft.member.Member;
-import com.firesoft.member.MemberAppConst;
 import com.firesoft.member.MessageConstant;
 import com.firesoft.member.Model.MemberModel;
-import com.firesoft.member.Model.UserBalanceModel;
 import com.firesoft.member.Protocol.ApiInterface;
-import com.firesoft.member.Protocol.ENUM_USER_GROUP;
-import com.firesoft.member.Protocol.SERVICE_TYPE;
 import com.firesoft.member.Protocol.SIMPLE_MEMBER;
-import com.firesoft.member.Protocol.USER;
-import com.firesoft.member.Protocol.memberaddReponse;
-import com.firesoft.member.Protocol.userprofileResponse;
+import com.firesoft.member.Protocol.memberaddResponse;
 import com.firesoft.member.R;
-import com.firesoft.member.SESSION;
-import com.firesoft.member.View.MyGridView;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -144,18 +120,18 @@ public class F0_ProfileActivity extends BaseActivity implements BusinessResponse
                 String phone = mobile_no.getText().toString();
 
                 if ("".equals(name)) {
-                    ToastView toast = new ToastView(F0_ProfileActivity.this, "ª·‘±√˚≥∆≤ªƒ‹Œ™ø’£°");
+                    ToastView toast = new ToastView(F0_ProfileActivity.this, "‰ºöÂëòÂêçÁß∞‰∏çËÉΩ‰∏∫Á©∫ÔºÅ");
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
                     member_name.setText("");
                     member_name.requestFocus();
                 }else if ("".equals(no)) {
-                    ToastView toast = new ToastView(F0_ProfileActivity.this,"ª·‘±ø®∫≈≤ªƒ‹Œ™ø’£°");
+                    ToastView toast = new ToastView(F0_ProfileActivity.this,"‰ºöÂëòÂç°Âè∑‰∏çËÉΩ‰∏∫Á©∫ÔºÅ");
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
                     member_no.requestFocus();
                 } else if ("".equals(phone)) {
-                    ToastView toast = new ToastView(F0_ProfileActivity.this," ÷ª˙∫≈≤ªƒ‹Œ™ø’£°");
+                    ToastView toast = new ToastView(F0_ProfileActivity.this,"ÊâãÊú∫Âè∑‰∏çËÉΩ‰∏∫Á©∫ÔºÅ");
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
                     mobile_no.requestFocus();
@@ -174,7 +150,7 @@ public class F0_ProfileActivity extends BaseActivity implements BusinessResponse
         }
     }
 
-        // πÿ±’º¸≈Ã
+        // ÔøΩÿ±’ºÔøΩÔøΩÔøΩ
     private void CloseKeyBoard() {
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(member_no.getWindowToken(), 0);
@@ -208,7 +184,7 @@ public class F0_ProfileActivity extends BaseActivity implements BusinessResponse
             throws JSONException {
         // TODO Auto-generated method stub
         if (url.endsWith(ApiInterface.MEMBER_DEL)) {
-            memberaddReponse response = new memberaddReponse();
+            memberaddResponse response = new memberaddResponse();
             response.fromJson(jo);
             if (response.succeed == 1) {
                 Intent intent = new Intent(this, C0_ServiceListActivity.class);
@@ -224,7 +200,7 @@ public class F0_ProfileActivity extends BaseActivity implements BusinessResponse
                 }
             }
         }else if(url.endsWith(ApiInterface.MEMBER_UPDATE)){
-            memberaddReponse response = new memberaddReponse();
+            memberaddResponse response = new memberaddResponse();
             response.fromJson(jo);
             if (response.succeed == 1) {
                 Message msg = new Message();
