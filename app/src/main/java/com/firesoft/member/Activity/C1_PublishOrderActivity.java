@@ -32,6 +32,7 @@
 package com.firesoft.member.Activity;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -52,13 +53,18 @@ import com.external.androidquery.callback.AjaxStatus;
 
 import com.external.eventbus.EventBus;
 import com.firesoft.member.APIErrorCode;
+import com.firesoft.member.Adapter.ProductxfAdapter;
 import com.firesoft.member.MessageConstant;
 import com.firesoft.member.Model.MemberModel;
+import com.firesoft.member.Model.Product;
 import com.firesoft.member.Protocol.ApiInterface;
 import com.firesoft.member.Protocol.memberaddResponse;
 import com.firesoft.member.R;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class C1_PublishOrderActivity extends BaseActivity implements BusinessResponse {
 
@@ -71,6 +77,8 @@ public class C1_PublishOrderActivity extends BaseActivity implements BusinessRes
     private EditText member_name;
     private EditText mobile_no;
     private TextView mAddComplete;
+    private TextView mcard_jb;
+    private TextView mcard_jbid;
 
 
     @Override
@@ -85,10 +93,25 @@ public class C1_PublishOrderActivity extends BaseActivity implements BusinessRes
         member_name = (EditText) findViewById(R.id.mcard_xm);
         mobile_no = (EditText) findViewById(R.id.mcard_phone);
         mAddComplete = (TextView) findViewById(R.id.c0_publish_button);
+        mcard_jb=(TextView) findViewById(R.id.mcard_jb);
+        mcard_jbid=(TextView) findViewById(R.id.mcard_jb_id);
 
 
         mMemberModel = new MemberModel(this);
         mMemberModel.addResponseListener(this);
+
+        mcard_jb.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Intent intent = new Intent(C1_PublishOrderActivity.this, F3_RegionPickActivity.class);
+                intent.putExtra("title", "会员级别选择");
+                startActivityForResult(intent, 1);
+                overridePendingTransition(R.anim.my_scale_action,R.anim.my_alpha_action);
+            }
+        });
+
 
 
         tv_xtkz.setOnClickListener(new OnClickListener() {
@@ -174,7 +197,28 @@ public class C1_PublishOrderActivity extends BaseActivity implements BusinessRes
 
     }
 
+    public  void ToastShow(String atr){
+        ToastView toast = new ToastView(C1_PublishOrderActivity.this, atr);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        ArrayList<Product> productArrayList;
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1){
+            if(resultCode == Activity.RESULT_OK){
+
+                String choose_name,choose_id;
+                choose_name=data.getStringExtra("name");
+                choose_id=data.getStringExtra("uid");
+                mcard_jb.setText(choose_name);
+                mcard_jbid.setText(choose_id);
+
+            }
+        }
+    }
     /*@Override
     protected void onDestroy() {
         // TODO Auto-generated method stub

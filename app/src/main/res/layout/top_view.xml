@@ -23,6 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textColor="#39BCED"
+            android:text="123"
             android:textSize="20sp"
             android:singleLine="true"
             android:ellipsize="end"

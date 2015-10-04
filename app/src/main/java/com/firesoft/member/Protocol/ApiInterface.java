@@ -79,5 +79,6 @@ public class ApiInterface
      public static final String MEMBER_UPDATE="/member/update";
      public static final String MEMBER_DEL="/member/del";
      public static final String MEMBER_MINFO="/member/minfo";
+     public static final String CHOOSE_LIST="/hyjb/list";
 
 }

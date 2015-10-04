@@ -220,6 +220,21 @@
                         android:hint="请选择"
                         android:singleLine="true"
                         android:drawableRight="@mipmap/dropdown_arrow" />
+                    <TextView
+                        android:id="@+id/mcard_jb_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="1dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:textColor="#333333"
+                        android:textSize="16dp"
+                        android:hint="请选择"
+                        android:singleLine="true"
+                        android:visibility="gone"
+                        />
                 </LinearLayout>
 
                 <LinearLayout
