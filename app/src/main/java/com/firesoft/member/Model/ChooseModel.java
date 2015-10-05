@@ -25,6 +25,7 @@ import java.util.Map;
  */
 public class ChooseModel extends BaseModel {
     public ArrayList<SIMPLE_CHOOSE> dataList = new ArrayList<SIMPLE_CHOOSE>();
+
     public static final int NUMPERPAGE = 10;
 
     public ChooseModel(Context context)
@@ -81,6 +82,7 @@ public class ChooseModel extends BaseModel {
             return;
         }
         cb.url(ApiInterface.CHOOSE_LIST).type(JSONObject.class).params(params);
+
         ajaxProgress(cb);
 
     }

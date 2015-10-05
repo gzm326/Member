@@ -107,6 +107,8 @@ public class C1_PublishOrderActivity extends BaseActivity implements BusinessRes
                 // TODO Auto-generated method stub
                 Intent intent = new Intent(C1_PublishOrderActivity.this, F3_RegionPickActivity.class);
                 intent.putExtra("title", "会员级别选择");
+                intent.putExtra("str_url",ApiInterface.COMMENT_LIST);
+                intent.putExtra("state",1);
                 startActivityForResult(intent, 1);
                 overridePendingTransition(R.anim.my_scale_action,R.anim.my_alpha_action);
             }
@@ -208,13 +210,18 @@ public class C1_PublishOrderActivity extends BaseActivity implements BusinessRes
         ArrayList<Product> productArrayList;
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 1){
-            if(resultCode == Activity.RESULT_OK){
+            switch(resultCode)
+            {
+                case 1:
+                    String choose_name,choose_id;
+                    choose_name=data.getStringExtra("name");
+                    choose_id=data.getStringExtra("uid");
+                    mcard_jb.setText(choose_name);
+                    mcard_jbid.setText(choose_id);
+                    break;
+                case 2:
 
-                String choose_name,choose_id;
-                choose_name=data.getStringExtra("name");
-                choose_id=data.getStringExtra("uid");
-                mcard_jb.setText(choose_name);
-                mcard_jbid.setText(choose_id);
+                    break;
 
             }
         }

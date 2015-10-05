@@ -1,6 +1,7 @@
 package com.firesoft.member.Activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 
@@ -14,6 +15,7 @@ import com.BeeFramework.model.BusinessResponse;
 import com.BeeFramework.view.ToastView;
 import com.external.androidquery.callback.AjaxStatus;
 import com.firesoft.member.Model.MemberModel;
+import com.firesoft.member.Model.Product;
 import com.firesoft.member.Protocol.ApiInterface;
 import com.firesoft.member.Protocol.SIMPLE_MEMBER;
 import com.firesoft.member.Protocol.memberaddResponse;
@@ -21,6 +23,8 @@ import com.firesoft.member.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class D1_McardccActivity extends BaseActivity implements BusinessResponse {
 
@@ -31,6 +35,8 @@ public class D1_McardccActivity extends BaseActivity implements BusinessResponse
     private TextView txv_money;
     private TextView txv_integrals;
     private TextView txv_phone;
+    private TextView txv_cc_item,txv_ccid_item;
+    private TextView txv_pay_item,txv_payid_item;
     private Button btn_qd;
     private EditText edt_keyword;
     private MemberModel mDataModel;
@@ -49,6 +55,10 @@ public class D1_McardccActivity extends BaseActivity implements BusinessResponse
         txv_money=(TextView)findViewById(R.id.txv_money);
         txv_integrals=(TextView)findViewById(R.id.txv_integrals);
         txv_phone=(TextView)findViewById(R.id.txv_phone);
+        txv_cc_item=(TextView)findViewById(R.id.txv_cc_item);
+        txv_pay_item=(TextView)findViewById(R.id.txv_pay_item);
+        txv_ccid_item=(TextView)findViewById(R.id.txv_ccid_item);
+        txv_payid_item=(TextView)findViewById(R.id.txv_payid_item);
         btn_qd=(Button)findViewById(R.id.btn_qd);
         edt_keyword=(EditText)findViewById(R.id.edt_keyword);
         btn_qd.setOnClickListener(new View.OnClickListener() {
@@ -63,6 +73,28 @@ public class D1_McardccActivity extends BaseActivity implements BusinessResponse
                 mDataModel.getinfo(member_no);
 
 
+            }
+        });
+        txv_cc_item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(D1_McardccActivity.this, F3_RegionPickActivity.class);
+                intent.putExtra("title", "充次项目选择");
+                intent.putExtra("str_url",ApiInterface.COMMENT_LIST);
+                intent.putExtra("state",2);
+                startActivityForResult(intent, 1);
+                overridePendingTransition(R.anim.my_scale_action,R.anim.my_alpha_action);
+            }
+        });
+        txv_pay_item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(D1_McardccActivity.this, F3_RegionPickActivity.class);
+                intent.putExtra("title", "支付类别选择");
+                intent.putExtra("str_url",ApiInterface.COMMENT_LIST);
+                intent.putExtra("state",3);
+                startActivityForResult(intent, 1);
+                overridePendingTransition(R.anim.my_scale_action, R.anim.my_alpha_action);
             }
         });
         mDataModel = new MemberModel(this);
@@ -119,6 +151,30 @@ public class D1_McardccActivity extends BaseActivity implements BusinessResponse
                     edt_keyword.setText("");
                     edt_keyword.requestFocus();
                 }
+            }
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        ArrayList<Product> productArrayList;
+        super.onActivityResult(requestCode, resultCode, data);
+        String choose_name,choose_id;
+        choose_name=data.getStringExtra("name");
+        choose_id=data.getStringExtra("uid");
+        if(requestCode == 1){
+            switch(resultCode)
+            {
+                case 2:
+
+                    txv_cc_item.setText(choose_name);
+                    txv_ccid_item.setText(choose_id);
+                    break;
+                case 3:
+                    txv_pay_item.setText(choose_name);
+                    txv_payid_item.setText(choose_id);
+                    break;
+
             }
         }
     }

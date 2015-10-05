@@ -32,6 +32,7 @@ public class F3_RegionPickActivity extends Activity implements BusinessResponse 
 	private int choose_id;
 	private String choose_name;
 	private String str_title;
+	private int choose_state;
 
 	
 	@Override
@@ -42,6 +43,9 @@ public class F3_RegionPickActivity extends Activity implements BusinessResponse 
 
 		Intent intent = getIntent();
 		str_title = intent.getStringExtra("title");
+		choose_state=intent.getIntExtra("state",0);
+        ToastShow(str_title);
+
 		
 		title = (TextView) findViewById(R.id.choose_title);
 		listView = (ListView) findViewById(R.id.choose_list);
@@ -68,7 +72,7 @@ public class F3_RegionPickActivity extends Activity implements BusinessResponse 
 				intent.putExtra("uid", choose_id);
 				intent.putExtra("name", choose_name);
 
-				setResult(Activity.RESULT_OK, intent);
+				setResult(choose_state, intent);
 				finish();
 
 			}
