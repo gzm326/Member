@@ -1,10 +1,13 @@
 package com.firesoft.member.Activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,7 +27,12 @@ import com.firesoft.member.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Timer;
 
 public class D1_McardccActivity extends BaseActivity implements BusinessResponse {
 
@@ -40,6 +48,7 @@ public class D1_McardccActivity extends BaseActivity implements BusinessResponse
     private Button btn_qd;
     private EditText edt_keyword;
     private MemberModel mDataModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,6 +127,7 @@ public class D1_McardccActivity extends BaseActivity implements BusinessResponse
         txv_integrals.setText("00");
         txv_phone.setText(member.mobile_no);
     }
+
 
     public  void ToastShow(String atr){
         ToastView toast = new ToastView(D1_McardccActivity.this, atr);

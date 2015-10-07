@@ -33,12 +33,15 @@ package com.firesoft.member.Activity;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
 import android.os.Message;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
@@ -52,6 +55,8 @@ import com.BeeFramework.view.ToastView;
 import com.external.androidquery.callback.AjaxStatus;
 
 import com.external.eventbus.EventBus;
+import com.external.timepicker.ScreenInfo;
+import com.external.timepicker.WheelMain;
 import com.firesoft.member.APIErrorCode;
 import com.firesoft.member.Adapter.ProductxfAdapter;
 import com.firesoft.member.MessageConstant;
@@ -63,8 +68,13 @@ import com.firesoft.member.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Timer;
 
 public class C1_PublishOrderActivity extends BaseActivity implements BusinessResponse {
 
@@ -79,6 +89,10 @@ public class C1_PublishOrderActivity extends BaseActivity implements BusinessRes
     private TextView mAddComplete;
     private TextView mcard_jb;
     private TextView mcard_jbid;
+    private Timer mTimer;
+    private TextView mTime;
+    private SimpleDateFormat mFormat;
+    private WheelMain mWheelMain;
 
 
     @Override
@@ -86,6 +100,7 @@ public class C1_PublishOrderActivity extends BaseActivity implements BusinessRes
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         setContentView(R.layout.c1_publish_order);
+        mFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         tv_xtkz =(TextView)findViewById(R.id.mcard_xtkz);
         mKzView = (LinearLayout) findViewById(R.id.mcard_xtkz_view);
@@ -95,10 +110,13 @@ public class C1_PublishOrderActivity extends BaseActivity implements BusinessRes
         mAddComplete = (TextView) findViewById(R.id.c0_publish_button);
         mcard_jb=(TextView) findViewById(R.id.mcard_jb);
         mcard_jbid=(TextView) findViewById(R.id.mcard_jb_id);
+        mTime =(TextView)findViewById(R.id.mcard_sr);
 
 
         mMemberModel = new MemberModel(this);
         mMemberModel.addResponseListener(this);
+
+        initData();
 
         mcard_jb.setOnClickListener(new OnClickListener() {
 
@@ -170,6 +188,53 @@ public class C1_PublishOrderActivity extends BaseActivity implements BusinessRes
             }
         });
     }
+
+    public void initData() {
+        Date date = new Date();
+        mTime.setText(mFormat.format(date));
+        mTime.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                CloseKeyBoard();
+                LayoutInflater inflater = LayoutInflater.from(C1_PublishOrderActivity.this);
+                final View timepickerview = inflater.inflate(R.layout.timepicker, null);
+                ScreenInfo screenInfo = new ScreenInfo(C1_PublishOrderActivity.this);
+                mWheelMain = new WheelMain(timepickerview);
+                mWheelMain.screenheight = screenInfo.getHeight();
+                Calendar calendar = Calendar.getInstance();
+                try {
+                    calendar.setTime(mFormat.parse(mTime.getText().toString()));
+                } catch (ParseException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH);
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+                int hour = calendar.get(Calendar.HOUR_OF_DAY);
+                int min = calendar.get(Calendar.MINUTE);
+                mWheelMain.initDateTimePicker(year, month, day, hour, min);
+                new AlertDialog.Builder(C1_PublishOrderActivity.this)
+                        .setTitle("选择时间")
+                        .setView(timepickerview)
+                        .setPositiveButton(getString(R.string.confirm), new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                mTime.setText(mWheelMain.getTime());
+                            }
+                        })
+                        .setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        })
+                        .show();
+            }
+        });
+    }
+
 
     // 关闭键盘
     private void CloseKeyBoard() {
