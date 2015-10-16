@@ -58,12 +58,12 @@ public class BeeQuery<T> extends AQuery {
 		if (ENVIROMENT_PRODUCTION == BeeQuery.environment())
 		{
 			//return "http://demo.o2omobile.com.cn/api";
-			return "http://192.168.199.207/api";
+			return "http://192.168.1.101/api";
 		}
 		else 
 		{
             //return "http://demo.o2omobile.com.cn/api";
-			return "http://192.168.199.207/api";
+			return "http://192.168.1.101/api";
 
 		}
 	}
@@ -72,12 +72,12 @@ public class BeeQuery<T> extends AQuery {
         if (ENVIROMENT_PRODUCTION == BeeQuery.environment())
         {
         	//return "http://demo.o2omobile.com.cn";
-			return "http://192.168.199.207";
+			return "http://192.168.1.101";
         }
         else
         {
         	//return "http://dev.o2omobile.com.cn/api";
-			return "http://192.168.199.207/api";
+			return "http://192.168.1.101/api";
         }
     }
 

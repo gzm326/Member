@@ -84,4 +84,18 @@
     <string name="pay">付款</string>
     <string name="balance_cancel">取消订单</string>
 
+    <string name="setting">设置</string>
+    <string name="logout_success">注销成功</string>
+    <string name="change_avatar_success">头像修改成功</string>
+    <string name="my_avatar">我的头像</string>
+    <string name="personal_signature">个人签名</string>
+    <string name="personal_brief">个人简介</string>
+    <string name="my_service">我的服务</string>
+    <string name="change_login_password">修改登录密码</string>
+    <string name="feedback">意见反馈</string>
+    <string name="about_us">关于我们</string>
+    <string name="account_logout">账户登出</string>
+
+    <string name="invite_firend">邀请好友</string>
+
 </resources>
