@@ -42,7 +42,10 @@ import android.view.animation.Animation.AnimationListener;
 
 import com.BeeFramework.BeeFrameworkApp;
 import com.BeeFramework.model.BeeQuery;
+import com.external.anyversion.AnyVersion;
+import com.external.anyversion.NotifyStyle;
 import com.firesoft.member.MemberAppConst;
+import com.firesoft.member.Protocol.ApiInterface;
 import com.firesoft.member.R;
 import com.firesoft.member.SESSION;
 
@@ -81,10 +84,17 @@ public class SplashActivity extends Activity {
             @Override
             public void onAnimationEnd(Animation animation) {
                 // TODO Auto-generated method stub
+                checkVersion();
                 redirectto();
             }
         }
         );
+    }
+
+    private void checkVersion(){
+        AnyVersion version = AnyVersion.getInstance();
+        version.setURL(BeeQuery.serviceUrl() + ApiInterface.SYSTEM_UPDATE);
+        version.check(NotifyStyle.Dialog);
     }
 
     private void redirectto() {

@@ -44,7 +44,7 @@ public class F3_RegionPickActivity extends Activity implements BusinessResponse 
 		Intent intent = getIntent();
 		str_title = intent.getStringExtra("title");
 		choose_state=intent.getIntExtra("state",0);
-        ToastShow(str_title);
+
 
 		
 		title = (TextView) findViewById(R.id.choose_title);
@@ -68,8 +68,10 @@ public class F3_RegionPickActivity extends Activity implements BusinessResponse 
 				choose_id = chooseModel.dataList.get(position).id;
 				choose_name = chooseModel.dataList.get(position).name;
 
+				//ToastShow(Integer.toString(choose_id));
+
 				Intent intent = new Intent();
-				intent.putExtra("uid", choose_id);
+				intent.putExtra("uid", Integer.toString(choose_id));
 				intent.putExtra("name", choose_name);
 
 				setResult(choose_state, intent);

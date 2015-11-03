@@ -51,10 +51,13 @@ import android.widget.TextView;
 import com.BeeFramework.Utils.ImageUtil;
 import com.BeeFramework.activity.BaseActivity;
 import com.BeeFramework.activity.WebViewActivity;
+import com.BeeFramework.model.BeeQuery;
 import com.BeeFramework.model.BusinessResponse;
 import com.BeeFramework.view.MyDialog;
 import com.BeeFramework.view.ToastView;
 import com.external.androidquery.callback.AjaxStatus;
+import com.external.anyversion.AnyVersion;
+import com.external.anyversion.NotifyStyle;
 import com.external.eventbus.EventBus;
 import com.firesoft.member.MemberAppConst;
 import com.firesoft.member.MessageConstant;
@@ -224,9 +227,13 @@ public class F9_SettingActivity extends BaseActivity implements BusinessResponse
                 startActivity(intent);
                 break;*/
             case R.id.about:
-                intent = new Intent(F9_SettingActivity.this, WebViewActivity.class);
+                /*intent = new Intent(F9_SettingActivity.this, WebViewActivity.class);
                 intent.putExtra(WebViewActivity.WEBURL, "http://www.o2omobile.com.cn");
-                startActivity(intent);
+                startActivity(intent);*/
+
+                AnyVersion version = AnyVersion.getInstance();
+                version.setURL(BeeQuery.hostUrl()+ApiInterface.SYSTEM_UPDATE);
+                version.check(NotifyStyle.Dialog);
                 break;
             /*case R.id.feedback:
                 intent = new Intent(F9_SettingActivity.this, C16_FeedbackActivity.class);

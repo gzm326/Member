@@ -198,7 +198,37 @@
         <activity
             android:name=".Activity.F3_RegionPickActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/dialog"  >
+            android:theme="@style/dialog" >
+        </activity>
+        <activity
+            android:name=".Activity.S1_ProductListActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustPan" >
+        </activity>
+        <activity
+            android:name=".Activity.S0_ProductTypeAddActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustPan" >
+        </activity>
+        <activity
+            android:name=".Activity.S0_ProductTypeUpdateActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustPan" >
+        </activity>
+        <activity
+            android:name=".Activity.S1_ProductAddActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustPan" >
+        </activity>
+        <activity
+            android:name=".Activity.S1_ProductUpdateActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustPan" >
+        </activity>
+        <activity
+            android:name=".Activity.S0_ProductTypeListActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustPan" >
         </activity>
     </application>
 

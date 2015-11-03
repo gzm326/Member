@@ -77,7 +77,7 @@ public class BeeQuery<T> extends AQuery {
         else
         {
         	//return "http://dev.o2omobile.com.cn/api";
-			return "http://192.168.1.101/api";
+			return "http://192.168.1.101";
         }
     }
 

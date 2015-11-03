@@ -37,9 +37,16 @@ import android.graphics.Bitmap;
 import android.telephony.TelephonyManager;
 
 import com.BeeFramework.BeeFrameworkApp;
+import com.external.anyversion.AnyVersion;
+import com.external.anyversion.Version;
+import com.external.anyversion.VersionParser;
 import com.firesoft.member.Utils.LocationManager;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
 public class Member extends BeeFrameworkApp {
 
@@ -49,6 +56,7 @@ public class Member extends BeeFrameworkApp {
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		initUpdate();
 
 		String device_id = Member.getDeviceId(getApplicationContext());
 		SharedPreferences shared;
@@ -90,6 +98,29 @@ public class Member extends BeeFrameworkApp {
 
 	}
 
+	private  void initUpdate(){
+
+		AnyVersion.init(this, new VersionParser() {
+			@Override
+			public Version onParse(String response) {
+				final JSONTokener tokener = new JSONTokener(response);
+				try {
+					JSONObject json = (JSONObject) tokener.nextValue();
+					return new Version(
+							json.getString("name"),
+							json.getString("note"),
+							json.getString("url"),
+							json.getInt("code")
+					);
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+				return null;
+			}
+		});
+	}
+
+
 	public int getCacheUserId() {
 		SharedPreferences shared;
 		SharedPreferences.Editor editor;
@@ -106,5 +137,7 @@ public class Member extends BeeFrameworkApp {
 		String deviceId = tm.getDeviceId();
 		return deviceId;
 	}
+
+
 
 }

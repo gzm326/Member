@@ -80,5 +80,15 @@ public class ApiInterface
      public static final String MEMBER_DEL="/member/del";
      public static final String MEMBER_MINFO="/member/minfo";
      public static final String CHOOSE_LIST="/hyjb/list";
-
+     public static final String SYSTEM_UPDATE="/member/version";
+     public static final String PRODUCTTYPE_LIST="/product/typelist";
+     public static final String PRODUCTTYPE_ADD="/product/typeadd";
+     public static final String PRODUCTTYPE_UPDATE="/product/typeupdate";
+     public static final String PRODUCTTYPE_DEL="/product/typedel";
+     public static final String PRODUCTTYPE_INFO="/product/typeinfo";
+     public static final String PRODUCT_LIST="/product/list";
+     public static final String PRODUCT_ADD="/product/add";
+     public static final String PRODUCT_UPDATE="/product/update";
+     public static final String PRODUCT_DEL="/product/del";
+     public static final String PRODUCT_INFO="/product/info";
 }
