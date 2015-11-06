@@ -91,4 +91,9 @@ public class ApiInterface
      public static final String PRODUCT_UPDATE="/product/update";
      public static final String PRODUCT_DEL="/product/del";
      public static final String PRODUCT_INFO="/product/info";
+     public static final String GRADE_LIST="/grade/list";
+     public static final String GRADE_ADD="/grade/add";
+     public static final String GRADE_UPDATE="/grade/update";
+     public static final String GRADE_DEL="/grade/del";
+     public static final String GRADE_INFO="/grade/info";
 }

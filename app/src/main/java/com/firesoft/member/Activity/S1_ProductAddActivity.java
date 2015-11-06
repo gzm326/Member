@@ -21,7 +21,7 @@ import com.firesoft.member.Model.Product;
 import com.firesoft.member.Model.ProductModel;
 import com.firesoft.member.Protocol.ApiInterface;
 import com.firesoft.member.Protocol.SIMPLE_PRODUCT;
-import com.firesoft.member.Protocol.producttypeaddResponse;
+import com.firesoft.member.Protocol.productaddResponse;
 import com.firesoft.member.R;
 
 import org.json.JSONException;
@@ -144,14 +144,14 @@ public class S1_ProductAddActivity extends BaseActivity implements BusinessRespo
             throws JSONException {
         // TODO Auto-generated method stub
         if (url.endsWith(ApiInterface.PRODUCT_ADD)) {
-            producttypeaddResponse response = new producttypeaddResponse();
+            productaddResponse response = new productaddResponse();
             response.fromJson(jo);
             if (response.succeed == 1) {
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
+                /*Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);*/
                 finish();
                 Message msg = new Message();
-                msg.what = MessageConstant.SIGN_UP_SUCCESS;
+                msg.what = MessageConstant.REFRESH_LIST;
                 EventBus.getDefault().post(msg);
             }else {
                 if (response.error_code == APIErrorCode.NICKNAME_EXIST) {

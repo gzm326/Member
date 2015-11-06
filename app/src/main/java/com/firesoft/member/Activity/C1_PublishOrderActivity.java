@@ -249,11 +249,11 @@ public class C1_PublishOrderActivity extends BaseActivity implements BusinessRes
             memberaddResponse response = new memberaddResponse();
             response.fromJson(jo);
             if (response.succeed == 1) {
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
+                /*Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);*/
                 finish();
                 Message msg = new Message();
-                msg.what = MessageConstant.SIGN_UP_SUCCESS;
+                msg.what = MessageConstant.REFRESH_LIST;
                 EventBus.getDefault().post(msg);
             }else {
                 if (response.error_code == APIErrorCode.NICKNAME_EXIST) {

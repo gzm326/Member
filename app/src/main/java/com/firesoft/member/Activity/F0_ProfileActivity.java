@@ -187,12 +187,12 @@ public class F0_ProfileActivity extends BaseActivity implements BusinessResponse
             memberaddResponse response = new memberaddResponse();
             response.fromJson(jo);
             if (response.succeed == 1) {
-                Intent intent = new Intent(this, C0_ServiceListActivity.class);
+                /*Intent intent = new Intent(this, C0_ServiceListActivity.class);
                 //startActivity(intent);
-                setResult(Activity.RESULT_OK, intent);
+                setResult(Activity.RESULT_OK, intent);*/
                 finish();
                 Message msg = new Message();
-                msg.what = MessageConstant.SIGN_UP_SUCCESS;
+                msg.what = MessageConstant.REFRESH_LIST;
                 EventBus.getDefault().post(msg);
             } else {
                 if (response.error_code == APIErrorCode.NICKNAME_EXIST) {
@@ -204,7 +204,7 @@ public class F0_ProfileActivity extends BaseActivity implements BusinessResponse
             response.fromJson(jo);
             if (response.succeed == 1) {
                 Message msg = new Message();
-                msg.what = MessageConstant.SIGN_UP_SUCCESS;
+                msg.what = MessageConstant.REFRESH_LIST;
                 EventBus.getDefault().post(msg);
             } else {
                 if (response.error_code == APIErrorCode.NICKNAME_EXIST) {

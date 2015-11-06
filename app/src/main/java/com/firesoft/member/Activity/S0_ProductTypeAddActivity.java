@@ -1,7 +1,7 @@
 package com.firesoft.member.Activity;
 
 
-import android.content.Intent;
+
 import android.os.Bundle;
 import android.os.Message;
 import android.view.Gravity;
@@ -70,14 +70,14 @@ public class S0_ProductTypeAddActivity extends BaseActivity implements BusinessR
                     toast.show();
                     type_name.setText("");
                     type_name.requestFocus();
-                }
-                else {
-                 mProductTypeModel.add(name, bz);
+                } else {
+                    mProductTypeModel.add(name, bz);
 
                 }
 
             }
         });
+
     }
 
 
@@ -89,11 +89,11 @@ public class S0_ProductTypeAddActivity extends BaseActivity implements BusinessR
             producttypeaddResponse response = new producttypeaddResponse();
             response.fromJson(jo);
             if (response.succeed == 1) {
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
+                /*Intent intent = new Intent(this, S0_ProductTypeListActivity.class);
+                startActivity(intent);*/
                 finish();
                 Message msg = new Message();
-                msg.what = MessageConstant.SIGN_UP_SUCCESS;
+                msg.what = MessageConstant.REFRESH_LIST;
                 EventBus.getDefault().post(msg);
             }else {
                 if (response.error_code == APIErrorCode.NICKNAME_EXIST) {

@@ -10,7 +10,7 @@ import org.json.JSONObject;
 /**
  * Created by Administrator on 2015/10/30.
  */
-@Table(name = "SIMPLE_PRODUCTTYPE")
+@Table(name = "SIMPLE_PRODUCT")
 public class SIMPLE_PRODUCT extends DataBaseModel {
     @Column(name = "uid")
     public int id;

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.os.Message;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,9 +19,11 @@ import com.BeeFramework.model.BusinessResponse;
 import com.BeeFramework.view.ToastView;
 import com.external.activeandroid.util.Log;
 import com.external.androidquery.callback.AjaxStatus;
+import com.external.eventbus.EventBus;
 import com.external.maxwin.view.IXListViewListener;
 import com.external.maxwin.view.XListView;
 import com.firesoft.member.Adapter.S0_ProductTypeListAdapter;
+import com.firesoft.member.MessageConstant;
 import com.firesoft.member.Model.Product;
 import com.firesoft.member.Model.ProductTypeListModel;
 import com.firesoft.member.Protocol.ApiInterface;
@@ -112,8 +115,18 @@ public class S0_ProductTypeListActivity extends BaseActivity implements Business
             }
         });
 
+        EventBus.getDefault().register(this);
+
         LocationManager.getInstance().refreshLocation();
 
+    }
+
+    public void onEvent(Object event) {
+
+        Message message = (Message) event;
+        if (message.what == MessageConstant.REFRESH_LIST) {
+            mDataModel.fetPreService(mServiceType.id, ENUM_SEARCH_ORDER.location_asc);
+        }
     }
 
 
@@ -190,7 +203,7 @@ public class S0_ProductTypeListActivity extends BaseActivity implements Business
         mDataModel.fetNextService(mServiceType.id, search_order);
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+   /* protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         ArrayList<Product> productArrayList;
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == REQUESTCODE1){
@@ -198,5 +211,5 @@ public class S0_ProductTypeListActivity extends BaseActivity implements Business
                 mDataModel.fetPreService(mServiceType.id, ENUM_SEARCH_ORDER.location_asc);
             }
         }
-    }
+    }*/
 }

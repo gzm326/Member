@@ -206,7 +206,7 @@ public class S1_ProductUpdateActivity extends BaseActivity implements BusinessRe
                 setResult(Activity.RESULT_OK, intent);
                 finish();
                 Message msg = new Message();
-                msg.what = MessageConstant.SIGN_UP_SUCCESS;
+                msg.what = MessageConstant.REFRESH_LIST;
                 EventBus.getDefault().post(msg);
             } else {
                 if (response.error_code == APIErrorCode.NICKNAME_EXIST) {
@@ -218,7 +218,7 @@ public class S1_ProductUpdateActivity extends BaseActivity implements BusinessRe
             response.fromJson(jo);
             if (response.succeed == 1) {
                 Message msg = new Message();
-                msg.what = MessageConstant.SIGN_UP_SUCCESS;
+                msg.what = MessageConstant.REFRESH_LIST;
                 EventBus.getDefault().post(msg);
                 ToastShow("保存成功");
             } else {

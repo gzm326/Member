@@ -230,6 +230,18 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustPan" >
         </activity>
+        <activity
+            android:name=".Activity.S2_GradeListActivity"
+            android:label="@string/title_activity_s2__grade_list" >
+        </activity>
+        <activity
+            android:name=".Activity.S2_GradeAddActivity"
+            android:label="@string/title_activity_s2__grade_add" >
+        </activity>
+        <activity
+            android:name=".Activity.S2_GradeUpdateActivity"
+            android:label="@string/title_activity_s2__grade_update" >
+        </activity>
     </application>
 
 </manifest>

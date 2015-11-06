@@ -35,7 +35,7 @@ public class MessageConstant {
     public static final int SIGN_UP_SUCCESS = 0;
     public static final int LOGINOUT = 1;
     public static final int MESSAGE_READ = 2;
-    public static final int APPLY_FREEMAN = 3;
+    public static final int REFRESH_LIST = 3;
 
     public static final int SIGN_IN_SUCCESS = 0;
     public static final int SHOW_SEARCH_VIEW = 6;

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.os.Message;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -15,9 +16,11 @@ import com.BeeFramework.Utils.ImageUtil;
 import com.BeeFramework.activity.BaseActivity;
 import com.BeeFramework.model.BusinessResponse;
 import com.external.androidquery.callback.AjaxStatus;
+import com.external.eventbus.EventBus;
 import com.external.maxwin.view.IXListViewListener;
 import com.external.maxwin.view.XListView;
 import com.firesoft.member.Adapter.S1_ProductListAdapter;
+import com.firesoft.member.MessageConstant;
 import com.firesoft.member.Model.Product;
 import com.firesoft.member.Model.ProductListModel;
 import com.firesoft.member.Protocol.ApiInterface;
@@ -108,9 +111,20 @@ public class S1_ProductListActivity extends BaseActivity implements BusinessResp
             }
         });
 
+        EventBus.getDefault().register(this);
+
         LocationManager.getInstance().refreshLocation();
 
     }
+
+    public void onEvent(Object event) {
+
+        Message message = (Message) event;
+        if (message.what == MessageConstant.REFRESH_LIST) {
+            mDataModel.fetPreService(mServiceType.id, ENUM_SEARCH_ORDER.location_asc);
+        }
+    }
+
 
     @Override
     public void OnMessageResponse(String url, JSONObject jo, AjaxStatus status) throws JSONException
@@ -177,7 +191,7 @@ public class S1_ProductListActivity extends BaseActivity implements BusinessResp
         mDataModel.fetNextService(mServiceType.id, search_order);
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+/*    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         ArrayList<Product> productArrayList;
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == REQUESTCODE1){
@@ -185,6 +199,6 @@ public class S1_ProductListActivity extends BaseActivity implements BusinessResp
                 mDataModel.fetPreService(mServiceType.id, ENUM_SEARCH_ORDER.location_asc);
             }
         }
-    }
+    }*/
 
 }

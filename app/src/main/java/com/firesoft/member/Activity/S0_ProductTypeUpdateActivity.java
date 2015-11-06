@@ -124,7 +124,7 @@ public class S0_ProductTypeUpdateActivity extends BaseActivity implements Busine
                 setResult(Activity.RESULT_OK, intent);
                 finish();
                 Message msg = new Message();
-                msg.what = MessageConstant.SIGN_UP_SUCCESS;
+                msg.what = MessageConstant.REFRESH_LIST;
                 EventBus.getDefault().post(msg);
             } else {
                 if (response.error_code == APIErrorCode.NICKNAME_EXIST) {
@@ -136,7 +136,7 @@ public class S0_ProductTypeUpdateActivity extends BaseActivity implements Busine
             response.fromJson(jo);
             if (response.succeed == 1) {
                 Message msg = new Message();
-                msg.what = MessageConstant.SIGN_UP_SUCCESS;
+                msg.what = MessageConstant.REFRESH_LIST;
                 EventBus.getDefault().post(msg);
             } else {
                 if (response.error_code == APIErrorCode.NICKNAME_EXIST) {
