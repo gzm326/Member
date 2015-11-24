@@ -43,6 +43,7 @@ import com.firesoft.member.Protocol.ApiInterface;
 import com.firesoft.member.Protocol.CONFIG;
 import com.firesoft.member.Protocol.ENUM_USER_GENDER;
 import com.firesoft.member.Protocol.LOCATION;
+import com.firesoft.member.Protocol.SIMPLE_USER;
 import com.firesoft.member.Protocol.USER;
 import com.firesoft.member.Protocol.usercertifyRequest;
 import com.firesoft.member.Protocol.usercertifyResponse;
@@ -73,6 +74,7 @@ import java.util.Map;
 public class UserModel extends BaseModel {
     private Context context;
     public String invite_code;
+    public USER nuser;
     public UserModel(Context context) {
         super(context);
         this.context = context;
@@ -114,6 +116,8 @@ public class UserModel extends BaseModel {
                             editor.putInt("uid", usersigninResponse.user.id);
                             editor.putString("sid", usersigninResponse.sid);
                             editor.putString("nickename",user.nickname);
+                            editor.putString("shopid",user.shopid);
+                            editor.putString("shopname",user.shopname);
                             editor.commit();
                             SESSION.getInstance().uid = usersigninResponse.user.id;
                             SESSION.getInstance().sid = usersigninResponse.sid;
@@ -542,6 +546,66 @@ public class UserModel extends BaseModel {
 
         cb.url(ApiInterface.USER_CERTIFY).type(JSONObject.class).params(params);
         ajaxProgress(cb);
+    }
+
+
+    public void getinfo()
+    {
+        userchange_profileRequest request = new userchange_profileRequest();
+
+        request.sid = SESSION.getInstance().sid;
+        request.uid = SESSION.getInstance().uid;
+        request.ver = MemberAppConst.VERSION_CODE;
+
+
+
+        BeeCallback<JSONObject> cb = new BeeCallback<JSONObject>() {
+
+            @Override
+            public void callback(String url, JSONObject jo, AjaxStatus status) {
+                try {
+                    UserModel.this.callback(this, url, jo, status);
+                    if (null != jo)
+                    {
+                        userchange_profileResponse response = new userchange_profileResponse();
+                        response.fromJson(jo);
+
+                        if(response.succeed == 1)
+                        {
+                            nuser= response.user;
+                            editor.putString("shopid",nuser.shopid);
+                            editor.putString("shopname",nuser.shopname);
+                            editor.commit();
+                            UserModel.this.OnMessageResponse(url,jo,status);
+                        }
+                        else
+                        {
+                            UserModel.this.callback(url, response.error_code, response.error_desc);
+                        }
+                    }else{
+                        UserModel.this.OnMessageResponse(url, jo, status);
+                    }
+
+                } catch (JSONException e) {
+
+                }
+            }
+        };
+
+        Map<String, Object> params = new HashMap<String, Object>();
+        try {
+            JSONObject jsonObject = request.toJson();
+            params.put("json", request.toJson().toString());
+
+        } catch (JSONException e) {
+
+        }
+        if(isSendingMessage(ApiInterface.USER_INFO)){
+            return;
+        }
+        cb.url(ApiInterface.USER_INFO).type(JSONObject.class).params(params);
+        ajaxProgress(cb);
+
     }
 }
 

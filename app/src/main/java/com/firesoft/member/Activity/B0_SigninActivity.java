@@ -33,6 +33,7 @@ package com.firesoft.member.Activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Handler;
@@ -50,6 +51,7 @@ import com.BeeFramework.model.BusinessResponse;
 import com.BeeFramework.view.ToastView;
 import com.external.androidquery.callback.AjaxStatus;
 import com.external.eventbus.EventBus;
+import com.firesoft.member.MemberAppConst;
 import com.firesoft.member.MessageConstant;
 import com.firesoft.member.Model.UserModel;
 import com.firesoft.member.Protocol.ApiInterface;
@@ -66,6 +68,8 @@ public class B0_SigninActivity extends BaseActivity implements BusinessResponse,
     private TextView mSignup;
     private Button mLogin;
     private UserModel mUserModel;
+
+    private SharedPreferences mShared;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,24 +102,16 @@ public class B0_SigninActivity extends BaseActivity implements BusinessResponse,
                 break;
             case R.id.btn_login:
                 if ("".equals(mobile)) {
-                    ToastView toast = new ToastView(this, getString(R.string.please_input_mobile_phone));
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
+                    ToastShow(getString(R.string.please_input_mobile_phone));
                     mMobile.requestFocus();
                 } else if ("".equals(password)) {
-                    ToastView toast = new ToastView(this, getString(R.string.please_input_password));
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
+                    ToastShow(getString(R.string.please_input_password));
                     mPassword.requestFocus();
                 } else if (mobile.length() < 11) {
-                    ToastView toast = new ToastView(this, getString(R.string.wrong_mobile_phone));
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
+                    ToastShow(getString(R.string.wrong_mobile_phone));
                     mMobile.requestFocus();
                 } else if (password.length() < 6 || password.length() > 20) {
-                    ToastView toast = new ToastView(this, getString(R.string.please_enter_correct_password_format));
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
+                    ToastShow(getString(R.string.please_enter_correct_password_format));
                     mPassword.requestFocus();
                 } else {
                     CloseKeyBoard();
@@ -127,7 +123,11 @@ public class B0_SigninActivity extends BaseActivity implements BusinessResponse,
         }
     }
 
-
+    public  void ToastShow(String atr){
+        ToastView toast = new ToastView(this, atr);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
+    }
     @Override
     public void OnMessageResponse(String url, JSONObject jo, AjaxStatus status)
             throws JSONException {
@@ -135,6 +135,7 @@ public class B0_SigninActivity extends BaseActivity implements BusinessResponse,
             usersigninResponse usersigninResponse = new usersigninResponse();
             usersigninResponse.fromJson(jo);
             if (usersigninResponse.succeed == 1) {
+
                 Message msg = new Message();
                 msg.what = MessageConstant.SIGN_IN_SUCCESS;
                 EventBus.getDefault().post(msg);
@@ -142,9 +143,7 @@ public class B0_SigninActivity extends BaseActivity implements BusinessResponse,
                 startActivity(intent);
                 finish();
             }else{
-                ToastView toast = new ToastView(this, getString(R.string.mobile_phone_or_password_error));
-                toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();
+                ToastShow(getString(R.string.mobile_phone_or_password_error));
                 mPassword.requestFocus();
             }
 
@@ -189,6 +188,7 @@ public class B0_SigninActivity extends BaseActivity implements BusinessResponse,
                 ToastView toast = new ToastView(getApplicationContext(), getString(R.string.exit_again));
 				toast.setGravity(Gravity.CENTER, 0, 0);
 	            toast.show();
+
                 handler.sendEmptyMessageDelayed(0, 3000);
                 return true;
             } else {

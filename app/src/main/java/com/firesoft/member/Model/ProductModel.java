@@ -39,6 +39,8 @@ public class ProductModel extends BaseModel {
         request.unit = product.unit;
         request.special_discount = product.special_discount;
         request.special_credit = product.special_credit;
+        request.shopid=product.shopid;
+        request.shopname=product.shopname;
 
         BeeCallback<JSONObject> cb = new BeeCallback<JSONObject>() {
             @Override
@@ -90,6 +92,9 @@ public class ProductModel extends BaseModel {
         request.special_discount = product.special_discount;
         request.special_credit = product.special_credit;
         request.uid=product.id;
+        request.shopid=product.shopid;
+        request.shopname=product.shopname;
+
         BeeCallback<JSONObject> cb = new BeeCallback<JSONObject>() {
             @Override
             public void callback(String url, JSONObject jo, AjaxStatus status) {

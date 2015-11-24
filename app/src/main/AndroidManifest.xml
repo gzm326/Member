@@ -232,15 +232,23 @@
         </activity>
         <activity
             android:name=".Activity.S2_GradeListActivity"
-            android:label="@string/title_activity_s2__grade_list" >
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustPan" >
         </activity>
         <activity
             android:name=".Activity.S2_GradeAddActivity"
-            android:label="@string/title_activity_s2__grade_add" >
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustPan" >
         </activity>
         <activity
             android:name=".Activity.S2_GradeUpdateActivity"
-            android:label="@string/title_activity_s2__grade_update" >
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustPan" >
+        </activity>
+        <activity
+            android:name=".Activity.A1_ShopAddActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustPan" >
         </activity>
     </application>
 

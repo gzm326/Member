@@ -89,7 +89,7 @@
 					android:drawablePadding="10dp"
 					android:drawableLeft="@mipmap/icon_me_photo"
 					android:drawableRight="@mipmap/right"
-					android:text="测试" />
+					android:text="门店设置" />
 		<View
 			android:background="@color/black2"
 			android:layout_width="fill_parent"

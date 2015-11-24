@@ -49,6 +49,10 @@ public class LocationManager implements BDLocationListener
     private static LocationManager Instance;
     private static double          latitude = 0; //经度
     private static double          longitude = 0; //纬度
+    private static String           naddress;
+    private static String           nProvince;  //省
+    private static String           nCity;     //市
+    private static String           nDistrict;  //县
     
     public static SharedPreferences shared;
 	public static SharedPreferences.Editor editor;
@@ -63,13 +67,17 @@ public class LocationManager implements BDLocationListener
         
         latitude = shared.getFloat("latitude", 0.0f);
         longitude = shared.getFloat("longitude", 0.0f);
+        naddress=shared.getString("naddress", "");
+        nProvince=shared.getString("nProvince","");
+        nCity=shared.getString("nCity","");
+        nDistrict=shared.getString("nDistrict","");
     	
         Instance = this;
         mLocationClient = new LocationClient(context);
         LocationClientOption option = new LocationClientOption();
         option.setLocationMode(LocationClientOption.LocationMode.Battery_Saving);//设置定位模式
         option.setCoorType("gcj02");//返回的定位结果是百度经纬度，默认值gcj02
-        option.setIsNeedAddress(false);//返回的定位结果包含地址信息
+        option.setIsNeedAddress(true);//返回的定位结果包含地址信息
         option.setNeedDeviceDirect(false);//返回的定位结果包含手机机头的方向
         option.setProdName(Config.BAIDU_MAP_PRODNAME);
         option.setOpenGps(true);
@@ -115,18 +123,30 @@ public class LocationManager implements BDLocationListener
             sb.append(bdLocation.getSpeed());
             sb.append("\nsatellite : ");
             sb.append(bdLocation.getSatelliteNumber());
+
         } else if (bdLocation.getLocType() == BDLocation.TypeNetWorkLocation){
             sb.append("\naddr : ");
             sb.append(bdLocation.getAddrStr());
+            sb.append("\ncity : ");
+            sb.append(bdLocation.getCity());
         }
 
         latitude = bdLocation.getLatitude();
         longitude = bdLocation.getLongitude();
+        naddress=bdLocation.getAddrStr();
+        nProvince=bdLocation.getProvince();
+        nCity=bdLocation.getCity();
+        nDistrict=bdLocation.getDistrict();
+
         
         if (latitude > 1 && longitude > 1)
         {
         	editor.putFloat("latitude", (float) latitude);
             editor.putFloat("longitude", (float) longitude);
+            editor.putString("naddress", naddress);
+            editor.putString("nProvince",nProvince);
+            editor.putString("nCity",nCity);
+            editor.putString("nDistrict",nDistrict);
             editor.commit();
         }
         else
@@ -146,6 +166,7 @@ public class LocationManager implements BDLocationListener
         }
 
         Log.e("location", sb.toString());
+
     }
 
     
@@ -192,7 +213,7 @@ public class LocationManager implements BDLocationListener
     	shared = context.getSharedPreferences(MemberAppConst.USERINFO, 0);
         editor = shared.edit();
         longitude = shared.getFloat("longitude", 0.0f);
-    	return longitude;
+        return longitude;
     } 
     
 }

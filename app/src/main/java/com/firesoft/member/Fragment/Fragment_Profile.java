@@ -2,8 +2,10 @@ package com.firesoft.member.Fragment;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -11,9 +13,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 
+import com.BeeFramework.view.ToastView;
+import com.firesoft.member.Activity.A1_ShopAddActivity;
 import com.firesoft.member.Activity.McardAddActivity;
 import com.firesoft.member.Activity.S0_ProductTypeListActivity;
 import com.firesoft.member.Activity.S1_ProductListActivity;
+import com.firesoft.member.MemberAppConst;
 import com.firesoft.member.R;
 
 
@@ -23,6 +28,8 @@ public class Fragment_Profile extends Fragment implements OnClickListener {
 	private Activity ctx;
 	private View layout;
 	private TextView tvname, tv_accout;
+
+	private SharedPreferences mShared;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -69,6 +76,13 @@ public class Fragment_Profile extends Fragment implements OnClickListener {
 	private void initData() {
 		// TODO Auto-generated method stub
 
+
+	}
+
+	public  void ToastShow(String atr){
+		ToastView toast = new ToastView(getActivity(), atr);
+		toast.setGravity(Gravity.CENTER, 0, 0);
+		toast.show();
 	}
 
 	@Override
@@ -81,7 +95,11 @@ public class Fragment_Profile extends Fragment implements OnClickListener {
 			/*Utils.start_Activity(getActivity(), PublicActivity.class,
 					new BasicNameValuePair(Constants.NAME,
 							getString(R.string.my_posts)));*/
+			Intent mShopIntent = new Intent(getActivity(), A1_ShopAddActivity.class);
+			startActivity(mShopIntent);
+			getActivity().overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
 			break;
+
 		case R.id.txt_collect:// 收藏
 			/*Utils.start_Activity(getActivity(), PublicActivity.class,
 					new BasicNameValuePair(Constants.NAME,

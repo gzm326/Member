@@ -2,6 +2,7 @@ package com.firesoft.member.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Message;
 import android.view.Gravity;
@@ -16,6 +17,7 @@ import com.BeeFramework.view.ToastView;
 import com.external.androidquery.callback.AjaxStatus;
 import com.external.eventbus.EventBus;
 import com.firesoft.member.APIErrorCode;
+import com.firesoft.member.MemberAppConst;
 import com.firesoft.member.MessageConstant;
 import com.firesoft.member.Model.Product;
 import com.firesoft.member.Model.ProductModel;
@@ -42,6 +44,8 @@ public class S1_ProductAddActivity extends BaseActivity implements BusinessRespo
     private RadioButton rb_credit_true,rb_credit_false;
 
     private TextView mAddComplete;
+
+    private SharedPreferences mShared;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +63,8 @@ public class S1_ProductAddActivity extends BaseActivity implements BusinessRespo
         rb_credit_true = (RadioButton) findViewById(R.id.rb_credit_true);
         rb_credit_false = (RadioButton) findViewById(R.id.rb_credit_false);
         mAddComplete = (TextView) findViewById(R.id.c0_publish_button);
+
+        mShared =getSharedPreferences(MemberAppConst.USERINFO, 0);
 
         mProductModel = new ProductModel(this);
         mProductModel.addResponseListener(this);
@@ -89,6 +95,8 @@ public class S1_ProductAddActivity extends BaseActivity implements BusinessRespo
                 String type_id = product_typeid.getText().toString();
                 String price = product_price.getText().toString();
                 String sprice = product_sprice.getText().toString();
+                String nShopid=mShared.getString("shopid", "0");
+                String nShopname=mShared.getString("shopname", "");
                 String special,discount,credit;
                 if(rb_special_true.isChecked()){
                     special="1";
@@ -126,6 +134,8 @@ public class S1_ProductAddActivity extends BaseActivity implements BusinessRespo
                     product.special=special;
                     product.special_discount=discount;
                     product.special_credit=credit;
+                    product.shopid=nShopid;
+                    product.shopname=nShopname;
                     mProductModel.add(product);
 
                 }

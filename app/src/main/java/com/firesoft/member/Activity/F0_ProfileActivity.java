@@ -34,6 +34,7 @@ package com.firesoft.member.Activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Message;
 import android.view.Gravity;
@@ -49,6 +50,7 @@ import com.BeeFramework.view.ToastView;
 import com.external.androidquery.callback.AjaxStatus;
 import com.external.eventbus.EventBus;
 import com.firesoft.member.APIErrorCode;
+import com.firesoft.member.MemberAppConst;
 import com.firesoft.member.MessageConstant;
 import com.firesoft.member.Model.MemberModel;
 import com.firesoft.member.Protocol.ApiInterface;
@@ -70,6 +72,8 @@ public class F0_ProfileActivity extends BaseActivity implements BusinessResponse
     private TextView mDelComplete;
     private LinearLayout mUpdateComplete;
     private MemberModel mMemberModel;
+
+    private SharedPreferences mShared;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +82,7 @@ public class F0_ProfileActivity extends BaseActivity implements BusinessResponse
         Intent intent = getIntent();
         member=(SIMPLE_MEMBER)intent.getSerializableExtra("member");
         init(member);
+        mShared =getSharedPreferences(MemberAppConst.USERINFO, 0);
 
         mMemberModel = new MemberModel(this);
         mMemberModel.addResponseListener(this);
@@ -118,6 +123,8 @@ public class F0_ProfileActivity extends BaseActivity implements BusinessResponse
                 String no = member_no.getText().toString().trim();
                 String name = member_name.getText().toString();
                 String phone = mobile_no.getText().toString();
+                String nShopid=mShared.getString("shopid", "0");
+                String nShopname=mShared.getString("shopname", "");
 
                 if ("".equals(name)) {
                     ToastView toast = new ToastView(F0_ProfileActivity.this, "会员名称不能为空！");
@@ -136,7 +143,14 @@ public class F0_ProfileActivity extends BaseActivity implements BusinessResponse
                     toast.show();
                     mobile_no.requestFocus();
                 } else {
-                    mMemberModel.update(no, name, phone, member.id);
+                    SIMPLE_MEMBER simple_member= new SIMPLE_MEMBER();
+                    simple_member.mobile_no=no;
+                    simple_member.member_name=name;
+                    simple_member.mobile_no=phone;
+                    simple_member.id=member.id;
+                    simple_member.shopid=nShopid;
+                    simple_member.shopname=nShopname;
+                    mMemberModel.update(simple_member);
                     CloseKeyBoard();
                 }
                 break;

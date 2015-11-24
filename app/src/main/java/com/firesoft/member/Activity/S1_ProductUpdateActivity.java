@@ -2,6 +2,7 @@ package com.firesoft.member.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import android.os.Message;
@@ -18,6 +19,7 @@ import com.BeeFramework.view.ToastView;
 import com.external.androidquery.callback.AjaxStatus;
 import com.external.eventbus.EventBus;
 import com.firesoft.member.APIErrorCode;
+import com.firesoft.member.MemberAppConst;
 import com.firesoft.member.MessageConstant;
 import com.firesoft.member.Model.ProductModel;
 
@@ -44,6 +46,8 @@ public class S1_ProductUpdateActivity extends BaseActivity implements BusinessRe
     private TextView mDelComplete;
     private LinearLayout mUpdateComplete;
     private SIMPLE_PRODUCT mProduct;
+
+    private SharedPreferences mShared;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +56,7 @@ public class S1_ProductUpdateActivity extends BaseActivity implements BusinessRe
         Intent intent = getIntent();
         mProduct=(SIMPLE_PRODUCT)intent.getSerializableExtra("product");
         init(mProduct);
+        mShared =getSharedPreferences(MemberAppConst.USERINFO, 0);
 
         mProductModel = new ProductModel(this);
         mProductModel.addResponseListener(this);
@@ -138,6 +143,8 @@ public class S1_ProductUpdateActivity extends BaseActivity implements BusinessRe
                 String type_id = product_typeid.getText().toString();
                 String price = product_price.getText().toString();
                 String sprice = product_sprice.getText().toString();
+                String nShopid=mShared.getString("shopid", "0");
+                String nShopname=mShared.getString("shopname", "");
                 String special,discount,credit;
                 if(rb_special_true.isChecked()){
                     special="1";
@@ -176,6 +183,8 @@ public class S1_ProductUpdateActivity extends BaseActivity implements BusinessRe
                     product.special_discount=discount;
                     product.special_credit=credit;
                     product.id=mProduct.id;
+                    product.shopid=nShopid;
+                    product.shopname=nShopname;
                     mProductModel.update(product);
 
                 }

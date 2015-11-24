@@ -25,6 +25,13 @@ public class SIMPLE_MEMBER extends DataBaseModel{
     @Column(name="mobile_no")
     public String mobile_no;
 
+    @Column(name = "shopid")
+    public String shopid;
+
+    @Column(name = "shopname")
+    public String shopname;
+
+
     public void  fromJson(JSONObject jsonObject)  throws JSONException
     {
         if(null == jsonObject){
@@ -39,6 +46,9 @@ public class SIMPLE_MEMBER extends DataBaseModel{
 
         this.mobile_no = jsonObject.optString("mobile_no");
 
+        this.shopid = jsonObject.optString("shopid");
+        this.shopname = jsonObject.optString("shopname");
+
         return ;
     }
     public JSONObject  toJson() throws JSONException
@@ -49,6 +59,9 @@ public class SIMPLE_MEMBER extends DataBaseModel{
         localItemObject.put("member_no", member_no);
         localItemObject.put("member_name", member_name);
         localItemObject.put("mobile_no", mobile_no);
+
+        localItemObject.put("shopid", shopid);
+        localItemObject.put("shopname", shopname);
         return localItemObject;
     }
 }

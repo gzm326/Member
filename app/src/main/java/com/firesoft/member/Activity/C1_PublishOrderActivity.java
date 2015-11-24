@@ -37,6 +37,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import android.os.Message;
@@ -59,10 +60,12 @@ import com.external.timepicker.ScreenInfo;
 import com.external.timepicker.WheelMain;
 import com.firesoft.member.APIErrorCode;
 import com.firesoft.member.Adapter.ProductxfAdapter;
+import com.firesoft.member.MemberAppConst;
 import com.firesoft.member.MessageConstant;
 import com.firesoft.member.Model.MemberModel;
 import com.firesoft.member.Model.Product;
 import com.firesoft.member.Protocol.ApiInterface;
+import com.firesoft.member.Protocol.SIMPLE_MEMBER;
 import com.firesoft.member.Protocol.memberaddResponse;
 import com.firesoft.member.R;
 import org.json.JSONException;
@@ -94,6 +97,7 @@ public class C1_PublishOrderActivity extends BaseActivity implements BusinessRes
     private SimpleDateFormat mFormat;
     private WheelMain mWheelMain;
 
+    private SharedPreferences mShared;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +115,8 @@ public class C1_PublishOrderActivity extends BaseActivity implements BusinessRes
         mcard_jb=(TextView) findViewById(R.id.mcard_jb);
         mcard_jbid=(TextView) findViewById(R.id.mcard_jb_id);
         mTime =(TextView)findViewById(R.id.mcard_sr);
+
+        mShared =getSharedPreferences(MemberAppConst.USERINFO, 0);
 
 
         mMemberModel = new MemberModel(this);
@@ -163,6 +169,8 @@ public class C1_PublishOrderActivity extends BaseActivity implements BusinessRes
                 String no = member_no.getText().toString().trim();
                 String name = member_name.getText().toString();
                 String phone = mobile_no.getText().toString();
+                String nShopid=mShared.getString("shopid", "0");
+                String nShopname=mShared.getString("shopname", "");
 
                 if ("".equals(name)) {
                     ToastView toast = new ToastView(C1_PublishOrderActivity.this, "会员名称不能为空！");
@@ -181,7 +189,13 @@ public class C1_PublishOrderActivity extends BaseActivity implements BusinessRes
                     toast.show();
                     mobile_no.requestFocus();
                 } else {
-                    mMemberModel.signup(no, name, phone);
+                    SIMPLE_MEMBER member= new SIMPLE_MEMBER();
+                    member.member_no=no;
+                    member.member_name=name;
+                    member.mobile_no=phone;
+                    member.shopid=nShopid;
+                    member.shopname=nShopname;
+                    mMemberModel.add(member);
                     CloseKeyBoard();
                 }
 

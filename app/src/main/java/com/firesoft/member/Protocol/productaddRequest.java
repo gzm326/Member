@@ -39,6 +39,12 @@ public class productaddRequest extends DataBaseModel {
     @Column(name = "special_credit")
     public String special_credit;
 
+    @Column(name = "shopid")
+    public String shopid;
+
+    @Column(name = "shopname")
+    public String shopname;
+
 
 
     public void  fromJson(JSONObject jsonObject)  throws JSONException
@@ -56,6 +62,8 @@ public class productaddRequest extends DataBaseModel {
         this.unit = jsonObject.optString("unit");
         this.special_discount = jsonObject.optString("special_discount");
         this.special_credit = jsonObject.optString("special_credit");
+        this.shopid = jsonObject.optString("shopid");
+        this.shopname = jsonObject.optString("shopname");
 
         return ;
     }
@@ -72,6 +80,8 @@ public class productaddRequest extends DataBaseModel {
         localItemObject.put("unit", unit);
         localItemObject.put("special_discount", special_discount);
         localItemObject.put("special_credit", special_credit);
+        localItemObject.put("shopid", shopid);
+        localItemObject.put("shopname", shopname);
         return localItemObject;
     }
 }

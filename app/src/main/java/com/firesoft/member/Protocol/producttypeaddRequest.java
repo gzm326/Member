@@ -19,6 +19,12 @@ public class producttypeaddRequest extends DataBaseModel {
     @Column(name = "name")
     public String name;
 
+    @Column(name = "shopid")
+    public String shopid;
+
+    @Column(name = "shopname")
+    public String shopname;
+
     @Column(name = "bz")
     public String bz;
 
@@ -30,7 +36,9 @@ public class producttypeaddRequest extends DataBaseModel {
         }
         this.uid = jsonObject.optInt("uid");
         this.name = jsonObject.optString("name");
-
+        this.shopid = jsonObject.optString("shopid");
+        this.shopname = jsonObject.optString("shopname");
+        this.bz = jsonObject.optString("bz");
 
         return ;
     }
@@ -41,6 +49,9 @@ public class producttypeaddRequest extends DataBaseModel {
 
         localItemObject.put("uid", uid);
         localItemObject.put("name", name);
+        localItemObject.put("shopid", shopid);
+        localItemObject.put("shopname", shopname);
+        localItemObject.put("bz", bz);
 
         return localItemObject;
     }

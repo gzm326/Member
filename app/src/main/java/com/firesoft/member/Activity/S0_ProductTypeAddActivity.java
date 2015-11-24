@@ -2,6 +2,7 @@ package com.firesoft.member.Activity;
 
 
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Message;
 import android.view.Gravity;
@@ -18,9 +19,11 @@ import com.external.androidquery.callback.AjaxStatus;
 import com.external.eventbus.EventBus;
 
 import com.firesoft.member.APIErrorCode;
+import com.firesoft.member.MemberAppConst;
 import com.firesoft.member.MessageConstant;
 import com.firesoft.member.Model.ProductTypeModel;
 import com.firesoft.member.Protocol.ApiInterface;
+import com.firesoft.member.Protocol.SIMPLE_PRODUCTTYPE;
 import com.firesoft.member.Protocol.producttypeaddResponse;
 import com.firesoft.member.R;
 
@@ -38,7 +41,10 @@ public class S0_ProductTypeAddActivity extends BaseActivity implements BusinessR
     private EditText type_name;
     private EditText type_bz;
 
+
     private TextView mAddComplete;
+
+    private SharedPreferences mShared;
 
 
     @Override
@@ -49,6 +55,8 @@ public class S0_ProductTypeAddActivity extends BaseActivity implements BusinessR
         type_name = (EditText) findViewById(R.id.type_name);
         type_bz = (EditText) findViewById(R.id.type_bz);
         mAddComplete = (TextView) findViewById(R.id.c0_publish_button);
+
+        mShared =getSharedPreferences(MemberAppConst.USERINFO, 0);
 
         mProductTypeModel = new ProductTypeModel(this);
         mProductTypeModel.addResponseListener(this);
@@ -62,6 +70,8 @@ public class S0_ProductTypeAddActivity extends BaseActivity implements BusinessR
 
                 String name = type_name.getText().toString();
                 String bz = type_bz.getText().toString();
+                String nShopid=mShared.getString("shopid", "0");
+                String nShopname=mShared.getString("shopname", "");
 
 
                 if ("".equals(name)) {
@@ -71,8 +81,12 @@ public class S0_ProductTypeAddActivity extends BaseActivity implements BusinessR
                     type_name.setText("");
                     type_name.requestFocus();
                 } else {
-                    mProductTypeModel.add(name, bz);
-
+                    SIMPLE_PRODUCTTYPE mProductTye = new SIMPLE_PRODUCTTYPE();
+                    mProductTye.name=name;
+                    mProductTye.bz=bz;
+                    mProductTye.shopid=nShopid;
+                    mProductTye.shopname=nShopname;
+                    mProductTypeModel.add(mProductTye);
                 }
 
             }

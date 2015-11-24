@@ -76,6 +76,12 @@ public class SIMPLE_USER extends DataBaseModel
      @Column(name = "avatar")
      public PHOTO   avatar;
 
+     @Column(name = "shopid")
+     public String   shopid;
+
+     @Column(name = "shopname")
+     public String   shopname;
+
      public void  fromJson(JSONObject jsonObject)  throws JSONException
      {
           if(null == jsonObject){
@@ -107,6 +113,8 @@ public class SIMPLE_USER extends DataBaseModel
           PHOTO  avatar = new PHOTO();
           avatar.fromJson(jsonObject.optJSONObject("avatar"));
           this.avatar = avatar;
+          this.shopid = jsonObject.optString("shopid");
+          this.shopname = jsonObject.optString("shopname");
           return ;
      }
 
@@ -131,6 +139,9 @@ public class SIMPLE_USER extends DataBaseModel
           {
             localItemObject.put("avatar", avatar.toJson());
           }
+
+          localItemObject.put("shopid", shopid);
+          localItemObject.put("shopname", shopname);
           return localItemObject;
      }
 

@@ -28,11 +28,13 @@ public class MemberModel extends BaseModel {
         this.context = context;
 
     }
-    public void signup(String member_no, String member_name, String mobile_no) {
+    public void add(SIMPLE_MEMBER member) {
         memberaddRequest request = new memberaddRequest();
-        request.member_no =member_no;
-        request.member_name = member_name;
-        request.mobile_no = mobile_no;
+        request.member_no =member.member_no;
+        request.member_name = member.member_name;
+        request.mobile_no = member.mobile_no;
+        request.shopid=member.shopid;
+        request.shopname=member.shopname;
         BeeCallback<JSONObject> cb = new BeeCallback<JSONObject>() {
             @Override
             public void callback(String url, JSONObject jo, AjaxStatus status) {
@@ -71,12 +73,15 @@ public class MemberModel extends BaseModel {
         ajaxProgress(cb);
     }
 
-    public void update(String member_no, String member_name, String mobile_no,int uid) {
+    public void update(SIMPLE_MEMBER member) {
         memberaddRequest request = new memberaddRequest();
-        request.member_no =member_no;
-        request.member_name = member_name;
-        request.mobile_no = mobile_no;
-        request.uid=uid;
+
+        request.member_no =member.member_no;
+        request.member_name = member.member_name;
+        request.mobile_no = member.mobile_no;
+        request.shopid=member.shopid;
+        request.shopname=member.shopname;
+        request.uid=member.id;
         BeeCallback<JSONObject> cb = new BeeCallback<JSONObject>() {
             @Override
             public void callback(String url, JSONObject jo, AjaxStatus status) {

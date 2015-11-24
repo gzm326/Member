@@ -28,10 +28,12 @@ public class ProductTypeModel extends BaseModel {
         this.context = context;
 
     }
-    public void add( String name,String bz) {
+    public void add( SIMPLE_PRODUCTTYPE mProductType) {
         producttypeaddRequest request = new producttypeaddRequest();
-        request.bz=bz;
-        request.name = name;
+        request.bz=mProductType.bz;
+        request.name =mProductType.name;
+        request.shopid=mProductType.shopid;
+        request.shopname=mProductType.shopname;
 
         BeeCallback<JSONObject> cb = new BeeCallback<JSONObject>() {
             @Override
@@ -71,11 +73,13 @@ public class ProductTypeModel extends BaseModel {
         ajaxProgress(cb);
     }
 
-    public void update( String name,int uid,String bz) {
+    public void update( SIMPLE_PRODUCTTYPE mProductType) {
         producttypeaddRequest request = new producttypeaddRequest();
-        request.name =name;
-        request.uid=uid;
-        request.bz=bz;
+        request.name =mProductType.name;
+        request.uid=mProductType.id;
+        request.bz=mProductType.bz;
+        request.shopid=mProductType.shopid;
+        request.shopname=mProductType.shopname;
         BeeCallback<JSONObject> cb = new BeeCallback<JSONObject>() {
             @Override
             public void callback(String url, JSONObject jo, AjaxStatus status) {

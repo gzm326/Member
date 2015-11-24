@@ -1,23 +1,43 @@
 package com.firesoft.member.Activity;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+
+import com.BeeFramework.model.BusinessResponse;
+import com.BeeFramework.view.ToastView;
+
+import com.external.androidquery.callback.AjaxStatus;
+import com.external.eventbus.EventBus;
 import com.firesoft.member.Fragment.A0_HomeFragment;
+
+import com.firesoft.member.MemberAppConst;
+import com.firesoft.member.MessageConstant;
+import com.firesoft.member.Model.UserModel;
+import com.firesoft.member.Protocol.ApiInterface;
+import com.firesoft.member.Protocol.userchange_profileRequest;
+import com.firesoft.member.Protocol.userchange_profileResponse;
+import com.firesoft.member.Protocol.usersigninResponse;
 import com.firesoft.member.R;
 import android.content.SharedPreferences;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.firesoft.member.Fragment.Fragment_Profile;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 
-public class MainActivity extends FragmentActivity {
+
+public class MainActivity extends FragmentActivity implements BusinessResponse {
 
     private A0_HomeFragment mA0HomeFragment;
     private Fragment[] fragments;
@@ -28,6 +48,7 @@ public class MainActivity extends FragmentActivity {
     private TextView[] textviews;
     private int index;
     private int currentTabIndex;// ��ǰfragment��index
+    private UserModel mUserModel;
 
 
 
@@ -35,16 +56,31 @@ public class MainActivity extends FragmentActivity {
     private     SharedPreferences.Editor mEditor;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();
+        mUserModel= new UserModel(this);
+        mUserModel.addResponseListener(this);
 
-        /*mShared = this.getSharedPreferences(MemberAppConst.USERINFO, 0);
+        mUserModel.getinfo();
+
+        mShared =getSharedPreferences(MemberAppConst.USERINFO, 0);
         mEditor = mShared.edit();
+
+
+       /* mEditor = mShared.edit();
         EventBus.getDefault().register(this);*/
     }
+
+    public  void ToastShow(String atr){
+        ToastView toast = new ToastView(this, atr);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
+    }
+
     private void init() {
 
         txt_title = (TextView) findViewById(R.id.txt_title);
@@ -127,8 +163,29 @@ public class MainActivity extends FragmentActivity {
         currentTabIndex = index;
     }
 
+    @Override
+    public void OnMessageResponse(String url, JSONObject jo, AjaxStatus status)
+            throws JSONException {
 
+       /* if (url.endsWith(ApiInterface.USER_SIGNIN)) {
+            userchange_profileResponse response = new userchange_profileResponse();
+            response.fromJson(jo);
+            if (response.succeed == 1) {
 
+                mEditor.putString("shopid", response.user.shopid);
+                mEditor.putString("shopname", response.user.shopname);
+                mEditor.commit();
+                ToastShow(response.user.shopid);
+                Message msg = new Message();
+                msg.what = MessageConstant.SIGN_IN_SUCCESS;
+                EventBus.getDefault().post(msg);
+
+            }else{
+
+            }
+
+        }*/
+    }
 
 
 

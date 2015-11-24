@@ -56,6 +56,12 @@ public class USER extends DataBaseModel
      @Column(name = "brief")
      public String   brief;
 
+     @Column(name = "shopid")
+     public String   shopid;
+
+     @Column(name = "shopname")
+     public String   shopname;
+
      public void  fromJson(JSONObject jsonObject)  throws JSONException
      {
           if(null == jsonObject){
@@ -104,6 +110,8 @@ public class USER extends DataBaseModel
           this.signature = jsonObject.optString("signature");
 
           this.brief = jsonObject.optString("brief");
+          this.shopid = jsonObject.optString("shopid");
+          this.shopname = jsonObject.optString("shopname");
           return ;
      }
 
@@ -138,6 +146,8 @@ public class USER extends DataBaseModel
           localItemObject.put("gender", gender);
           localItemObject.put("signature", signature);
           localItemObject.put("brief", brief);
+          localItemObject.put("shopid", shopid);
+          localItemObject.put("shopname", shopname);
           return localItemObject;
      }
 

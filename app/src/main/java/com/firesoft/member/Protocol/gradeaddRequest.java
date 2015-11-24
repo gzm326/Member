@@ -19,7 +19,7 @@ public class gradeaddRequest extends DataBaseModel {
     public String name;
 
     @Column(name = "discount_percent")
-    public int discount_percent;
+    public String discount_percent;
 
     @Column(name = "credit_percent")
     public String credit_percent;
@@ -51,7 +51,7 @@ public class gradeaddRequest extends DataBaseModel {
         }
 
         this.id = jsonObject.optInt("id");
-        this.discount_percent = jsonObject.optInt("discount_percent");
+        this.discount_percent = jsonObject.optString("discount_percent");
         this.name = jsonObject.optString("name");
         this.credit_percent = jsonObject.optString("credit_percent");
         this.validity = jsonObject.optString("validity");

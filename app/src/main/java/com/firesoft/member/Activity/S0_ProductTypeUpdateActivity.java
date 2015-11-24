@@ -2,6 +2,7 @@ package com.firesoft.member.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Message;
 import android.view.Gravity;
@@ -16,6 +17,7 @@ import com.BeeFramework.view.ToastView;
 import com.external.androidquery.callback.AjaxStatus;
 import com.external.eventbus.EventBus;
 import com.firesoft.member.APIErrorCode;
+import com.firesoft.member.MemberAppConst;
 import com.firesoft.member.MessageConstant;
 
 import com.firesoft.member.Model.ProductTypeModel;
@@ -36,6 +38,8 @@ public class S0_ProductTypeUpdateActivity extends BaseActivity implements Busine
     private SIMPLE_PRODUCTTYPE mProductType;
     private TextView mDelComplete;
     private LinearLayout mUpdateComplete;
+
+    private SharedPreferences mShared;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +48,8 @@ public class S0_ProductTypeUpdateActivity extends BaseActivity implements Busine
         Intent intent = getIntent();
         mProductType=(SIMPLE_PRODUCTTYPE)intent.getSerializableExtra("producttype");
         init(mProductType);
+
+        mShared =getSharedPreferences(MemberAppConst.USERINFO, 0);
 
        mProductTypeModel = new ProductTypeModel(this);
         mProductTypeModel.addResponseListener(this);
@@ -78,6 +84,8 @@ public class S0_ProductTypeUpdateActivity extends BaseActivity implements Busine
             case R.id.top_member_upate:
                 String name = type_name.getText().toString();
                 String bz = type_bz.getText().toString();
+                String nShopid=mShared.getString("shopid", "0");
+                String nShopname=mShared.getString("shopname", "");
 
                 if ("".equals(name)) {
                     ToastView toast = new ToastView(S0_ProductTypeUpdateActivity.this, "项目分类名称不能为空！");
@@ -87,7 +95,13 @@ public class S0_ProductTypeUpdateActivity extends BaseActivity implements Busine
                     type_name.requestFocus();
                 }
                 else {
-                    mProductTypeModel.update(name, mProductType.id, bz);
+                    SIMPLE_PRODUCTTYPE producttype = new SIMPLE_PRODUCTTYPE();
+                    producttype.name=name;
+                    producttype.bz=bz;
+                    producttype.shopid=nShopid;
+                    producttype.shopname=nShopname;
+                    producttype.id=mProductType.id;
+                    mProductTypeModel.update(producttype);
                 }
                 break;
 

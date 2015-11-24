@@ -18,6 +18,12 @@ public class SIMPLE_PRODUCTTYPE extends DataBaseModel {
     @Column(name = "name")
     public String name;
 
+    @Column(name = "shopid")
+    public String shopid;
+
+    @Column(name = "shopname")
+    public String shopname;
+
     @Column(name = "bz")
     public String bz;
 
@@ -31,6 +37,9 @@ public class SIMPLE_PRODUCTTYPE extends DataBaseModel {
 
         this.name = jsonObject.optString("name");
 
+        this.shopid = jsonObject.optString("shopid");
+        this.shopname = jsonObject.optString("shopname");
+
         this.bz = jsonObject.optString("bz");
 
         return ;
@@ -41,6 +50,8 @@ public class SIMPLE_PRODUCTTYPE extends DataBaseModel {
 
         localItemObject.put("id", id);
         localItemObject.put("name", name);
+        localItemObject.put("shopid", shopid);
+        localItemObject.put("shopname", shopname);
         localItemObject.put("bz", bz);
         return localItemObject;
     }
