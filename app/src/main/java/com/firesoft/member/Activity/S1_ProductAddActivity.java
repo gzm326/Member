@@ -75,9 +75,8 @@ public class S1_ProductAddActivity extends BaseActivity implements BusinessRespo
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Intent intent = new Intent(S1_ProductAddActivity.this, F3_RegionPickActivity.class);
+                Intent intent = new Intent(S1_ProductAddActivity.this, S0_ProductTypeChooseActivity.class);
                 intent.putExtra("title", "项目分类选择");
-                intent.putExtra("str_url", ApiInterface.COMMENT_LIST);
                 intent.putExtra("state", 1);
                 startActivityForResult(intent, 1);
                 overridePendingTransition(R.anim.my_scale_action, R.anim.my_alpha_action);
@@ -93,6 +92,7 @@ public class S1_ProductAddActivity extends BaseActivity implements BusinessRespo
 
                 String name = product_name.getText().toString();
                 String type_id = product_typeid.getText().toString();
+                String type_name=product_type.getText().toString();
                 String price = product_price.getText().toString();
                 String sprice = product_sprice.getText().toString();
                 String nShopid=mShared.getString("shopid", "0");
@@ -130,6 +130,7 @@ public class S1_ProductAddActivity extends BaseActivity implements BusinessRespo
                     product.name=name;
                     product.price=price;
                     product.type_id=Integer.parseInt(type_id);
+                    product.type_name=type_name;
                     product.specia_price=sprice;
                     product.special=special;
                     product.special_discount=discount;

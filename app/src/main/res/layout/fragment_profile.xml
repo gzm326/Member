@@ -107,7 +107,7 @@
 					android:drawablePadding="10dp"
 					android:drawableLeft="@mipmap/icon_me_collect"
 					android:drawableRight="@mipmap/right"
-					android:text="测试" />
+					android:text="会员级别维护" />
 		<View
 			android:background="@color/black2"
 			android:layout_width="fill_parent"

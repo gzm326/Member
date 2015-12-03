@@ -2,6 +2,7 @@ package com.firesoft.member.Activity;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Message;
 import android.view.Gravity;
@@ -17,6 +18,7 @@ import com.BeeFramework.view.ToastView;
 import com.external.androidquery.callback.AjaxStatus;
 import com.external.eventbus.EventBus;
 import com.firesoft.member.APIErrorCode;
+import com.firesoft.member.MemberAppConst;
 import com.firesoft.member.MessageConstant;
 import com.firesoft.member.Model.Product;
 import com.firesoft.member.Model.GradeModel;
@@ -44,6 +46,7 @@ public class S2_GradeAddActivity extends BaseActivity implements BusinessRespons
 
 
     private TextView mAddComplete;
+    private SharedPreferences mShared;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +63,8 @@ public class S2_GradeAddActivity extends BaseActivity implements BusinessRespons
         rec_credit = (EditText) findViewById(R.id.rec_credit);
         rem = (EditText) findViewById(R.id.rem);
         mAddComplete = (TextView) findViewById(R.id.c0_publish_button);
+
+        mShared =getSharedPreferences(MemberAppConst.USERINFO, 0);
 
         mGradeModel = new GradeModel(this);
         mGradeModel.addResponseListener(this);
@@ -95,6 +100,8 @@ public class S2_GradeAddActivity extends BaseActivity implements BusinessRespons
                 String begCredit = beg_credit.getText().toString();
                 String recCredit = rec_credit.getText().toString();
                 String rems = rem.getText().toString();
+                String nShopid=mShared.getString("shopid", "0");
+                String nShopname=mShared.getString("shopname", "");
 
 
 
@@ -117,6 +124,8 @@ public class S2_GradeAddActivity extends BaseActivity implements BusinessRespons
                     grade.beg_credit=begCredit;
                     grade.rec_credit=recCredit;
                     grade.rem=rems;
+                    grade.shopid=nShopid;
+                    grade.shopname=nShopname;
                     mGradeModel.add(grade);
 
                 }
@@ -133,7 +142,7 @@ public class S2_GradeAddActivity extends BaseActivity implements BusinessRespons
     public void OnMessageResponse(String url, JSONObject jo, AjaxStatus status)
             throws JSONException {
         // TODO Auto-generated method stub
-        if (url.endsWith(ApiInterface.PRODUCT_ADD)) {
+        if (url.endsWith(ApiInterface.GRADE_ADD)) {
             gradeaddResponse response = new gradeaddResponse();
             response.fromJson(jo);
             if (response.succeed == 1) {

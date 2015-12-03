@@ -18,6 +18,7 @@ import com.firesoft.member.Activity.A1_ShopAddActivity;
 import com.firesoft.member.Activity.McardAddActivity;
 import com.firesoft.member.Activity.S0_ProductTypeListActivity;
 import com.firesoft.member.Activity.S1_ProductListActivity;
+import com.firesoft.member.Activity.S2_GradeListActivity;
 import com.firesoft.member.MemberAppConst;
 import com.firesoft.member.R;
 
@@ -91,7 +92,7 @@ public class Fragment_Profile extends Fragment implements OnClickListener {
 		case R.id.view_user:
 			//Utils.start_Activity(getActivity(), MyCodeActivity.class);
 			break;
-		case R.id.txt_album:// 相册
+		case R.id.txt_album:// 门店维护
 			/*Utils.start_Activity(getActivity(), PublicActivity.class,
 					new BasicNameValuePair(Constants.NAME,
 							getString(R.string.my_posts)));*/
@@ -100,10 +101,13 @@ public class Fragment_Profile extends Fragment implements OnClickListener {
 			getActivity().overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
 			break;
 
-		case R.id.txt_collect:// 收藏
+		case R.id.txt_collect:// 会员级别维护
 			/*Utils.start_Activity(getActivity(), PublicActivity.class,
 					new BasicNameValuePair(Constants.NAME,
 							getString(R.string.collection)));*/
+			Intent mGradeIntent = new Intent(getActivity(), S2_GradeListActivity.class);
+			startActivity(mGradeIntent);
+			getActivity().overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
 			break;
 		case R.id.txt_money:// 钱包
 			/*Utils.start_Activity(getActivity(), PublicActivity.class,
@@ -115,7 +119,7 @@ public class Fragment_Profile extends Fragment implements OnClickListener {
 					new BasicNameValuePair(Constants.NAME,
 							getString(R.string.card_bag)));*/
 			break;
-		case R.id.txt_producttype:// 表情
+		case R.id.txt_producttype:// 项目分类维护
 			Intent mProductTypeIntent = new Intent(getActivity(), S0_ProductTypeListActivity.class);
 			startActivity(mProductTypeIntent);
 			getActivity().overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
@@ -126,7 +130,7 @@ public class Fragment_Profile extends Fragment implements OnClickListener {
 			startActivity(mProductIntent);
 			getActivity().overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
 			break;
-		case R.id.txt_setting:// 设置
+		case R.id.txt_setting:// 项目维护
 			//Utils.start_Activity(getActivity(), SettingActivity.class);
 			Intent mUpdateIntent = new Intent(getActivity(), McardAddActivity.class);
 			startActivity(mUpdateIntent);

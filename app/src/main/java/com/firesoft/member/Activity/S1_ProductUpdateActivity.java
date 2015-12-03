@@ -21,6 +21,7 @@ import com.external.eventbus.EventBus;
 import com.firesoft.member.APIErrorCode;
 import com.firesoft.member.MemberAppConst;
 import com.firesoft.member.MessageConstant;
+import com.firesoft.member.Model.Product;
 import com.firesoft.member.Model.ProductModel;
 
 import com.firesoft.member.Protocol.ApiInterface;
@@ -30,6 +31,8 @@ import com.firesoft.member.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class S1_ProductUpdateActivity extends BaseActivity implements BusinessResponse, View.OnClickListener {
 
@@ -86,7 +89,7 @@ public class S1_ProductUpdateActivity extends BaseActivity implements BusinessRe
         product_name.setText(produt.name);
         product_price.setText(produt.price);
         product_sprice.setText(produt.specia_price);
-        product_type.setText(Integer.toString(produt.type_id));
+        product_type.setText(produt.type_name);
         product_typeid.setText(Integer.toString(produt.type_id));
         if(produt.special=="1"){
             rb_special_true.setChecked(true);
@@ -112,7 +115,18 @@ public class S1_ProductUpdateActivity extends BaseActivity implements BusinessRe
             rb_credit_false.setChecked(true);
         }
 
+        product_type.setOnClickListener(new View.OnClickListener() {
 
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Intent intent = new Intent(S1_ProductUpdateActivity.this, S0_ProductTypeChooseActivity.class);
+                intent.putExtra("title", "项目分类选择");
+                intent.putExtra("state", 1);
+                startActivityForResult(intent, 1);
+                overridePendingTransition(R.anim.my_scale_action, R.anim.my_alpha_action);
+            }
+        });
 
 
     }
@@ -141,6 +155,7 @@ public class S1_ProductUpdateActivity extends BaseActivity implements BusinessRe
             case R.id.top_member_upate:
                 String name = product_name.getText().toString();
                 String type_id = product_typeid.getText().toString();
+                String type_name=product_type.getText().toString();
                 String price = product_price.getText().toString();
                 String sprice = product_sprice.getText().toString();
                 String nShopid=mShared.getString("shopid", "0");
@@ -178,6 +193,7 @@ public class S1_ProductUpdateActivity extends BaseActivity implements BusinessRe
                     product.name=name;
                     product.price=price;
                     product.type_id=Integer.parseInt(type_id);
+                    product.type_name=type_name;
                     product.specia_price=sprice;
                     product.special=special;
                     product.special_discount=discount;
@@ -234,6 +250,29 @@ public class S1_ProductUpdateActivity extends BaseActivity implements BusinessRe
                 if (response.error_code == APIErrorCode.NICKNAME_EXIST) {
                     product_name.requestFocus();
                 }
+            }
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1){
+            switch(resultCode)
+            {
+                case 1:
+                    String choose_name,choose_id;
+                    choose_name=data.getStringExtra("name");
+                    choose_id=data.getStringExtra("uid");
+                    product_type.setText(choose_name);
+                    product_typeid.setText(choose_id);
+
+                    break;
+                case 2:
+
+                    break;
+
             }
         }
     }

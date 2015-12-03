@@ -15,6 +15,12 @@ public class chooselistRequest extends DataBaseModel {
     @Column(name = "uid")
     public int uid;
 
+    @Column(name = "shopid")
+    public String shopid;
+
+    @Column(name = "type_id")
+    public String type_id;
+
     @Column(name = "name")
     public String name;
 
@@ -25,6 +31,8 @@ public class chooselistRequest extends DataBaseModel {
         }
         this.uid = jsonObject.optInt("uid");
         this.name = jsonObject.optString("name");
+        this.shopid = jsonObject.optString("shopid");
+        this.type_id = jsonObject.optString("type_id");
 
 
         return ;
@@ -36,6 +44,8 @@ public class chooselistRequest extends DataBaseModel {
 
         localItemObject.put("uid", uid);
         localItemObject.put("name", name);
+        localItemObject.put("shopid", shopid);
+        localItemObject.put("type_id", type_id);
 
         return localItemObject;
     }

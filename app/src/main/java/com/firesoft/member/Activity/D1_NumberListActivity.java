@@ -1,8 +1,7 @@
 package com.firesoft.member.Activity;
 
-import android.app.Activity;
+
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Message;
@@ -10,7 +9,6 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,48 +16,48 @@ import com.BeeFramework.Utils.ImageUtil;
 import com.BeeFramework.activity.BaseActivity;
 import com.BeeFramework.model.BusinessResponse;
 import com.BeeFramework.view.ToastView;
-import com.external.activeandroid.util.Log;
 import com.external.androidquery.callback.AjaxStatus;
 import com.external.eventbus.EventBus;
 import com.external.maxwin.view.IXListViewListener;
 import com.external.maxwin.view.XListView;
-import com.firesoft.member.Adapter.S0_ProductTypeListAdapter;
-import com.firesoft.member.MemberAppConst;
+import com.firesoft.member.Adapter.D1_NumberListAdapter;
 import com.firesoft.member.MessageConstant;
-import com.firesoft.member.Model.Product;
-import com.firesoft.member.Model.ProductTypeListModel;
+import com.firesoft.member.Model.NumberListModel;
 import com.firesoft.member.Protocol.ApiInterface;
 import com.firesoft.member.Protocol.ENUM_SEARCH_ORDER;
 import com.firesoft.member.Protocol.SERVICE_TYPE;
-import com.firesoft.member.Protocol.SIMPLE_PRODUCTTYPE;
-import com.firesoft.member.Protocol.producttypelistResponse;
+import com.firesoft.member.Protocol.SIMPLE_NUMBER;
+import com.firesoft.member.Protocol.numberlistResponse;
 import com.firesoft.member.R;
 import com.firesoft.member.Utils.LocationManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
+public class D1_NumberListActivity extends BaseActivity implements BusinessResponse, IXListViewListener {
 
-public class S0_ProductTypeListActivity extends BaseActivity implements BusinessResponse, IXListViewListener {
-
-    S0_ProductTypeListAdapter mListWithServiceAdapter;
+    D1_NumberListAdapter mListWithServiceAdapter;
     XListView mListView;
-    ProductTypeListModel mDataModel;
+    NumberListModel mDataModel;
     SERVICE_TYPE mServiceType;
     ImageView mBackButton;
     TextView mTitleTextView;
-    TextView                        mPublishButton;
+
     ENUM_SEARCH_ORDER search_order = ENUM_SEARCH_ORDER.location_asc;
     View footView               ;
     public static final int REQUESTCODE1 = 1;
-
-    private SharedPreferences mShared;
-    private String nShopid;
+    private SIMPLE_NUMBER number;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.s0_product_type);
+        setContentView(R.layout.d1_number_list);
+
+        number = new SIMPLE_NUMBER();
+
+        Intent intent = getIntent();
+        number.shopid = intent.getStringExtra("shopid");
+        number.member_no=intent.getStringExtra("member_no");
+
 
         mTitleTextView = (TextView)findViewById(R.id.top_view_title);
 
@@ -67,23 +65,7 @@ public class S0_ProductTypeListActivity extends BaseActivity implements Business
         mListView.setXListViewListener(this, 0);
         mListView.setPullLoadEnable(true);
         mListView.setPullRefreshEnable(true);
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                if (position - 1 >= 0 && position - 1 < mDataModel.dataList.size()) {
-                    SIMPLE_PRODUCTTYPE producttype = mDataModel.dataList.get(position - 1);
-
-                    Intent intent_profile = new Intent(S0_ProductTypeListActivity.this, S0_ProductTypeUpdateActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("producttype", producttype);
-                    intent_profile.putExtras(bundle);
-
-                    startActivityForResult(intent_profile, REQUESTCODE1);
-                    S0_ProductTypeListActivity.this.overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
-                }
-            }
-        });
 
 
         mBackButton = (ImageView)findViewById(R.id.top_view_back);
@@ -94,39 +76,24 @@ public class S0_ProductTypeListActivity extends BaseActivity implements Business
             }
         });
 
-        mShared =getSharedPreferences(MemberAppConst.USERINFO, 0);
-        nShopid=mShared.getString("shopid", "0");
-
-        mDataModel = new ProductTypeListModel(this);
+        mDataModel = new NumberListModel(this);
         mDataModel.addResponseListener(this);
 
-        mTitleTextView.setText("项目分类维护");
+        mTitleTextView.setText("项目剩余次数查询");
 
-        mDataModel.fetPreService(nShopid, ENUM_SEARCH_ORDER.location_asc);
+       mDataModel.fetPreService(number, ENUM_SEARCH_ORDER.location_asc);
 
 
-        mPublishButton = (TextView)findViewById(R.id.c0_publish_button1);
-        mPublishButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent_profile = new Intent(S0_ProductTypeListActivity.this, S0_ProductTypeAddActivity.class);
-                startActivity(intent_profile);
-                S0_ProductTypeListActivity.this.overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
-            }
-        });
+       /*  EventBus.getDefault().register(this);
 
-        EventBus.getDefault().register(this);
-
-        LocationManager.getInstance().refreshLocation();
-
+        LocationManager.getInstance().refreshLocation();*/
     }
-
     public void onEvent(Object event) {
 
-        Message message = (Message) event;
+       /* Message message = (Message) event;
         if (message.what == MessageConstant.REFRESH_LIST) {
-            mDataModel.fetPreService(nShopid, ENUM_SEARCH_ORDER.location_asc);
-        }
+            mDataModel.fetPreService(number, ENUM_SEARCH_ORDER.location_asc);
+        }*/
     }
 
 
@@ -136,17 +103,16 @@ public class S0_ProductTypeListActivity extends BaseActivity implements Business
 
         mListView.stopRefresh();
         mListView.stopLoadMore();
-
-        if(url.endsWith(ApiInterface.PRODUCTTYPE_LIST))
+        if(url.endsWith(ApiInterface.NUMBER_LIST))
         {
             if (null != jo)
             {
-                producttypelistResponse response = new producttypelistResponse();
+                numberlistResponse response = new numberlistResponse();
                 response.fromJson(jo);
 
                 if (null == mListWithServiceAdapter)
                 {
-                    mListWithServiceAdapter = new S0_ProductTypeListAdapter(this, mDataModel.dataList);
+                    mListWithServiceAdapter = new D1_NumberListAdapter(this, mDataModel.dataList);
                     mListView.setAdapter(mListWithServiceAdapter);
                     footView = new View(this);
                     footView.setEnabled(true);
@@ -157,7 +123,6 @@ public class S0_ProductTypeListActivity extends BaseActivity implements Business
                 {
                     mListWithServiceAdapter.notifyDataSetChanged();
                 }
-
                 mListView.stopLoadMore();
                 if (0 == response.more)
                 {
@@ -184,32 +149,19 @@ public class S0_ProductTypeListActivity extends BaseActivity implements Business
 
 
         }
-
     }
-
     public  void ToastShow(String atr){
-        ToastView toast = new ToastView(S0_ProductTypeListActivity.this, atr);
+        ToastView toast = new ToastView(this, atr);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
     }
-
     @Override
     public void onRefresh(int id) {
-        mDataModel.fetPreService(nShopid, search_order);
+        mDataModel.fetPreService(number, search_order);
     }
 
     @Override
     public void onLoadMore(int id) {
-        mDataModel.fetNextService(nShopid, search_order);
+        mDataModel.fetNextService(number, search_order);
     }
-
-   /* protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        ArrayList<Product> productArrayList;
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == REQUESTCODE1){
-            if(resultCode == Activity.RESULT_OK){
-                mDataModel.fetPreService(mServiceType.id, ENUM_SEARCH_ORDER.location_asc);
-            }
-        }
-    }*/
 }

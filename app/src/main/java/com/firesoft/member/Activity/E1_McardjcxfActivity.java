@@ -2,6 +2,7 @@ package com.firesoft.member.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
@@ -20,6 +21,7 @@ import com.BeeFramework.view.ToastView;
 import com.external.androidquery.callback.AjaxStatus;
 import com.firesoft.member.Adapter.ProductxfAdapter;
 import com.firesoft.member.Adapter.SpecificationAdapter;
+import com.firesoft.member.MemberAppConst;
 import com.firesoft.member.Model.MemberModel;
 import com.firesoft.member.Model.Product;
 import com.firesoft.member.Protocol.ApiInterface;
@@ -54,10 +56,12 @@ public class E1_McardjcxfActivity extends BaseActivity implements BusinessRespon
     private Button btn_qd;
     private EditText edt_keyword;
     private MemberModel mDataModel;
+    private SharedPreferences mShared;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.e0_mcard_jcxf);
+        mShared =getSharedPreferences(MemberAppConst.USERINFO, 0);
         init_qd();
 
         tv_add_goods=(TextView)findViewById(R.id.add_goods);
@@ -106,12 +110,13 @@ public class E1_McardjcxfActivity extends BaseActivity implements BusinessRespon
             @Override
             public void onClick(View view) {
                 String member_no = edt_keyword.getText().toString();
+                String nShopid=mShared.getString("shopid", "0");
                 if ("".equals(member_no)) {
                     ToastShow("请输入会员卡号！");
                     edt_keyword.setText("");
                     edt_keyword.requestFocus();
                 }
-                mDataModel.getinfo(member_no);
+                mDataModel.getinfo(member_no,nShopid);
 
 
             }

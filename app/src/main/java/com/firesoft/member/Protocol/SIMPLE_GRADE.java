@@ -42,6 +42,12 @@ public class SIMPLE_GRADE extends DataBaseModel {
     @Column(name = "rem")
     public String rem;
 
+    @Column(name = "shopid")
+    public String shopid;
+
+    @Column(name = "shopname")
+    public String shopname;
+
 
 
     public void  fromJson(JSONObject jsonObject)  throws JSONException
@@ -60,6 +66,8 @@ public class SIMPLE_GRADE extends DataBaseModel {
         this.beg_credit = jsonObject.optString("beg_credit");
         this.rec_credit = jsonObject.optString("rec_credit");
         this.rem = jsonObject.optString("rem");
+        this.shopid = jsonObject.optString("shopid");
+        this.shopname = jsonObject.optString("shopname");
 
         return ;
     }
@@ -77,6 +85,8 @@ public class SIMPLE_GRADE extends DataBaseModel {
         localItemObject.put("beg_credit", beg_credit);
         localItemObject.put("rec_credit", rec_credit);
         localItemObject.put("rem", rem);
+        localItemObject.put("shopid", shopid);
+        localItemObject.put("shopname", shopname);
         return localItemObject;
     }
 }

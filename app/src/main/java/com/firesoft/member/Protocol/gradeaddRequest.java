@@ -13,7 +13,7 @@ import org.json.JSONObject;
 @Table(name = "gradeaddRequest")
 public class gradeaddRequest extends DataBaseModel {
     @Column(name = "uid")
-    public int id;
+    public int uid;
 
     @Column(name = "name")
     public String name;
@@ -42,6 +42,12 @@ public class gradeaddRequest extends DataBaseModel {
     @Column(name = "rem")
     public String rem;
 
+    @Column(name = "shopid")
+    public String shopid;
+
+    @Column(name = "shopname")
+    public String shopname;
+
 
 
     public void  fromJson(JSONObject jsonObject)  throws JSONException
@@ -50,7 +56,7 @@ public class gradeaddRequest extends DataBaseModel {
             return ;
         }
 
-        this.id = jsonObject.optInt("id");
+        this.uid = jsonObject.optInt("uid");
         this.discount_percent = jsonObject.optString("discount_percent");
         this.name = jsonObject.optString("name");
         this.credit_percent = jsonObject.optString("credit_percent");
@@ -60,6 +66,8 @@ public class gradeaddRequest extends DataBaseModel {
         this.beg_credit = jsonObject.optString("beg_credit");
         this.rec_credit = jsonObject.optString("rec_credit");
         this.rem = jsonObject.optString("rem");
+        this.shopid = jsonObject.optString("shopid");
+        this.shopname = jsonObject.optString("shopname");
 
         return ;
     }
@@ -67,7 +75,7 @@ public class gradeaddRequest extends DataBaseModel {
     {
         JSONObject localItemObject = new JSONObject();
 
-        localItemObject.put("id", id);
+        localItemObject.put("uid", uid);
         localItemObject.put("name", name);
         localItemObject.put("discount_percent", discount_percent);
         localItemObject.put("credit_percent", credit_percent);
@@ -77,6 +85,8 @@ public class gradeaddRequest extends DataBaseModel {
         localItemObject.put("beg_credit", beg_credit);
         localItemObject.put("rec_credit", rec_credit);
         localItemObject.put("rem", rem);
+        localItemObject.put("shopid", shopid);
+        localItemObject.put("shopname", shopname);
         return localItemObject;
     }
 }

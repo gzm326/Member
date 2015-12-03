@@ -33,13 +33,14 @@ public class ProductListModel extends BaseModel {
         super(context);
     }
 
-    public void fetPreService(int serviceId,ENUM_SEARCH_ORDER search_order)
+    public void fetPreService(String shopid,ENUM_SEARCH_ORDER search_order)
     {
         productlistRequest request = new productlistRequest();
 
         request.sid = SESSION.getInstance().sid;
         request.uid = SESSION.getInstance().uid;
         request.by_no = 1;
+        request.shopid=shopid;
         request.sort_by = search_order.value();
         request.ver = MemberAppConst.VERSION_CODE;
         request.count = NUMPERPAGE;
@@ -93,12 +94,13 @@ public class ProductListModel extends BaseModel {
 
     }
 
-    public void fetNextService(int serviceId,ENUM_SEARCH_ORDER search_order)
+    public void fetNextService(String shopid,ENUM_SEARCH_ORDER search_order)
     {
         productlistRequest request = new productlistRequest();
 
         request.sid = SESSION.getInstance().sid;
         request.uid = SESSION.getInstance().uid;
+        request.shopid=shopid;
         request.sort_by = search_order.value();
         request.ver = MemberAppConst.VERSION_CODE;
         request.count = NUMPERPAGE;

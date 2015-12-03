@@ -11,11 +11,11 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 /**
- * Created by Administrator on 2015/11/4.
+ * Created by Administrator on 2015/12/3.
  */
-@Table(name = "gradelistResponse")
-public class gradelistResponse extends DataBaseModel {
-    public ArrayList<SIMPLE_GRADE> grades = new ArrayList<SIMPLE_GRADE>();
+@Table(name = "numberlistResponse")
+public class numberlistResponse extends DataBaseModel {
+    public ArrayList<SIMPLE_NUMBER> numbers = new ArrayList<SIMPLE_NUMBER>();
 
     @Column(name = "total")
     public int total;
@@ -43,16 +43,16 @@ public class gradelistResponse extends DataBaseModel {
 
         JSONArray subItemArray;
 
-        subItemArray = jsonObject.optJSONArray("grades");
+        subItemArray = jsonObject.optJSONArray("numbers");
 
         if(null != subItemArray)
         {
             for(int i = 0;i < subItemArray.length();i++)
             {
                 JSONObject subItemObject = subItemArray.getJSONObject(i);
-                SIMPLE_GRADE subItem = new SIMPLE_GRADE();
+                SIMPLE_NUMBER subItem = new SIMPLE_NUMBER();
                 subItem.fromJson(subItemObject);
-                this.grades.add(subItem);
+                this.numbers.add(subItem);
             }
         }
 
@@ -76,15 +76,15 @@ public class gradelistResponse extends DataBaseModel {
         JSONObject localItemObject = new JSONObject();
         JSONArray itemJSONArray = new JSONArray();
 
-        for(int i =0; i< grades.size(); i++)
+        for(int i =0; i< numbers.size(); i++)
         {
-            SIMPLE_GRADE itemData =grades.get(i);
+            SIMPLE_NUMBER itemData =numbers.get(i);
             JSONObject itemJSONObject = itemData.toJson();
             itemJSONArray.put(itemJSONObject);
         }
 
         localItemObject.put("total", total);
-        localItemObject.put("products", itemJSONArray);
+        localItemObject.put("numbers", itemJSONArray);
         localItemObject.put("more", more);
         localItemObject.put("succeed", succeed);
         localItemObject.put("count", count);

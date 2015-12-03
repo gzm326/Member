@@ -32,6 +32,7 @@ public class ProductModel extends BaseModel {
         productaddRequest request = new productaddRequest();
 
         request.type_id = product.type_id;
+        request.type_name=product.type_name;
         request.name =product.name ;
         request.price =product.price;
         request.special = product.special;
@@ -84,6 +85,7 @@ public class ProductModel extends BaseModel {
         productaddRequest request = new productaddRequest();
 
         request.type_id = product.type_id;
+        request.type_name=product.type_name;
         request.name =product.name ;
         request.price =product.price;
         request.special = product.special;

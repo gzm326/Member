@@ -144,7 +144,7 @@ public class F0_ProfileActivity extends BaseActivity implements BusinessResponse
                     mobile_no.requestFocus();
                 } else {
                     SIMPLE_MEMBER simple_member= new SIMPLE_MEMBER();
-                    simple_member.mobile_no=no;
+                    simple_member.member_no=no;
                     simple_member.member_name=name;
                     simple_member.mobile_no=phone;
                     simple_member.id=member.id;

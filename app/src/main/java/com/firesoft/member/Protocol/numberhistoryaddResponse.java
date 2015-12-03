@@ -9,15 +9,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Created by Administrator on 2015/11/4.
+ * Created by Administrator on 2015/12/1.
  */
-@Table(name = "gradeaddResponse")
-public class gradeaddResponse extends DataBaseModel {
+@Table(name = "numberhistoryaddResponse")
+public class numberhistoryaddResponse extends DataBaseModel {
     @Column(name = "uid")
     public int uid;
 
-    @Column(name = "grade")
-    public SIMPLE_GRADE grade;
+    @Column(name = "number")
+    public SIMPLE_NUMBERHISTORY number;
 
     @Column(name = "succeed")
     public int succeed;
@@ -38,9 +38,9 @@ public class gradeaddResponse extends DataBaseModel {
 
         this.uid = jsonObject.optInt("uid");
 
-        SIMPLE_GRADE grade = new SIMPLE_GRADE();
-        grade.fromJson(jsonObject.optJSONObject("grade"));
-        this.grade=grade;
+        SIMPLE_CHARGE charge = new SIMPLE_CHARGE();
+        charge.fromJson(jsonObject.optJSONObject("number"));
+        this.number=number;
 
         this.succeed = jsonObject.optInt("succeed");
 
@@ -56,9 +56,9 @@ public class gradeaddResponse extends DataBaseModel {
         JSONArray itemJSONArray = new JSONArray();
         localItemObject.put("uid", uid);
 
-        if(null != grade)
+        if(null != number)
         {
-            localItemObject.put("grade", grade.toJson());
+            localItemObject.put("number", number.toJson());
         }
 
         localItemObject.put("succeed", succeed);

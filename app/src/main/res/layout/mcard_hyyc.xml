@@ -3,7 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <RelativeLayout android:gravity="center_vertical" android:orientation="horizontal" android:background="@drawable/home_listview_item_selector" android:layout_width="fill_parent" android:layout_height="51.0dip" android:onClick="toTimesProducts">
+    <RelativeLayout android:id="@+id/number_sy" android:gravity="center_vertical" android:orientation="horizontal" android:background="@drawable/home_listview_item_selector" android:layout_width="fill_parent" android:layout_height="51.0dip" android:onClick="toTimesProducts">
         <TextView android:textSize="18.0dip" android:textColor="@color/color7" android:gravity="center_vertical" android:paddingLeft="10.0dip" android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="已充次项目" />
         <ImageView android:id="@+id/arrow" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="7.0dip" android:src="@mipmap/c0_arrow_on" android:layout_alignParentRight="true" android:layout_centerVertical="true" />
     </RelativeLayout>
@@ -35,7 +35,7 @@
     <LinearLayout android:gravity="center_vertical" android:background="@color/text_white" android:paddingLeft="10.0dip" android:layout_width="fill_parent" android:layout_height="51.0dip">
         <TextView android:textSize="18.0sp" android:textColor="@color/text_name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="充次次数: " android:layout_centerVertical="true" />
         <LinearLayout android:orientation="vertical" android:id="@+id/type_et_layout" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:layout_marginRight="18.0dip">
-            <EditText android:textSize="18.0sp" android:textColor="@color/title_bg_blue" android:id="@+id/times_et" android:background="@null" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="3.0dip" android:inputType="number" />
+            <EditText android:textSize="18.0sp" android:textColor="@color/title_bg_blue" android:id="@+id/cc_num" android:background="@null" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="3.0dip" android:inputType="number" />
             <ImageView android:background="@mipmap/input_bottom_line" android:layout_width="fill_parent" android:layout_height="4.0dip" />
         </LinearLayout>
     </LinearLayout>
@@ -43,7 +43,23 @@
     <LinearLayout android:gravity="center_vertical" android:background="@color/text_white" android:paddingLeft="10.0dip" android:layout_width="fill_parent" android:layout_height="51.0dip">
         <TextView android:textSize="18.0sp" android:textColor="@color/text_name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="应付金额: " android:layout_centerVertical="true" />
         <LinearLayout android:orientation="vertical" android:id="@id/type_et_layout" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:layout_marginRight="18.0dip">
-            <EditText android:textSize="18.0sp" android:textColor="@color/title_bg_blue" android:id="@+id/money_et" android:background="@null" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="3.0dip" android:inputType="numberDecimal" />
+            <TextView android:textSize="18.0sp" android:textColor="@color/title_bg_blue" android:id="@+id/cc_money" android:background="@null" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="3.0dip" android:inputType="numberDecimal" />
+            <ImageView android:background="@mipmap/input_bottom_line" android:layout_width="fill_parent" android:layout_height="4.0dip" />
+        </LinearLayout>
+    </LinearLayout>
+    <View android:background="@color/diver" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+    <LinearLayout android:gravity="center_vertical" android:background="@color/text_white" android:paddingLeft="10.0dip" android:layout_width="fill_parent" android:layout_height="51.0dip">
+        <TextView android:textSize="18.0sp" android:textColor="@color/text_name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="优惠金额: " android:layout_centerVertical="true" />
+        <LinearLayout android:orientation="vertical" android:id="@id/type_et_layout" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:layout_marginRight="18.0dip">
+            <TextView android:textSize="18.0sp" android:textColor="@color/title_bg_blue" android:id="@+id/cc_yh_money" android:background="@null" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="3.0dip" android:inputType="numberDecimal" />
+            <ImageView android:background="@mipmap/input_bottom_line" android:layout_width="fill_parent" android:layout_height="4.0dip" />
+        </LinearLayout>
+    </LinearLayout>
+    <View android:background="@color/diver" android:layout_width="fill_parent" android:layout_height="0.5dip" />
+    <LinearLayout android:gravity="center_vertical" android:background="@color/text_white" android:paddingLeft="10.0dip" android:layout_width="fill_parent" android:layout_height="51.0dip">
+        <TextView android:textSize="18.0sp" android:textColor="@color/text_name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="实付金额: " android:layout_centerVertical="true" />
+        <LinearLayout android:orientation="vertical" android:id="@id/type_et_layout" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:layout_marginRight="18.0dip">
+            <EditText android:textSize="18.0sp" android:textColor="@color/title_bg_blue" android:id="@+id/cc_sf_money" android:background="@null" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="3.0dip" android:inputType="numberDecimal" />
             <ImageView android:background="@mipmap/input_bottom_line" android:layout_width="fill_parent" android:layout_height="4.0dip" />
         </LinearLayout>
     </LinearLayout>

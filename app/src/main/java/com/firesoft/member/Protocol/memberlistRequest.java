@@ -20,6 +20,9 @@ public class memberlistRequest extends DataBaseModel {
     @Column(name = "sid")
     public String   sid;
 
+    @Column(name = "shopid")
+    public String   shopid;
+
     @Column(name = "by_no")
     public int by_no;
 
@@ -39,6 +42,7 @@ public class memberlistRequest extends DataBaseModel {
         }
         this.uid = jsonObject.optInt("uid");
         this.sid = jsonObject.optString("sid");
+        this.shopid = jsonObject.optString("shopid");
         this.by_no = jsonObject.optInt("by_no");
         this.count = jsonObject.optInt("count");
         this.sort_by = jsonObject.optInt("sort_by");
@@ -53,6 +57,7 @@ public class memberlistRequest extends DataBaseModel {
 
         localItemObject.put("uid", uid);
         localItemObject.put("sid", sid);
+        localItemObject.put("shopid", shopid);
         localItemObject.put("count", count);
         localItemObject.put("sort_by", sort_by);
         localItemObject.put("ver", ver);

@@ -8,9 +8,9 @@ import com.external.androidquery.callback.AjaxStatus;
 import com.firesoft.member.MemberAppConst;
 import com.firesoft.member.Protocol.ApiInterface;
 import com.firesoft.member.Protocol.ENUM_SEARCH_ORDER;
-import com.firesoft.member.Protocol.SIMPLE_PRODUCTTYPE;
-import com.firesoft.member.Protocol.producttypelistRequest;
-import com.firesoft.member.Protocol.producttypelistResponse;
+import com.firesoft.member.Protocol.SIMPLE_NUMBER;
+import com.firesoft.member.Protocol.numberlistRequest;
+import com.firesoft.member.Protocol.numberlistResponse;
 import com.firesoft.member.SESSION;
 
 import org.json.JSONException;
@@ -21,26 +21,27 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by Administrator on 2015/10/30.
+ * Created by Administrator on 2015/12/3.
  */
-public class ProductTypeListModel extends BaseModel {
-    public ArrayList<SIMPLE_PRODUCTTYPE> dataList = new ArrayList<SIMPLE_PRODUCTTYPE>();
+public class NumberListModel extends BaseModel {
+    public ArrayList<SIMPLE_NUMBER> dataList = new ArrayList<SIMPLE_NUMBER>();
 
     public static final int NUMPERPAGE = 10;
 
-    public ProductTypeListModel(Context context)
+    public NumberListModel(Context context)
     {
         super(context);
     }
 
-    public void fetPreService(String shopid,ENUM_SEARCH_ORDER search_order)
+    public void fetPreService(SIMPLE_NUMBER number,ENUM_SEARCH_ORDER search_order)
     {
-        producttypelistRequest request = new producttypelistRequest();
+        numberlistRequest request = new numberlistRequest();
 
         request.sid = SESSION.getInstance().sid;
         request.uid = SESSION.getInstance().uid;
         request.by_no = 1;
-        request.shopid=shopid;
+        request.shopid=number.shopid;
+        request.member_no=number.member_no;
         request.sort_by = search_order.value();
         request.ver = MemberAppConst.VERSION_CODE;
         request.count = NUMPERPAGE;
@@ -52,24 +53,24 @@ public class ProductTypeListModel extends BaseModel {
             @Override
             public void callback(String url, JSONObject jo, AjaxStatus status) {
                 try {
-                    ProductTypeListModel.this.callback(this, url, jo, status);
+                    NumberListModel.this.callback(this, url, jo, status);
                     if (null != jo)
                     {
-                        producttypelistResponse response = new producttypelistResponse();
+                        numberlistResponse response = new numberlistResponse();
                         response.fromJson(jo);
 
                         if(response.succeed == 1)
                         {
                             dataList.clear();
-                            dataList.addAll(response.producttypes);
-                            ProductTypeListModel.this.OnMessageResponse(url,jo,status);
+                            dataList.addAll(response.numbers);
+                            NumberListModel.this.OnMessageResponse(url,jo,status);
                         }
                         else
                         {
-                            ProductTypeListModel.this.callback(url, response.error_code, response.error_desc);
+                            NumberListModel.this.callback(url, response.error_code, response.error_desc);
                         }
                     }else{
-                        ProductTypeListModel.this.OnMessageResponse(url,jo,status);
+                        NumberListModel.this.OnMessageResponse(url,jo,status);
                     }
 
                 } catch (JSONException e) {
@@ -86,21 +87,21 @@ public class ProductTypeListModel extends BaseModel {
         } catch (JSONException e) {
 
         }
-        if(isSendingMessage(ApiInterface.PRODUCTTYPE_LIST)){
+        if(isSendingMessage(ApiInterface.NUMBER_LIST)){
             return;
         }
-        cb.url(ApiInterface.PRODUCTTYPE_LIST).type(JSONObject.class).params(params);
+        cb.url(ApiInterface.NUMBER_LIST).type(JSONObject.class).params(params);
         ajaxProgress(cb);
-
     }
 
-    public void fetNextService(String shopid,ENUM_SEARCH_ORDER search_order)
+    public void fetNextService(SIMPLE_NUMBER number,ENUM_SEARCH_ORDER search_order)
     {
-        producttypelistRequest request = new producttypelistRequest();
+        numberlistRequest request = new numberlistRequest();
 
         request.sid = SESSION.getInstance().sid;
         request.uid = SESSION.getInstance().uid;
-        request.shopid=shopid;
+        request.shopid=number.shopid;
+        request.member_no=number.member_no;
         request.sort_by = search_order.value();
         request.ver = MemberAppConst.VERSION_CODE;
         request.count = NUMPERPAGE;
@@ -118,23 +119,23 @@ public class ProductTypeListModel extends BaseModel {
             @Override
             public void callback(String url, JSONObject jo, AjaxStatus status) {
                 try {
-                    ProductTypeListModel.this.callback(this, url, jo, status);
+                    NumberListModel.this.callback(this, url, jo, status);
                     if (null != jo)
                     {
-                        producttypelistResponse response = new producttypelistResponse();
+                        numberlistResponse response = new numberlistResponse();
                         response.fromJson(jo);
 
                         if(response.succeed == 1)
                         {
-                            dataList.addAll(response.producttypes);
-                            ProductTypeListModel.this.OnMessageResponse(url,jo,status);
+                            dataList.addAll(response.numbers);
+                            NumberListModel.this.OnMessageResponse(url,jo,status);
                         }
                         else
                         {
-                            ProductTypeListModel.this.callback(url, response.error_code, response.error_desc);
+                            NumberListModel.this.callback(url, response.error_code, response.error_desc);
                         }
                     }else{
-                        ProductTypeListModel.this.OnMessageResponse(url,jo,status);
+                        NumberListModel.this.OnMessageResponse(url,jo,status);
                     }
 
                 } catch (JSONException e) {
@@ -151,10 +152,10 @@ public class ProductTypeListModel extends BaseModel {
         } catch (JSONException e) {
 
         }
-        if(isSendingMessage(ApiInterface.PRODUCTTYPE_LIST)){
+        if(isSendingMessage(ApiInterface.NUMBER_LIST)){
             return;
         }
-        cb.url(ApiInterface.PRODUCTTYPE_LIST).type(JSONObject.class).params(params);
+        cb.url(ApiInterface.NUMBER_LIST).type(JSONObject.class).params(params);
         ajax(cb);
 
     }

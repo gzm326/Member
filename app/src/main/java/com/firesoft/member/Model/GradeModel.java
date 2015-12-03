@@ -33,6 +33,8 @@ public class GradeModel extends BaseModel {
 
         request.discount_percent = grade.discount_percent;
         request.name =grade.name ;
+        request.shopid=grade.shopid;
+        request.shopname=grade.shopname;
         request.credit_percent =grade.credit_percent;
         request.validity = grade.validity;
         request.validity_unit = grade.validity_unit;
@@ -84,6 +86,8 @@ public class GradeModel extends BaseModel {
 
         request.discount_percent = grade.discount_percent;
         request.name =grade.name ;
+        request.shopid=grade.shopid;
+        request.shopname=grade.shopname;
         request.credit_percent =grade.credit_percent;
         request.validity = grade.validity;
         request.validity_unit = grade.validity_unit;
@@ -91,7 +95,7 @@ public class GradeModel extends BaseModel {
         request.beg_credit = grade.beg_credit;
         request.rec_credit = grade.rec_credit;
         request.rem = grade.rem;
-        request.id=grade.id;
+        request.uid=grade.id;
         BeeCallback<JSONObject> cb = new BeeCallback<JSONObject>() {
             @Override
             public void callback(String url, JSONObject jo, AjaxStatus status) {
@@ -133,7 +137,7 @@ public class GradeModel extends BaseModel {
     public void del(int uid) {
         gradeaddRequest request = new gradeaddRequest();
 
-        request.id=uid;
+        request.uid=uid;
         BeeCallback<JSONObject> cb = new BeeCallback<JSONObject>() {
             @Override
             public void callback(String url, JSONObject jo, AjaxStatus status) {
@@ -176,7 +180,7 @@ public class GradeModel extends BaseModel {
     {
         gradeaddRequest memberrequest = new gradeaddRequest();
 
-        memberrequest.id = id;
+        memberrequest.uid = id;
 
 
 

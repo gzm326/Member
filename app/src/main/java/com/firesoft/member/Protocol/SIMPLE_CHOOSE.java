@@ -15,6 +15,12 @@ public class SIMPLE_CHOOSE extends DataBaseModel{
     @Column(name = "uid")
     public int id;
 
+    @Column(name = "shopid")
+    public String shopid;
+
+    @Column(name = "type_id")
+    public String type_id;
+
     @Column(name = "name")
     public String name;
 
@@ -23,19 +29,24 @@ public class SIMPLE_CHOOSE extends DataBaseModel{
         if(null == jsonObject){
             return ;
         }
-
         this.id = jsonObject.optInt("id");
-
         this.name = jsonObject.optString("name");
+        this.shopid = jsonObject.optString("shopid");
+        this.type_id = jsonObject.optString("type_id");
+
 
         return ;
     }
+
     public JSONObject  toJson() throws JSONException
     {
         JSONObject localItemObject = new JSONObject();
 
         localItemObject.put("id", id);
         localItemObject.put("name", name);
+        localItemObject.put("shopid", shopid);
+        localItemObject.put("type_id", type_id);
+
         return localItemObject;
     }
 }

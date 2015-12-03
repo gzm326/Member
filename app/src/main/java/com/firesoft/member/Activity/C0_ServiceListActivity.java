@@ -34,6 +34,7 @@ package com.firesoft.member.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Rect;
 
 import android.os.Bundle;
@@ -57,6 +58,7 @@ import com.external.eventbus.EventBus;
 import com.external.maxwin.view.IXListViewListener;
 import com.external.maxwin.view.XListView;
 import com.firesoft.member.Adapter.C0_ServiceListAdapter;
+import com.firesoft.member.MemberAppConst;
 import com.firesoft.member.MessageConstant;
 import com.firesoft.member.Model.MemberListModel;
 
@@ -88,6 +90,9 @@ public class C0_ServiceListActivity extends BaseActivity implements BusinessResp
     View footView               ;
     public static final int REQUESTCODE1 = 1;
 
+    private SharedPreferences mShared;
+    private String nShopid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,7 +114,7 @@ public class C0_ServiceListActivity extends BaseActivity implements BusinessResp
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("member", member);
                     intent_profile.putExtras(bundle);
-                    startActivityForResult(intent_profile, REQUESTCODE1 );
+                    startActivityForResult(intent_profile, REQUESTCODE1);
                     C0_ServiceListActivity.this.overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
                 }
             }
@@ -128,20 +133,17 @@ public class C0_ServiceListActivity extends BaseActivity implements BusinessResp
         });
 
 
+        mShared =getSharedPreferences(MemberAppConst.USERINFO, 0);
+        nShopid=mShared.getString("shopid", "0");
 
         mDataModel = new MemberListModel(this);
         mDataModel.addResponseListener(this);
         mServiceType =  new SERVICE_TYPE();
 
-        mServiceType.id=5;
-        mServiceType.title="会员档案";
+        mTitleTextView.setText("会员档案");
 
-        if (null != mServiceType.title)
-        {
-            mTitleTextView.setText(mServiceType.title);
-        }
 
-        mDataModel.fetPreService(mServiceType.id, ENUM_SEARCH_ORDER.location_asc);
+        mDataModel.fetPreService(nShopid, ENUM_SEARCH_ORDER.location_asc);
 
 
         mPublishButton = (TextView)findViewById(R.id.c0_publish_button1);
@@ -165,7 +167,7 @@ public class C0_ServiceListActivity extends BaseActivity implements BusinessResp
 
         Message message = (Message) event;
         if (message.what == MessageConstant.REFRESH_LIST) {
-            mDataModel.fetPreService(mServiceType.id, ENUM_SEARCH_ORDER.location_asc);
+            mDataModel.fetPreService(nShopid, ENUM_SEARCH_ORDER.location_asc);
         }
     }
 
@@ -233,12 +235,12 @@ public class C0_ServiceListActivity extends BaseActivity implements BusinessResp
 
     @Override
     public void onRefresh(int id) {
-        mDataModel.fetPreService(mServiceType.id, search_order);
+        mDataModel.fetPreService(nShopid, search_order);
     }
 
     @Override
     public void onLoadMore(int id) {
-        mDataModel.fetNextService(mServiceType.id, search_order);
+        mDataModel.fetNextService(nShopid, search_order);
     }
 
     /*protected void onActivityResult(int requestCode, int resultCode, Intent data) {

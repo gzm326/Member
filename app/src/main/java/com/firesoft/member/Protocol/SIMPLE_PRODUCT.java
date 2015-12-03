@@ -21,6 +21,9 @@ public class SIMPLE_PRODUCT extends DataBaseModel {
     @Column(name = "type_id")
     public int type_id;
 
+    @Column(name = "type_name")
+    public String type_name;
+
     @Column(name = "price")
     public String price;
 
@@ -55,6 +58,7 @@ public class SIMPLE_PRODUCT extends DataBaseModel {
 
         this.id = jsonObject.optInt("id");
         this.type_id = jsonObject.optInt("type_id");
+        this.type_name = jsonObject.optString("type_name");
         this.name = jsonObject.optString("name");
         this.price = jsonObject.optString("price");
         this.special = jsonObject.optString("special");
@@ -74,6 +78,7 @@ public class SIMPLE_PRODUCT extends DataBaseModel {
         localItemObject.put("id", id);
         localItemObject.put("name", name);
         localItemObject.put("type_id", type_id);
+        localItemObject.put("type_name", type_name);
         localItemObject.put("price", price);
         localItemObject.put("special", special);
         localItemObject.put("specia_price", specia_price);

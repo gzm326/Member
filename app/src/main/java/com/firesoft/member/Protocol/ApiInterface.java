@@ -79,9 +79,10 @@ public class ApiInterface
      public static final String MEMBER_UPDATE="/member/update";
      public static final String MEMBER_DEL="/member/del";
      public static final String MEMBER_MINFO="/member/minfo";
-     public static final String CHOOSE_LIST="/hyjb/list";
+     public static final String CHOOSE_LIST="/dict/list";
      public static final String SYSTEM_UPDATE="/member/version";
      public static final String PRODUCTTYPE_LIST="/product/typelist";
+     public static final String PRODUCTTYPE_CHOOSELIST="/product/choosetypelist";
      public static final String PRODUCTTYPE_ADD="/product/typeadd";
      public static final String PRODUCTTYPE_UPDATE="/product/typeupdate";
      public static final String PRODUCTTYPE_DEL="/product/typedel";
@@ -101,4 +102,9 @@ public class ApiInterface
      public static final String SHOP_DEL="/shop/del";
      public static final String SHOP_INFO="/shop/info";
      public static final String USER_INFO  ="/user/info";
+     public static final String CHARGE_ADD  ="/charge/add";
+     public static final String CHARGE_INFO  ="/charge/info";
+     public static final String NUMBERHISTORY_ADD  ="/numberhistory/add";
+     public static final String NUMBERHISTORY_INFO  ="/numberhistory/info";
+     public static final String NUMBER_LIST  ="/number/list";
 }

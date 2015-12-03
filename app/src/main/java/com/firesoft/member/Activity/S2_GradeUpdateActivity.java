@@ -2,6 +2,7 @@ package com.firesoft.member.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Message;
 import android.view.Gravity;
@@ -16,6 +17,7 @@ import com.BeeFramework.view.ToastView;
 import com.external.androidquery.callback.AjaxStatus;
 import com.external.eventbus.EventBus;
 import com.firesoft.member.APIErrorCode;
+import com.firesoft.member.MemberAppConst;
 import com.firesoft.member.MessageConstant;
 import com.firesoft.member.Model.GradeModel;
 import com.firesoft.member.Protocol.ApiInterface;
@@ -41,6 +43,8 @@ public class S2_GradeUpdateActivity extends BaseActivity implements BusinessResp
     private TextView mDelComplete;
     private LinearLayout mUpdateComplete;
     private SIMPLE_GRADE mGrade;
+
+    private SharedPreferences mShared;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +53,8 @@ public class S2_GradeUpdateActivity extends BaseActivity implements BusinessResp
         Intent intent = getIntent();
         mGrade=(SIMPLE_GRADE)intent.getSerializableExtra("grade");
         init(mGrade);
+
+        mShared =getSharedPreferences(MemberAppConst.USERINFO, 0);
 
         mGradeModel = new GradeModel(this);
         mGradeModel.addResponseListener(this);
@@ -66,7 +72,7 @@ public class S2_GradeUpdateActivity extends BaseActivity implements BusinessResp
         rec_credit = (EditText) findViewById(R.id.rec_credit);
         rem = (EditText) findViewById(R.id.rem);
 
-        mDelComplete = (TextView) findViewById(R.id.c0_del_button);
+       mDelComplete = (TextView) findViewById(R.id.c0_del_button);
         mUpdateComplete = (LinearLayout) findViewById(R.id.top_member_upate);
 
         mUpdateComplete.setOnClickListener(this);
@@ -75,7 +81,7 @@ public class S2_GradeUpdateActivity extends BaseActivity implements BusinessResp
         grade_name.setText(grade.name);
         discount_percent.setText(grade.discount_percent);
         credit_percent.setText(grade.credit_percent);
-        validity.setText(grade.validity);
+         validity.setText(grade.validity);
         validity_unit.setText(grade.validity_unit);
         validity_unitid.setText(grade.validity_unit);
         beg_money.setText(grade.beg_money);
@@ -103,6 +109,8 @@ public class S2_GradeUpdateActivity extends BaseActivity implements BusinessResp
                 String begCredit = beg_credit.getText().toString();
                 String recCredit = rec_credit.getText().toString();
                 String rems = rem.getText().toString();
+                String nShopid=mShared.getString("shopid", "0");
+                String nShopname=mShared.getString("shopname", "");
 
 
 
@@ -126,6 +134,8 @@ public class S2_GradeUpdateActivity extends BaseActivity implements BusinessResp
                     grade.rec_credit=recCredit;
                     grade.rem=rems;
                     grade.id=mGrade.id;
+                    grade.shopid=nShopid;
+                    grade.shopname=nShopname;
                     mGradeModel.update(grade);
 
                 }

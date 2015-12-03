@@ -2,6 +2,7 @@ package com.firesoft.member.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import com.BeeFramework.view.ToastView;
 import com.external.androidquery.callback.AjaxStatus;
 import com.BeeFramework.model.BusinessResponse;
+import com.firesoft.member.MemberAppConst;
 import com.firesoft.member.Model.ChooseModel;
 import com.firesoft.member.Protocol.ApiInterface;
 import com.firesoft.member.Protocol.chooselistResponse;
@@ -32,9 +34,11 @@ public class F3_RegionPickActivity extends Activity implements BusinessResponse 
 	private int choose_id;
 	private String choose_name;
 	private String str_title;
+	private String nShopid;
+	private String nType_id;
 	private int choose_state;
 
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -43,7 +47,9 @@ public class F3_RegionPickActivity extends Activity implements BusinessResponse 
 
 		Intent intent = getIntent();
 		str_title = intent.getStringExtra("title");
-		choose_state=intent.getIntExtra("state",0);
+		choose_state=intent.getIntExtra("state", 0);
+		nShopid=intent.getStringExtra("shopid");
+		nType_id=intent.getStringExtra("type_id");
 
 
 		
@@ -53,9 +59,11 @@ public class F3_RegionPickActivity extends Activity implements BusinessResponse 
 
         title.setText(str_title);
 
+
+
 		chooseModel = new ChooseModel(this);
 		chooseModel.addResponseListener(this);
-		chooseModel.getList();
+		chooseModel.getList(nShopid,nType_id);
 
 		
 		listView.setOnItemClickListener(new OnItemClickListener() {

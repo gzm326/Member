@@ -5,9 +5,7 @@ import android.content.Context;
 import com.BeeFramework.model.BaseModel;
 import com.BeeFramework.model.BeeCallback;
 import com.external.androidquery.callback.AjaxStatus;
-import com.firesoft.member.MemberAppConst;
 import com.firesoft.member.Protocol.ApiInterface;
-import com.firesoft.member.Protocol.ENUM_SEARCH_ORDER;
 import com.firesoft.member.Protocol.SIMPLE_CHOOSE;
 import com.firesoft.member.Protocol.chooselistRequest;
 import com.firesoft.member.Protocol.chooselistResponse;
@@ -21,32 +19,31 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by Administrator on 15-10-4.
+ * Created by Administrator on 2015/11/25.
  */
-public class ChooseModel extends BaseModel {
+public class ChooseProductTypeModel extends BaseModel {
     public ArrayList<SIMPLE_CHOOSE> dataList = new ArrayList<SIMPLE_CHOOSE>();
 
     public static final int NUMPERPAGE = 10;
 
-    public ChooseModel(Context context)
+    public ChooseProductTypeModel(Context context)
     {
         super(context);
     }
 
-    public void getList(String shopid,String type_id)
+    public void getList(String shopid)
     {
         chooselistRequest chooselistrequest = new chooselistRequest();
 
 
         chooselistrequest.uid = SESSION.getInstance().uid;
         chooselistrequest.shopid=shopid;
-        chooselistrequest.type_id=type_id;
         BeeCallback<JSONObject> cb = new BeeCallback<JSONObject>() {
 
             @Override
             public void callback(String url, JSONObject jo, AjaxStatus status) {
                 try {
-                    ChooseModel.this.callback(this, url, jo, status);
+                    ChooseProductTypeModel.this.callback(this, url, jo, status);
                     if (null != jo)
                     {
                         chooselistResponse response = new chooselistResponse();
@@ -56,14 +53,14 @@ public class ChooseModel extends BaseModel {
                         {
                             dataList.clear();
                             dataList.addAll(response.chooses);
-                            ChooseModel.this.OnMessageResponse(url,jo,status);
+                            ChooseProductTypeModel.this.OnMessageResponse(url,jo,status);
                         }
                         else
                         {
-                            ChooseModel.this.callback(url, response.error_code, response.error_desc);
+                            ChooseProductTypeModel.this.callback(url, response.error_code, response.error_desc);
                         }
                     }else{
-                        ChooseModel.this.OnMessageResponse(url,jo,status);
+                        ChooseProductTypeModel.this.OnMessageResponse(url,jo,status);
                     }
 
                 } catch (JSONException e) {
@@ -80,10 +77,10 @@ public class ChooseModel extends BaseModel {
         } catch (JSONException e) {
 
         }
-        if(isSendingMessage(ApiInterface.CHOOSE_LIST)){
+        if(isSendingMessage(ApiInterface.PRODUCTTYPE_CHOOSELIST)){
             return;
         }
-        cb.url(ApiInterface.CHOOSE_LIST).type(JSONObject.class).params(params);
+        cb.url(ApiInterface.PRODUCTTYPE_CHOOSELIST).type(JSONObject.class).params(params);
 
         ajaxProgress(cb);
 

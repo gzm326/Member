@@ -2,9 +2,11 @@ package com.firesoft.member.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Message;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -15,11 +17,13 @@ import android.widget.TextView;
 import com.BeeFramework.Utils.ImageUtil;
 import com.BeeFramework.activity.BaseActivity;
 import com.BeeFramework.model.BusinessResponse;
+import com.BeeFramework.view.ToastView;
 import com.external.androidquery.callback.AjaxStatus;
 import com.external.eventbus.EventBus;
 import com.external.maxwin.view.IXListViewListener;
 import com.external.maxwin.view.XListView;
 import com.firesoft.member.Adapter.S1_ProductListAdapter;
+import com.firesoft.member.MemberAppConst;
 import com.firesoft.member.MessageConstant;
 import com.firesoft.member.Model.Product;
 import com.firesoft.member.Model.ProductListModel;
@@ -48,6 +52,9 @@ public class S1_ProductListActivity extends BaseActivity implements BusinessResp
     ENUM_SEARCH_ORDER search_order = ENUM_SEARCH_ORDER.location_asc;
     View footView               ;
     public static final int REQUESTCODE1 = 1;
+
+    private SharedPreferences mShared;
+    private String nShopid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,10 +74,10 @@ public class S1_ProductListActivity extends BaseActivity implements BusinessResp
 
                     Intent intent_profile = new Intent(S1_ProductListActivity.this, S1_ProductUpdateActivity.class);
                     Bundle bundle = new Bundle();
-                    bundle.putSerializable("product",product);
+                    bundle.putSerializable("product", product);
                     intent_profile.putExtras(bundle);
 
-                    startActivityForResult(intent_profile, REQUESTCODE1 );
+                    startActivityForResult(intent_profile, REQUESTCODE1);
                     S1_ProductListActivity.this.overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
                 }
             }
@@ -86,19 +93,15 @@ public class S1_ProductListActivity extends BaseActivity implements BusinessResp
         });
 
 
+        mShared =getSharedPreferences(MemberAppConst.USERINFO, 0);
+        nShopid=mShared.getString("shopid", "0");
+
         mDataModel = new ProductListModel(this);
         mDataModel.addResponseListener(this);
-        mServiceType =  new SERVICE_TYPE();
 
-        mServiceType.id=5;
-        mServiceType.title="项目维护";
+        mTitleTextView.setText("项目维护");
 
-        if (null != mServiceType.title)
-        {
-            mTitleTextView.setText(mServiceType.title);
-        }
-
-        mDataModel.fetPreService(mServiceType.id, ENUM_SEARCH_ORDER.location_asc);
+        mDataModel.fetPreService(nShopid, ENUM_SEARCH_ORDER.location_asc);
 
 
         mPublishButton = (TextView)findViewById(R.id.c0_publish_button1);
@@ -121,7 +124,7 @@ public class S1_ProductListActivity extends BaseActivity implements BusinessResp
 
         Message message = (Message) event;
         if (message.what == MessageConstant.REFRESH_LIST) {
-            mDataModel.fetPreService(mServiceType.id, ENUM_SEARCH_ORDER.location_asc);
+            mDataModel.fetPreService(nShopid, ENUM_SEARCH_ORDER.location_asc);
         }
     }
 
@@ -180,15 +183,19 @@ public class S1_ProductListActivity extends BaseActivity implements BusinessResp
         }
 
     }
-
+    public  void ToastShow(String atr){
+        ToastView toast = new ToastView(this, atr);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
+    }
     @Override
     public void onRefresh(int id) {
-        mDataModel.fetPreService(mServiceType.id, search_order);
+        mDataModel.fetPreService(nShopid, search_order);
     }
 
     @Override
     public void onLoadMore(int id) {
-        mDataModel.fetNextService(mServiceType.id, search_order);
+        mDataModel.fetNextService(nShopid, search_order);
     }
 
 /*    protected void onActivityResult(int requestCode, int resultCode, Intent data) {

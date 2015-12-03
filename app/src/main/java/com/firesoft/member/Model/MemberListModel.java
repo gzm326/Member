@@ -27,13 +27,14 @@ public class MemberListModel extends BaseModel{
         super(context);
     }
 
-    public void fetPreService(int serviceId,ENUM_SEARCH_ORDER search_order)
+    public void fetPreService(String shopid,ENUM_SEARCH_ORDER search_order)
     {
         memberlistRequest memberrequest = new memberlistRequest();
 
         memberrequest.sid = SESSION.getInstance().sid;
         memberrequest.uid = SESSION.getInstance().uid;
         memberrequest.by_no = 1;
+        memberrequest.shopid=shopid;
         memberrequest.sort_by = search_order.value();
         memberrequest.ver = MemberAppConst.VERSION_CODE;
         memberrequest.count = NUMPERPAGE;
@@ -87,12 +88,13 @@ public class MemberListModel extends BaseModel{
 
     }
 
-    public void fetNextService(int serviceId,ENUM_SEARCH_ORDER search_order)
+    public void fetNextService(String shopid,ENUM_SEARCH_ORDER search_order)
     {
         memberlistRequest memberrequest = new memberlistRequest();
 
         memberrequest.sid = SESSION.getInstance().sid;
         memberrequest.uid = SESSION.getInstance().uid;
+        memberrequest.shopid=shopid;
         memberrequest.sort_by = search_order.value();
         memberrequest.ver = MemberAppConst.VERSION_CODE;
         memberrequest.count = NUMPERPAGE;

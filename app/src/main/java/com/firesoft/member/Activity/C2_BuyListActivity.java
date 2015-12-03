@@ -2,6 +2,7 @@ package com.firesoft.member.Activity;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -21,6 +22,7 @@ import com.external.androidquery.callback.AjaxStatus;
 import com.external.maxwin.view.IXListViewListener;
 import com.external.maxwin.view.XListView;
 import com.firesoft.member.Adapter.C2_BuyListAdapter;
+import com.firesoft.member.MemberAppConst;
 import com.firesoft.member.Model.MemberListModel;
 import com.firesoft.member.Protocol.ApiInterface;
 import com.firesoft.member.Protocol.ENUM_SEARCH_ORDER;
@@ -44,6 +46,9 @@ public class C2_BuyListActivity extends BaseActivity implements BusinessResponse
     TextView                        mPublishButton;
     ENUM_SEARCH_ORDER search_order = ENUM_SEARCH_ORDER.location_asc;
     View footView;
+
+    private SharedPreferences mShared;
+    private String nShopid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,19 +90,15 @@ public class C2_BuyListActivity extends BaseActivity implements BusinessResponse
             }
         });*/
 
+        mShared =getSharedPreferences(MemberAppConst.USERINFO, 0);
+        nShopid=mShared.getString("shopid", "0");
+
         mDataModel = new MemberListModel(this);
         mDataModel.addResponseListener(this);
-        mServiceType =  new SERVICE_TYPE();
-        //mServiceType = (SERVICE_TYPE) getIntent().getSerializableExtra(MemberAppConst.SERVICE_TYPE);
-        mServiceType.id=5;
-        mServiceType.title="消费明细查询";
 
-        if (null != mServiceType.title)
-        {
-            mTitleTextView.setText(mServiceType.title);
-        }
+        mTitleTextView.setText("消费明细查询");
 
-        mDataModel.fetPreService(mServiceType.id, ENUM_SEARCH_ORDER.location_asc);
+        mDataModel.fetPreService(nShopid, ENUM_SEARCH_ORDER.location_asc);
 
        /* mFilterLayout = (LinearLayout)findViewById(R.id.c0_filter_layout);
         mFilterButton = (ImageView)findViewById(R.id.top_view_right_image);
@@ -191,11 +192,11 @@ public class C2_BuyListActivity extends BaseActivity implements BusinessResponse
 
     @Override
     public void onRefresh(int id) {
-        mDataModel.fetPreService(mServiceType.id, search_order);
+        mDataModel.fetPreService(nShopid,search_order);
     }
 
     @Override
     public void onLoadMore(int id) {
-        mDataModel.fetNextService(mServiceType.id, search_order);
+        mDataModel.fetNextService(nShopid, search_order);
     }
 }
