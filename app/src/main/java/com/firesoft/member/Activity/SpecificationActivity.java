@@ -37,6 +37,13 @@ import com.external.androidquery.callback.AjaxStatus;
 import com.external.eventbus.EventBus;
 import com.BeeFramework.model.BusinessResponse;
 import com.BeeFramework.view.ToastView;
+import com.firesoft.member.Model.NumberListModel;
+import com.firesoft.member.Protocol.ApiInterface;
+import com.firesoft.member.Protocol.ENUM_SEARCH_ORDER;
+import com.firesoft.member.Protocol.SIMPLE_MEMBER;
+import com.firesoft.member.Protocol.SIMPLE_NUMBER;
+import com.firesoft.member.Protocol.memberaddResponse;
+import com.firesoft.member.Protocol.numberlistResponse;
 import com.firesoft.member.R;
 import com.firesoft.member.Adapter.SpecificationAdapter;
 import com.firesoft.member.Model.Product;
@@ -61,9 +68,12 @@ public class SpecificationActivity extends Activity implements BusinessResponse
     private View addItemComponent;
     private int num;
     private boolean creat_cart;
-    private ArrayList<Product> productA2;
+    private ArrayList<SIMPLE_NUMBER> numbers;
     private ArrayList<Product> productA3;
     private Product product1,product2,product3;
+    private SIMPLE_NUMBER number;
+    private TextView mTitleTextView;
+    private NumberListModel mDataModel;
 
 	@Override
     protected void onCreate(Bundle savedInstanceState)
@@ -71,14 +81,25 @@ public class SpecificationActivity extends Activity implements BusinessResponse
         super.onCreate(savedInstanceState);
         setContentView(R.layout.specification_activity);
         
-        /*Intent intent = getIntent();
-        num = intent.getIntExtra("num", 0);
-        creat_cart = intent.getBooleanExtra("creat_cart", false);*/
+
+
+        number = new SIMPLE_NUMBER();
+
+        Intent intent = getIntent();
+        number.shopid = intent.getStringExtra("shopid");
+        number.member_no=intent.getStringExtra("member_no");
 
         specificationListView = (ListView)findViewById(R.id.specification_list);
-        productA2=initProduct();
-        listAdapter = new SpecificationAdapter(this,productA2 );
-        specificationListView.setAdapter(listAdapter);
+        mTitleTextView = (TextView)findViewById(R.id.top_view_title);
+        mTitleTextView.setText("项目剩余次数查询");
+
+        mDataModel = new NumberListModel(this);
+        mDataModel.addResponseListener(this);
+
+        mDataModel.fetPreService(number, ENUM_SEARCH_ORDER.location_asc);
+
+
+
 
 
         ok = (TextView) findViewById(R.id.shop_car_item_ok);
@@ -88,7 +109,7 @@ public class SpecificationActivity extends Activity implements BusinessResponse
             public void onClick(View v) {
 
                 //productA3 =
-                HashMap<String,Product> hm;
+                HashMap<String,SIMPLE_NUMBER> hm;
 
                 SpecificationAdapter sf=(SpecificationAdapter)specificationListView.getAdapter();
                 hm=sf.getHm();
@@ -97,7 +118,7 @@ public class SpecificationActivity extends Activity implements BusinessResponse
                 Intent intent = new Intent();
                 Bundle bundle = new Bundle();
                 //bundle.putSerializable("product", productA3);
-                bundle.putSerializable("product", hm);
+                bundle.putSerializable("numbers", hm);
                 intent.putExtras(bundle);
                 setResult(Activity.RESULT_OK, intent);
                 finish();
@@ -186,7 +207,21 @@ public class SpecificationActivity extends Activity implements BusinessResponse
 
     @Override
     public void OnMessageResponse(String url, JSONObject jo, AjaxStatus status) throws JSONException {
-
+        if(url.endsWith(ApiInterface.NUMBER_LIST))
+        {
+            if (null != jo)
+            {
+                numberlistResponse response = new numberlistResponse();
+                response.fromJson(jo);
+                numbers=mDataModel.dataList;
+               if(null ==listAdapter){
+                   listAdapter = new SpecificationAdapter(this,numbers );
+                   specificationListView.setAdapter(listAdapter);
+               }else{
+                   listAdapter.notifyDataSetChanged();
+               }
+            }
+        }
     }
 
     public void onEvent(Object event)

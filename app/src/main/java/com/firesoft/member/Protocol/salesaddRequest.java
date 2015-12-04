@@ -8,10 +8,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Created by Administrator on 2015/12/1.
+ * Created by Administrator on 2015/12/4.
  */
-@Table(name = "SIMPLE_NUMBER")
-public class SIMPLE_NUMBER extends DataBaseModel {
+@Table(name = "salesaddRequest")
+public class salesaddRequest extends DataBaseModel {
     @Column(name = "uid")
     public int id;
 
@@ -33,17 +33,11 @@ public class SIMPLE_NUMBER extends DataBaseModel {
     @Column(name = "num")
     public String num;
 
-    @Column(name = "donum")
-    public String donum;
-
-    @Column(name = "lnum")
-    public int lnum=1;
-
     @Column(name = "sale_price")
     public String sale_price;
 
-    @Column(name = "unit")
-    public String unit;
+    @Column(name = "sum")
+    public String sum;
 
     @Column(name = "oper")
     public String oper;
@@ -70,11 +64,8 @@ public class SIMPLE_NUMBER extends DataBaseModel {
         this.type_id = jsonObject.optString("type_id");
         this.type_name = jsonObject.optString("type_name");
         this.num = jsonObject.optString("num");
-        this.donum = jsonObject.optString("donum");
         this.sale_price = jsonObject.optString("sale_price");
-
-        this.unit = jsonObject.optString("unit");
-
+        this.sum = jsonObject.optString("sum");
         this.oper = jsonObject.optString("oper");
         this.opername = jsonObject.optString("opername");
         this.shopid = jsonObject.optString("shopid");
@@ -94,11 +85,8 @@ public class SIMPLE_NUMBER extends DataBaseModel {
         localItemObject.put("type_id", type_id);
         localItemObject.put("type_name", type_name);
         localItemObject.put("num", num);
-        localItemObject.put("donum", donum);
         localItemObject.put("sale_price", sale_price);
-
-        localItemObject.put("unit", unit);
-
+        localItemObject.put("sum", sum);
         localItemObject.put("oper", oper);
         localItemObject.put("opername", opername);
         localItemObject.put("shopid", shopid);

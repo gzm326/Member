@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.BeeFramework.adapter.BeeBaseAdapter;
 import com.firesoft.member.Model.Product;
+import com.firesoft.member.Protocol.SIMPLE_NUMBER;
 import com.firesoft.member.R;
 import com.firesoft.member.View.AddDelView;
 
@@ -23,8 +24,8 @@ import java.util.HashMap;
 
 public class ProductxfAdapter extends BeeBaseAdapter{
     private Context mContext;
-    private HashMap<String,Product> hm_product =new HashMap<String,Product>();
-    private HashMap<String,Product> hm_check =new HashMap<String,Product>();
+    private HashMap<String,SIMPLE_NUMBER> hm_product =new HashMap<String,SIMPLE_NUMBER>();
+    private HashMap<String,SIMPLE_NUMBER> hm_check =new HashMap<String,SIMPLE_NUMBER>();
     private int num=1;
     public ProductxfAdapter(Context c, ArrayList dataList) {
         super(c, dataList);
@@ -43,11 +44,11 @@ public class ProductxfAdapter extends BeeBaseAdapter{
         CheckBox checkBox;
     }
 
-    public HashMap<String,Product> getHm(){
+    public HashMap<String,SIMPLE_NUMBER> getHm(){
         return  hm_product;
     }
 
-    public HashMap<String,Product> getCheckedHm(){
+    public HashMap<String,SIMPLE_NUMBER> getCheckedHm(){
         return  hm_check;
     }
 
@@ -68,24 +69,24 @@ public class ProductxfAdapter extends BeeBaseAdapter{
 
     @Override
     protected View bindData(int position, View cellView, ViewGroup parent, BeeCellHolder h) {
-        final Product product= (Product)dataList.get(position);
+        final SIMPLE_NUMBER number= (SIMPLE_NUMBER)dataList.get(position);
         final C0_ProductCellHolder holder=(C0_ProductCellHolder)h;
-        holder.productid.setText(product.str_productid);
-        holder.productname.setText(product.str_productname);
-        holder.productnum.setText(Integer.toString(product.it_maxnum)+"/"+Integer.toString(product.it_num));
-        holder.addview.maxNum=product.it_maxnum-product.it_num;
-        holder.num.setText(Integer.toString(product.num));
+        holder.productid.setText(number.product_id);
+        holder.productname.setText(number.product_name);
+        holder.productnum.setText(number.num+"/"+number.donum);
+        holder.addview.maxNum=Integer.parseInt(number.num)-Integer.parseInt(number.donum);
+        holder.num.setText(Integer.toString(number.lnum));
 
         holder.minusImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (product.num - 1 > 0) {
-                    product.num--;
-                    if (hm_product.containsKey(product.str_productid)) {
-                        hm_product.remove(product.str_productid);
+                if (number.lnum - 1 > 0) {
+                    number.lnum--;
+                    if (hm_product.containsKey(number.product_id)) {
+                        hm_product.remove(number.product_id);
                     }
-                    hm_product.put(product.str_productid, product);
-                    holder.num.setText(String.valueOf(product.num));
+                    hm_product.put(number.product_id, number);
+                    holder.num.setText(String.valueOf(number.lnum));
                 }
             }
         });
@@ -94,12 +95,12 @@ public class ProductxfAdapter extends BeeBaseAdapter{
             @Override
             public void onClick(View v) {
                 if(holder.checkBox.isChecked()){
-                    hm_check.put(product.str_productid,product);
+                    hm_check.put(number.product_id,number);
                 }
                 else{
-                    if(hm_check.containsKey(product.str_productid)){
+                    if(hm_check.containsKey(number.product_id)){
                         //holder.productnum.setText("1");
-                        hm_check.remove(product.str_productid);
+                        hm_check.remove(number.product_id);
                     }
                 }
             }
@@ -108,13 +109,13 @@ public class ProductxfAdapter extends BeeBaseAdapter{
         holder.addImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (product.num < product.it_maxnum-product.it_num) {
-                    product.num++;
-                    if(hm_product.containsKey(product.str_productid)){
-                        hm_product.remove(product.str_productid);
+                if (number.lnum < Integer.parseInt(number.num) - Integer.parseInt(number.donum)) {
+                    number.lnum++;
+                    if(hm_product.containsKey(number.product_id)){
+                        hm_product.remove(number.product_id);
                     }
-                    hm_product.put(product.str_productid,product);
-                    holder.num.setText(String.valueOf(product.num));
+                    hm_product.put(number.product_id,number);
+                    holder.num.setText(String.valueOf(number.lnum));
                 }
             }
         });

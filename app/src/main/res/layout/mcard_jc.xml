@@ -7,7 +7,7 @@
         <TextView android:textSize="16.0dip" android:textColor="@color/color10" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="18.0dip" android:text="消费项目:" android:layout_centerVertical="true" />
         <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_alignParentRight="true">
             <ImageView android:background="@drawable/add_blue_selector" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-            <TextView android:textSize="16.0dip" android:textColor="@color/title_bg_blue" android:gravity="center" android:id="@+id/add_goods" android:clickable="true" android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="添加项目" />
+            <TextView android:textSize="16.0dip" android:textColor="@color/title_bg_blue" android:gravity="center" android:id="@+id/add_goods" android:clickable="true" android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="选择项目" />
             <ImageView android:id="@+id/del_goods_icon" android:background="@mipmap/del_red_disable" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="30.0dip" />
             <TextView android:textSize="16.0dip" android:textColor="@color/color10" android:gravity="center" android:id="@+id/delete_goods" android:clickable="true" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_marginRight="10.0dip" android:text="删除"  />
         </LinearLayout>

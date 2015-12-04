@@ -107,4 +107,6 @@ public class ApiInterface
      public static final String NUMBERHISTORY_ADD  ="/numberhistory/add";
      public static final String NUMBERHISTORY_INFO  ="/numberhistory/info";
      public static final String NUMBER_LIST  ="/number/list";
+     public static final String SALES_ADD  ="/sales/add";
+     public static final String SALES_INFO  ="/sales/info";
 }
