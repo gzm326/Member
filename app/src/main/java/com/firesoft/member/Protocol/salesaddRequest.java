@@ -4,14 +4,20 @@ import com.external.activeandroid.DataBaseModel;
 import com.external.activeandroid.annotation.Column;
 import com.external.activeandroid.annotation.Table;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * Created by Administrator on 2015/12/4.
  */
 @Table(name = "salesaddRequest")
 public class salesaddRequest extends DataBaseModel {
+
+    public ArrayList<SIMPLE_SALES> sales = new ArrayList<SIMPLE_SALES>();
+
     @Column(name = "uid")
     public int id;
 
@@ -50,6 +56,7 @@ public class salesaddRequest extends DataBaseModel {
 
     @Column(name = "shopname")
     public String shopname;
+
 
 
     public void fromJson(JSONObject jsonObject) throws JSONException {
@@ -91,6 +98,38 @@ public class salesaddRequest extends DataBaseModel {
         localItemObject.put("opername", opername);
         localItemObject.put("shopid", shopid);
         localItemObject.put("shopname", shopname);
+
+        return localItemObject;
+    }
+
+    public JSONObject toAddJson() throws JSONException {
+        JSONObject localItemObject = new JSONObject();
+        JSONArray addJSONArray = new JSONArray();
+        JSONArray updateJSONArray = new JSONArray();
+
+        for(int i =0; i< sales.size(); i++)
+        {
+            SIMPLE_SALES itemData =sales.get(i);
+            JSONObject addJSONObject = itemData.toAddJson();
+            //JSONObject updateJSONObject = itemData.toUpdateJson();
+            addJSONArray.put(addJSONObject);
+            //updateJSONArray.put(updateJSONObject);
+        }
+
+        localItemObject.put("addstr", addJSONArray);
+        //localItemObject.put("updatestr", updateJSONArray);
+        /*localItemObject.put("product_id", product_id);
+        localItemObject.put("product_name", product_name);
+        localItemObject.put("type_id", type_id);
+        localItemObject.put("type_name", type_name);
+        localItemObject.put("num", num);
+        localItemObject.put("sale_price", sale_price);
+        localItemObject.put("sum", sum);
+        localItemObject.put("oper", oper);
+        localItemObject.put("opername", opername);
+        localItemObject.put("shopid", shopid);
+        localItemObject.put("shopname", shopname);*/
+
         return localItemObject;
     }
 }

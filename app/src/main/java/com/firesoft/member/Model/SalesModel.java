@@ -14,6 +14,7 @@ import com.firesoft.member.Protocol.salesaddResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,9 +29,11 @@ public class SalesModel extends BaseModel {
         this.context = context;
 
     }
-    public void add(SIMPLE_SALES number) {
+    public void add(ArrayList<SIMPLE_SALES> number) {
+
         salesaddRequest request = new salesaddRequest();
-        request.member_no =number.member_no;
+        request.sales=number;
+        /*request.member_no =number.member_no;
         request.product_id = number.product_id;
         request.product_name = number.product_name;
         request.type_id = number.type_id;
@@ -41,7 +44,7 @@ public class SalesModel extends BaseModel {
         request.oper = number.oper;
         request.opername = number.opername;
         request.shopid=number.shopid;
-        request.shopname=number.shopname;
+        request.shopname=number.shopname;*/
         BeeCallback<JSONObject> cb = new BeeCallback<JSONObject>() {
             @Override
             public void callback(String url, JSONObject jo, AjaxStatus status) {
@@ -70,7 +73,7 @@ public class SalesModel extends BaseModel {
         };
         Map<String, String> params = new HashMap<String, String>();
         try {
-            params.put("json", request.toJson().toString());
+            params.put("json", request.toAddJson().toString());
         } catch (JSONException e) {
 
         }

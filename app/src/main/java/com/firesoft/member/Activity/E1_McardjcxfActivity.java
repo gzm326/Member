@@ -88,6 +88,13 @@ public class E1_McardjcxfActivity extends BaseActivity implements BusinessRespon
         df = new DecimalFormat("#.00");
         mTitleTextView.setText("会员消费");
 
+        mMemberModel = new MemberModel(this);
+        mMemberModel.addResponseListener(this);
+
+        mDataModel = new SalesModel(this);
+        mDataModel.addResponseListener(this);
+
+
         tv_add_goods.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -139,8 +146,9 @@ public class E1_McardjcxfActivity extends BaseActivity implements BusinessRespon
                     ToastShow("请选择消费项目");
 
                 } else {
-                    ToastShow(Integer.toString(hm.size()));
-                    /*Iterator iter = hm.entrySet().iterator();
+
+                    Iterator iter = hm.entrySet().iterator();
+                    ArrayList<SIMPLE_SALES> arrayList=new ArrayList<SIMPLE_SALES>();
                     while (iter.hasNext()) {
                         Map.Entry entry = (Map.Entry) iter.next();
                         SIMPLE_NUMBER number= (SIMPLE_NUMBER)entry.getValue();
@@ -152,13 +160,18 @@ public class E1_McardjcxfActivity extends BaseActivity implements BusinessRespon
                         sale.type_name = number.type_name;
                         sale.num = Integer.toString(number.lnum);
                         sale.sale_price = number.sale_price;
-                        sale.sum =df.format(Double.toString(number.lnum*Double.parseDouble(number.sale_price))) ;
+                        sale.sum =String.valueOf(df.format(number.lnum * Double.parseDouble(number.sale_price)));
                         sale.oper = Integer.toString(userid);
                         sale.opername = Integer.toString(userid);
                         sale.shopid = nShopid;
                         sale.shopname = nShopname;
-                        ToastShow(Integer.toString(number.lnum));
-                    }*/
+                        sale.id=number.id;
+                        arrayList.add(sale);
+
+                    }
+                    if(arrayList.size()>0){
+                        mDataModel.add(arrayList);
+                    }
                     //mNumberModel.add(obj);
 
                 }
@@ -200,11 +213,6 @@ public class E1_McardjcxfActivity extends BaseActivity implements BusinessRespon
 
             }
         });
-        mMemberModel = new MemberModel(this);
-        mMemberModel.addResponseListener(this);
-
-        mDataModel = new SalesModel(this);
-        mDataModel.addResponseListener(this);
 
 
     }

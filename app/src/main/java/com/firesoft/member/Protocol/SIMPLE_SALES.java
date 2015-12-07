@@ -97,4 +97,33 @@ public class SIMPLE_SALES extends DataBaseModel {
         localItemObject.put("shopname", shopname);
         return localItemObject;
     }
+
+    public JSONObject toAddJson() throws JSONException {
+        JSONObject localItemObject = new JSONObject();
+
+        localItemObject.put("member_no", member_no);
+        localItemObject.put("product_id", product_id);
+        localItemObject.put("product_name", product_name);
+        localItemObject.put("type_id", type_id);
+        localItemObject.put("type_name", type_name);
+        localItemObject.put("num", num);
+        localItemObject.put("sum", sum);
+        localItemObject.put("sale_price", sale_price);
+        localItemObject.put("oper", oper);
+        localItemObject.put("opername", opername);
+        localItemObject.put("shopid", shopid);
+        localItemObject.put("shopname", shopname);
+        return localItemObject;
+    }
+
+    public JSONObject toUpdateJson() throws JSONException {
+        JSONObject localItemObject = new JSONObject();
+
+        localItemObject.put("member_no", member_no);
+        localItemObject.put("product_id", product_id);
+        localItemObject.put("num", num);
+        localItemObject.put("sale_price", sale_price);
+        localItemObject.put("shopid", shopid);
+        return localItemObject;
+    }
 }
