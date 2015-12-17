@@ -14,6 +14,9 @@ import android.widget.TextView;
 import com.BeeFramework.activity.BaseActivity;
 import com.BeeFramework.model.BusinessResponse;
 import com.BeeFramework.view.ToastView;
+import com.external.alertview.AlertView;
+import com.external.alertview.OnDismissListener;
+import com.external.alertview.OnItemClickListener;
 import com.external.androidquery.callback.AjaxStatus;
 import com.external.eventbus.EventBus;
 import com.firesoft.member.APIErrorCode;
@@ -28,8 +31,8 @@ import com.firesoft.member.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class S2_GradeUpdateActivity extends BaseActivity implements BusinessResponse, View.OnClickListener {
-
+public class S2_GradeUpdateActivity extends BaseActivity implements BusinessResponse, View.OnClickListener,OnItemClickListener, OnDismissListener {
+    private AlertView mAlertView;//避免创建重复View，先创建View，然后需要的时候show出来，推荐这个做法
     private GradeModel mGradeModel;
     private EditText grade_name;
     private EditText discount_percent;
@@ -39,9 +42,8 @@ public class S2_GradeUpdateActivity extends BaseActivity implements BusinessResp
     private EditText rec_credit;
     private EditText rem;
     private TextView validity_unit,validity_unitid;
-
-    private TextView mDelComplete;
-    private LinearLayout mUpdateComplete;
+    private LinearLayout mDelComplete;
+    private TextView mUpdateComplete;
     private SIMPLE_GRADE mGrade;
 
     private SharedPreferences mShared;
@@ -53,7 +55,7 @@ public class S2_GradeUpdateActivity extends BaseActivity implements BusinessResp
         Intent intent = getIntent();
         mGrade=(SIMPLE_GRADE)intent.getSerializableExtra("grade");
         init(mGrade);
-
+        mAlertView = new AlertView("信息提示", "确定删除该条记录！", "取消", new String[]{"确定"}, null, this, AlertView.Style.Alert, this).setCancelable(true).setOnDismissListener(this);
         mShared =getSharedPreferences(MemberAppConst.USERINFO, 0);
 
         mGradeModel = new GradeModel(this);
@@ -72,8 +74,8 @@ public class S2_GradeUpdateActivity extends BaseActivity implements BusinessResp
         rec_credit = (EditText) findViewById(R.id.rec_credit);
         rem = (EditText) findViewById(R.id.rem);
 
-       mDelComplete = (TextView) findViewById(R.id.c0_del_button);
-        mUpdateComplete = (LinearLayout) findViewById(R.id.top_member_upate);
+       mDelComplete = (LinearLayout) findViewById(R.id.c0_del_button);
+        mUpdateComplete = (TextView)findViewById(R.id.top_member_upate);
 
         mUpdateComplete.setOnClickListener(this);
         mDelComplete.setOnClickListener(this);
@@ -142,7 +144,9 @@ public class S2_GradeUpdateActivity extends BaseActivity implements BusinessResp
                 break;
 
             case R.id.c0_del_button:{
-                mGradeModel.del(mGrade.id);
+                mAlertView.show();
+
+
                 break;
             }
         }
@@ -164,6 +168,7 @@ public class S2_GradeUpdateActivity extends BaseActivity implements BusinessResp
                 Intent intent = new Intent(this, S0_ProductTypeListActivity.class);
                 //startActivity(intent);
                 setResult(Activity.RESULT_OK, intent);
+                ToastShow("删除成功！");
                 finish();
                 Message msg = new Message();
                 msg.what = MessageConstant.REFRESH_LIST;
@@ -177,15 +182,29 @@ public class S2_GradeUpdateActivity extends BaseActivity implements BusinessResp
             gradeaddResponse response = new gradeaddResponse();
             response.fromJson(jo);
             if (response.succeed == 1) {
+                ToastShow("保存成功");
+                finish();
                 Message msg = new Message();
                 msg.what = MessageConstant.REFRESH_LIST;
                 EventBus.getDefault().post(msg);
-                ToastShow("保存成功");
+
             } else {
                 if (response.error_code == APIErrorCode.NICKNAME_EXIST) {
                     grade_name.requestFocus();
                 }
             }
         }
+    }
+
+    @Override
+    public void onItemClick(Object o,int position) {
+        if(position!=AlertView.CANCELPOSITION){
+            mGradeModel.del(mGrade.id);
+        }
+    }
+
+    @Override
+    public void onDismiss(Object o) {
+
     }
 }

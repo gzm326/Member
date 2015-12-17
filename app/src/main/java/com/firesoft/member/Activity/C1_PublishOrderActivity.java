@@ -265,6 +265,7 @@ public class C1_PublishOrderActivity extends BaseActivity implements BusinessRes
             if (response.succeed == 1) {
                 /*Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);*/
+                ToastShow("保存成功");
                 finish();
                 Message msg = new Message();
                 msg.what = MessageConstant.REFRESH_LIST;

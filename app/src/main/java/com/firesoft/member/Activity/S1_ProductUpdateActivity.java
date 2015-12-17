@@ -16,6 +16,9 @@ import android.widget.TextView;
 import com.BeeFramework.activity.BaseActivity;
 import com.BeeFramework.model.BusinessResponse;
 import com.BeeFramework.view.ToastView;
+import com.external.alertview.AlertView;
+import com.external.alertview.OnDismissListener;
+import com.external.alertview.OnItemClickListener;
 import com.external.androidquery.callback.AjaxStatus;
 import com.external.eventbus.EventBus;
 import com.firesoft.member.APIErrorCode;
@@ -34,8 +37,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class S1_ProductUpdateActivity extends BaseActivity implements BusinessResponse, View.OnClickListener {
-
+public class S1_ProductUpdateActivity extends BaseActivity implements BusinessResponse, View.OnClickListener,OnItemClickListener, OnDismissListener {
+    private AlertView mAlertView;//避免创建重复View，先创建View，然后需要的时候show出来，推荐这个做法
     private ProductModel mProductModel;
     private EditText product_name;
     private EditText product_price;
@@ -46,8 +49,8 @@ public class S1_ProductUpdateActivity extends BaseActivity implements BusinessRe
     private RadioButton rb_discount_true,rb_discount_false;
     private RadioButton rb_credit_true,rb_credit_false;
 
-    private TextView mDelComplete;
-    private LinearLayout mUpdateComplete;
+    private LinearLayout  mDelComplete;
+    private TextView mUpdateComplete;
     private SIMPLE_PRODUCT mProduct;
 
     private SharedPreferences mShared;
@@ -60,6 +63,7 @@ public class S1_ProductUpdateActivity extends BaseActivity implements BusinessRe
         mProduct=(SIMPLE_PRODUCT)intent.getSerializableExtra("product");
         init(mProduct);
         mShared =getSharedPreferences(MemberAppConst.USERINFO, 0);
+        mAlertView = new AlertView("信息提示", "确定删除该条记录！", "取消", new String[]{"确定"}, null, this, AlertView.Style.Alert, this).setCancelable(true).setOnDismissListener(this);
 
         mProductModel = new ProductModel(this);
         mProductModel.addResponseListener(this);
@@ -80,8 +84,8 @@ public class S1_ProductUpdateActivity extends BaseActivity implements BusinessRe
         rb_credit_true = (RadioButton) findViewById(R.id.rb_credit_true);
         rb_credit_false = (RadioButton) findViewById(R.id.rb_credit_false);
 
-        mDelComplete = (TextView) findViewById(R.id.c0_del_button);
-        mUpdateComplete = (LinearLayout) findViewById(R.id.top_member_upate);
+        mDelComplete = (LinearLayout) findViewById(R.id.c0_del_button);
+        mUpdateComplete =(TextView)  findViewById(R.id.top_member_upate);
 
         mUpdateComplete.setOnClickListener(this);
         mDelComplete.setOnClickListener(this);
@@ -207,7 +211,7 @@ public class S1_ProductUpdateActivity extends BaseActivity implements BusinessRe
                 break;
 
             case R.id.c0_del_button:{
-                mProductModel.del(mProduct.id);
+                mAlertView.show();
                 break;
             }
         }
@@ -229,6 +233,7 @@ public class S1_ProductUpdateActivity extends BaseActivity implements BusinessRe
                 Intent intent = new Intent(this, S0_ProductTypeListActivity.class);
                 //startActivity(intent);
                 setResult(Activity.RESULT_OK, intent);
+                ToastShow("删除成功！");
                 finish();
                 Message msg = new Message();
                 msg.what = MessageConstant.REFRESH_LIST;
@@ -242,10 +247,12 @@ public class S1_ProductUpdateActivity extends BaseActivity implements BusinessRe
             productaddResponse response = new productaddResponse();
             response.fromJson(jo);
             if (response.succeed == 1) {
+                ToastShow("保存成功！");
+                finish();
                 Message msg = new Message();
                 msg.what = MessageConstant.REFRESH_LIST;
                 EventBus.getDefault().post(msg);
-                ToastShow("保存成功");
+
             } else {
                 if (response.error_code == APIErrorCode.NICKNAME_EXIST) {
                     product_name.requestFocus();
@@ -275,5 +282,16 @@ public class S1_ProductUpdateActivity extends BaseActivity implements BusinessRe
 
             }
         }
+    }
+    @Override
+    public void onItemClick(Object o,int position) {
+        if(position!=AlertView.CANCELPOSITION){
+            mProductModel.del(mProduct.id);
+        }
+    }
+
+    @Override
+    public void onDismiss(Object o) {
+
     }
 }

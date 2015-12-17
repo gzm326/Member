@@ -18,6 +18,7 @@ public class gradeaddRequest extends DataBaseModel {
     @Column(name = "name")
     public String name;
 
+
     @Column(name = "discount_percent")
     public String discount_percent;
 

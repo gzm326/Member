@@ -19,6 +19,7 @@ import com.firesoft.member.Activity.McardAddActivity;
 import com.firesoft.member.Activity.S0_ProductTypeListActivity;
 import com.firesoft.member.Activity.S1_ProductListActivity;
 import com.firesoft.member.Activity.S2_GradeListActivity;
+import com.firesoft.member.Activity.S3_GuideListActivity;
 import com.firesoft.member.MemberAppConst;
 import com.firesoft.member.R;
 
@@ -105,14 +106,17 @@ public class Fragment_Profile extends Fragment implements OnClickListener {
 			/*Utils.start_Activity(getActivity(), PublicActivity.class,
 					new BasicNameValuePair(Constants.NAME,
 							getString(R.string.collection)));*/
-			Intent mGradeIntent = new Intent(getActivity(), S2_GradeListActivity.class);
-			startActivity(mGradeIntent);
+			Intent mGuideIntent = new Intent(getActivity(), S3_GuideListActivity.class);
+			startActivity(mGuideIntent);
 			getActivity().overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
 			break;
 		case R.id.txt_money:// 钱包
 			/*Utils.start_Activity(getActivity(), PublicActivity.class,
 					new BasicNameValuePair(Constants.NAME,
 							getString(R.string.wallet)));*/
+			Intent mGradeIntent = new Intent(getActivity(), S2_GradeListActivity.class);
+			startActivity(mGradeIntent);
+			getActivity().overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
 			break;
 		case R.id.txt_card:// 相册
 			/*Utils.start_Activity(getActivity(), PublicActivity.class,

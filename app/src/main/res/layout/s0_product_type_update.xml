@@ -40,7 +40,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/top_member_upate"
+            android:id="@+id/c0_del_button"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginRight="20dp"
@@ -52,7 +52,7 @@
                 android:id="@+id/member_update"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="保存"
+                android:text="删除"
                 android:textColor="@color/select_item"
                 android:textSize="18dp"
                 />
@@ -203,7 +203,7 @@
                 android:background="#000000"/>
 
             <TextView
-                android:id="@+id/c0_del_button"
+                android:id="@+id/top_member_upate"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginBottom="5dp"
@@ -212,7 +212,7 @@
                 android:layout_marginTop="5dp"
                 android:background="@drawable/c1_apply_btn_select"
                 android:gravity="center"
-                android:text="@string/del"
+                android:text="保存"
                 android:textColor="#FFFFFF"
                 android:textSize="20dp"/>
         </FrameLayout>

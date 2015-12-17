@@ -33,6 +33,9 @@ import com.firesoft.member.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class D0_McardycActivity extends BaseActivity implements BusinessResponse {
 
     private TextView txv_no;
@@ -82,18 +85,55 @@ public class D0_McardycActivity extends BaseActivity implements BusinessResponse
         btn_qd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String tmp = edt_keyword.getText().toString();
-                String str = "00000000"+tmp;
-                String member_no=str.substring(str.length()-8,str.length());
+
 
 
                 String nShopid=mShared.getString("shopid", "0");
-                if ("".equals(member_no)) {
-                    ToastShow("请输入会员卡号！");
-                    edt_keyword.setText("");
+                String flag="-1";
+                String dia="查询条件输入有误，请重新输入！";
+                String member_no="";
+                String tmp = edt_keyword.getText().toString();
+                Pattern pt= Pattern.compile("[0-9]*"); //数字
+                Matcher m = pt.matcher(tmp);
+                if(m.matches()){
+                    if(tmp.length()<=8){
+                        flag="0";
+                        String str = "00000000" + tmp;
+                        member_no = str.substring(str.length() - 8, str.length());
+                    }else if(tmp.length()>8){
+                        Pattern pf = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
+                        Matcher mf = pf.matcher(tmp);
+                        if (mf.matches()) {
+                            flag = "1";
+                            member_no = tmp;
+                        } else {
+                            dia="手机号码输入有误，请重新输入！";
+                            //edt_keyword.setText("");
+                            edt_keyword.requestFocus();
+                        }
+                    }
+                }/*else{
+                    Pattern pa= Pattern.compile("[a-zA-Z]");//字母
+                    Matcher ma = pa.matcher(tmp);
+                    if(ma.matches()){
+                        flag="2";
+                        member_no=tmp;
+                    }
+
+                }*/
+
+                if(flag=="-1"){
+                    ToastShow(dia);
+                    //edt_keyword.setText("");
                     edt_keyword.requestFocus();
+                    if("--".equals(txv_no.getText().toString())){
+
+                    }else {
+                        init_null();
+                    }
+                }else{
+                    mMemberModel.getinfo(member_no, nShopid, flag);
                 }
-                mMemberModel.getinfo(member_no,nShopid);
 
 
             }

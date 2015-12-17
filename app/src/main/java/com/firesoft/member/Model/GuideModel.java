@@ -7,9 +7,9 @@ import com.BeeFramework.model.BeeCallback;
 import com.external.androidquery.callback.AjaxStatus;
 import com.firesoft.member.APIErrorCode;
 import com.firesoft.member.Protocol.ApiInterface;
-import com.firesoft.member.Protocol.SIMPLE_MEMBER;
-import com.firesoft.member.Protocol.memberaddRequest;
-import com.firesoft.member.Protocol.memberaddResponse;
+import com.firesoft.member.Protocol.SIMPLE_GUIDE;
+import com.firesoft.member.Protocol.guideaddRequest;
+import com.firesoft.member.Protocol.guideaddResponse;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,40 +18,42 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by Administrator on 15-10-1.
+ * Created by Administrator on 2015/12/12.
  */
-public class MemberModel extends BaseModel {
+public class GuideModel extends BaseModel {
     private Context context;
-    public SIMPLE_MEMBER member;
-    public MemberModel(Context context) {
+    public SIMPLE_GUIDE guide;
+    public GuideModel(Context context) {
         super(context);
         this.context = context;
 
     }
-    public void add(SIMPLE_MEMBER member) {
-        memberaddRequest request = new memberaddRequest();
-        request.member_no =member.member_no;
-        request.member_name = member.member_name;
-        request.mobile_no = member.mobile_no;
-        request.shopid=member.shopid;
-        request.shopname=member.shopname;
+    public void add( SIMPLE_GUIDE obj) {
+        guideaddRequest request = new guideaddRequest();
+        request.phone=obj.phone;
+        request.user_flag=obj.user_flag;
+        request.name =obj.name;
+        request.shopid=obj.shopid;
+        request.shopname=obj.shopname;
+        request.password=obj.password;
+
         BeeCallback<JSONObject> cb = new BeeCallback<JSONObject>() {
             @Override
             public void callback(String url, JSONObject jo, AjaxStatus status) {
                 try {
-                    MemberModel.this.callback(this, url, jo, status);
+                    GuideModel.this.callback(this, url, jo, status);
 
                     if (null != jo) {
-                        memberaddResponse response = new memberaddResponse();
+                        guideaddResponse response = new guideaddResponse();
                         response.fromJson(jo);
                         if (response.succeed == 1) {
-                            MemberModel.this.OnMessageResponse(url, jo, status);
+                            GuideModel.this.OnMessageResponse(url, jo, status);
                         } else {
                             if(response.error_code== APIErrorCode.NICKNAME_EXIST){
 
-                                MemberModel.this.OnMessageResponse(url, jo, status);
+                                GuideModel.this.OnMessageResponse(url, jo, status);
                             }
-                            MemberModel.this.callback(url, response.error_code, response.error_desc);
+                            GuideModel.this.callback(url, response.error_code, response.error_desc);
                         }
                     }
 
@@ -68,37 +70,37 @@ public class MemberModel extends BaseModel {
 
         }
 
-        cb.url(ApiInterface.MEMBER_ADD).type(JSONObject.class).params(params);
+        cb.url(ApiInterface.GUIDE_ADD).type(JSONObject.class).params(params);
         //aq.ajax(cb);
         ajaxProgress(cb);
     }
 
-    public void update(SIMPLE_MEMBER member) {
-        memberaddRequest request = new memberaddRequest();
-
-        request.member_no =member.member_no;
-        request.member_name = member.member_name;
-        request.mobile_no = member.mobile_no;
-        request.shopid=member.shopid;
-        request.shopname=member.shopname;
-        request.uid=member.id;
+    public void update( SIMPLE_GUIDE obj) {
+        guideaddRequest request = new guideaddRequest();
+        request.name =obj.name;
+        request.uid=obj.id;
+        request.phone=obj.phone;
+        request.user_flag=obj.user_flag;
+        request.shopid=obj.shopid;
+        request.shopname=obj.shopname;
+        request.password=obj.password;
         BeeCallback<JSONObject> cb = new BeeCallback<JSONObject>() {
             @Override
             public void callback(String url, JSONObject jo, AjaxStatus status) {
                 try {
-                    MemberModel.this.callback(this, url, jo, status);
+                    GuideModel.this.callback(this, url, jo, status);
 
                     if (null != jo) {
-                        memberaddResponse response = new memberaddResponse();
+                        guideaddResponse response = new guideaddResponse();
                         response.fromJson(jo);
                         if (response.succeed == 1) {
-                            MemberModel.this.OnMessageResponse(url, jo, status);
+                            GuideModel.this.OnMessageResponse(url, jo, status);
                         } else {
                             if(response.error_code== APIErrorCode.NICKNAME_EXIST){
 
-                                MemberModel.this.OnMessageResponse(url, jo, status);
+                                GuideModel.this.OnMessageResponse(url, jo, status);
                             }
-                            MemberModel.this.callback(url, response.error_code, response.error_desc);
+                            GuideModel.this.callback(url, response.error_code, response.error_desc);
                         }
                     }
 
@@ -115,32 +117,32 @@ public class MemberModel extends BaseModel {
 
         }
 
-        cb.url(ApiInterface.MEMBER_UPDATE).type(JSONObject.class).params(params);
+        cb.url(ApiInterface.GUIDE_UPDATE).type(JSONObject.class).params(params);
         //aq.ajax(cb);
         ajaxProgress(cb);
     }
 
     public void del(int uid) {
-        memberaddRequest request = new memberaddRequest();
+        guideaddRequest request = new guideaddRequest();
 
         request.uid=uid;
         BeeCallback<JSONObject> cb = new BeeCallback<JSONObject>() {
             @Override
             public void callback(String url, JSONObject jo, AjaxStatus status) {
                 try {
-                    MemberModel.this.callback(this, url, jo, status);
+                    GuideModel.this.callback(this, url, jo, status);
 
                     if (null != jo) {
-                        memberaddResponse response = new memberaddResponse();
+                        guideaddResponse response = new guideaddResponse();
                         response.fromJson(jo);
                         if (response.succeed == 1) {
-                            MemberModel.this.OnMessageResponse(url, jo, status);
+                            GuideModel.this.OnMessageResponse(url, jo, status);
                         } else {
                             if(response.error_code== APIErrorCode.NICKNAME_EXIST){
 
-                                MemberModel.this.OnMessageResponse(url, jo, status);
+                                GuideModel.this.OnMessageResponse(url, jo, status);
                             }
-                            MemberModel.this.callback(url, response.error_code, response.error_desc);
+                            GuideModel.this.callback(url, response.error_code, response.error_desc);
                         }
                     }
 
@@ -157,18 +159,16 @@ public class MemberModel extends BaseModel {
 
         }
 
-        cb.url(ApiInterface.MEMBER_DEL).type(JSONObject.class).params(params);
+        cb.url(ApiInterface.GUIDE_DEL).type(JSONObject.class).params(params);
         //aq.ajax(cb);
         ajaxProgress(cb);
     }
 
-    public void getinfo(String member_no,String shopid,String flag)
+    public void getinfo(int id)
     {
-        memberaddRequest memberrequest = new memberaddRequest();
+        guideaddRequest memberrequest = new guideaddRequest();
 
-        memberrequest.member_no = member_no;
-        memberrequest.shopid=shopid;
-        memberrequest.flag=flag;
+        memberrequest.uid = id;
 
 
 
@@ -177,23 +177,23 @@ public class MemberModel extends BaseModel {
             @Override
             public void callback(String url, JSONObject jo, AjaxStatus status) {
                 try {
-                    MemberModel.this.callback(this, url, jo, status);
+                    GuideModel.this.callback(this, url, jo, status);
                     if (null != jo)
                     {
-                        memberaddResponse response = new memberaddResponse();
+                        guideaddResponse response = new guideaddResponse();
                         response.fromJson(jo);
 
                         if(response.succeed == 1)
                         {
-                           member= response.member;
-                            MemberModel.this.OnMessageResponse(url,jo,status);
+                            guide= response.guide;
+                            GuideModel.this.OnMessageResponse(url,jo,status);
                         }
                         else
                         {
-                            MemberModel.this.callback(url, response.error_code, response.error_desc);
+                            GuideModel.this.callback(url, response.error_code, response.error_desc);
                         }
                     }else{
-                        MemberModel.this.OnMessageResponse(url, jo, status);
+                        GuideModel.this.OnMessageResponse(url, jo, status);
                     }
 
                 } catch (JSONException e) {
@@ -210,10 +210,10 @@ public class MemberModel extends BaseModel {
         } catch (JSONException e) {
 
         }
-        if(isSendingMessage(ApiInterface.MEMBER_MINFO)){
+        if(isSendingMessage(ApiInterface.GUIDE_INFO)){
             return;
         }
-        cb.url(ApiInterface.MEMBER_MINFO).type(JSONObject.class).params(params);
+        cb.url(ApiInterface.GUIDE_INFO).type(JSONObject.class).params(params);
         ajaxProgress(cb);
 
     }

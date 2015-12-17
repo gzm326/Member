@@ -109,4 +109,10 @@ public class ApiInterface
      public static final String NUMBER_LIST  ="/number/list";
      public static final String SALES_ADD  ="/sales/add";
      public static final String SALES_INFO  ="/sales/info";
+     public static final String GUIDE_LIST="/guide/list";
+     public static final String GUIDE_CHOOSELIST="/guide/chooselist";
+     public static final String GUIDE_ADD="/guide/add";
+     public static final String GUIDE_UPDATE="/guide/update";
+     public static final String GUIDE_DEL="/guide/del";
+     public static final String GUIDE_INFO="/guide/info";
 }

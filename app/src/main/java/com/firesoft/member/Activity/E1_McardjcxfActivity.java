@@ -43,6 +43,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class E1_McardjcxfActivity extends BaseActivity implements BusinessResponse {
@@ -103,13 +105,15 @@ public class E1_McardjcxfActivity extends BaseActivity implements BusinessRespon
                     ToastShow("请输入会员卡号！");
                     edt_keyword.setText("");
                     edt_keyword.requestFocus();
+                }else{
+                    Intent it = new Intent(E1_McardjcxfActivity.this, SpecificationActivity.class);
+                    it.putExtra("member_no", member_no);
+                    it.putExtra("shopid", nShopid);
+                    //startActivity(it);
+                    startActivityForResult(it, REQUESTCODE1);
+                    overridePendingTransition(R.anim.my_scale_action, R.anim.my_alpha_action);
                 }
-                Intent it = new Intent(E1_McardjcxfActivity.this, SpecificationActivity.class);
-                it.putExtra("member_no", member_no);
-                it.putExtra("shopid", nShopid);
-                //startActivity(it);
-                startActivityForResult(it, REQUESTCODE1);
-                overridePendingTransition(R.anim.my_scale_action, R.anim.my_alpha_action);
+
 
             }
         });
@@ -198,17 +202,52 @@ public class E1_McardjcxfActivity extends BaseActivity implements BusinessRespon
         btn_qd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String flag="-1";
+                String dia="查询条件输入有误，请重新输入！";
+                String member_no="";
                 String tmp = edt_keyword.getText().toString();
-                String str = "00000000" + tmp;
-                String member_no = str.substring(str.length() - 8, str.length());
+                Pattern pt= Pattern.compile("[0-9]*"); //数字
+                Matcher m = pt.matcher(tmp);
+                if(m.matches()){
+                    if(tmp.length()<=8){
+                        flag="0";
+                        String str = "00000000" + tmp;
+                        member_no = str.substring(str.length() - 8, str.length());
+                    }else if(tmp.length()>8){
+                        Pattern pf = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
+                        Matcher mf = pf.matcher(tmp);
+                        if (mf.matches()) {
+                            flag = "1";
+                            member_no = tmp;
+                        } else {
+                            dia="手机号码输入有误，请重新输入！";
+                            //edt_keyword.setText("");
+                            edt_keyword.requestFocus();
+                        }
+                    }
+                }/*else{
+                    Pattern pa= Pattern.compile("[a-zA-Z]");//字母
+                    Matcher ma = pa.matcher(tmp);
+                    if(ma.matches()){
+                        flag="2";
+                        member_no=tmp;
+                    }
 
+                }*/
 
-                if ("".equals(member_no)) {
-                    ToastShow("请输入会员卡号！");
-                    edt_keyword.setText("");
+                if(flag=="-1"){
+                    ToastShow(dia);
+                    //edt_keyword.setText("");
                     edt_keyword.requestFocus();
+                    if("--".equals(txv_no.getText().toString())){
+
+                    }else {
+                        init_null();
+                    }
+                }else{
+                    mMemberModel.getinfo(member_no, nShopid,flag);
                 }
-                mMemberModel.getinfo(member_no, nShopid);
+
 
 
             }
@@ -245,6 +284,7 @@ public class E1_McardjcxfActivity extends BaseActivity implements BusinessRespon
                 memberaddResponse response = new memberaddResponse();
                 response.fromJson(jo);
                 //ToastShow(response.member.member_name);
+
                 SIMPLE_MEMBER member;
                 member = mMemberModel.member;
                 if (null != member) {
@@ -252,13 +292,13 @@ public class E1_McardjcxfActivity extends BaseActivity implements BusinessRespon
                     if(null !=member.member_name) {
                         init_member(member);
                     }else {
-                        ToastShow("会员卡号输入有误，无此会员信息！");
+                        ToastShow("查询条件输入有误，无此会员信息！");
                         init_null();
                         edt_keyword.setText("");
                         edt_keyword.requestFocus();
                     }
                 } else {
-                    ToastShow("会员卡号输入有误，无此会员信息！");
+                    ToastShow("查询条件输入有误，无此会员信息！");
                     init_null();
                     edt_keyword.setText("");
                     edt_keyword.requestFocus();

@@ -47,6 +47,9 @@ import android.widget.TextView;
 import com.BeeFramework.activity.BaseActivity;
 import com.BeeFramework.model.BusinessResponse;
 import com.BeeFramework.view.ToastView;
+import com.external.alertview.AlertView;
+import com.external.alertview.OnDismissListener;
+import com.external.alertview.OnItemClickListener;
 import com.external.androidquery.callback.AjaxStatus;
 import com.external.eventbus.EventBus;
 import com.firesoft.member.APIErrorCode;
@@ -62,15 +65,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-public class F0_ProfileActivity extends BaseActivity implements BusinessResponse, View.OnClickListener {
+public class F0_ProfileActivity extends BaseActivity implements BusinessResponse, View.OnClickListener,OnItemClickListener, OnDismissListener {
 
-
+    private AlertView mAlertView;//避免创建重复View，先创建View，然后需要的时候show出来，推荐这个做法
     private SIMPLE_MEMBER member;
     private EditText member_no;
     private EditText member_name;
     private EditText mobile_no;
-    private TextView mDelComplete;
-    private LinearLayout mUpdateComplete;
+    private LinearLayout mDelComplete;
+    private TextView mUpdateComplete;
     private MemberModel mMemberModel;
 
     private SharedPreferences mShared;
@@ -83,6 +86,7 @@ public class F0_ProfileActivity extends BaseActivity implements BusinessResponse
         member=(SIMPLE_MEMBER)intent.getSerializableExtra("member");
         init(member);
         mShared =getSharedPreferences(MemberAppConst.USERINFO, 0);
+        mAlertView = new AlertView("信息提示", "确定删除该条记录！", "取消", new String[]{"确定"}, null, this, AlertView.Style.Alert, this).setCancelable(true).setOnDismissListener(this);
 
         mMemberModel = new MemberModel(this);
         mMemberModel.addResponseListener(this);
@@ -94,8 +98,8 @@ public class F0_ProfileActivity extends BaseActivity implements BusinessResponse
         member_no = (EditText) findViewById(R.id.mcard_kh);
         member_name = (EditText) findViewById(R.id.mcard_xm);
         mobile_no = (EditText) findViewById(R.id.mcard_phone);
-        mDelComplete = (TextView) findViewById(R.id.c0_del_button);
-        mUpdateComplete = (LinearLayout) findViewById(R.id.top_member_upate);
+        mDelComplete = (LinearLayout)findViewById(R.id.c0_del_button);
+        mUpdateComplete = (TextView)findViewById(R.id.top_member_upate);
 
         mUpdateComplete.setOnClickListener(this);
         mDelComplete.setOnClickListener(this);
@@ -156,7 +160,8 @@ public class F0_ProfileActivity extends BaseActivity implements BusinessResponse
                 break;
 
             case R.id.c0_del_button:{
-                mMemberModel.del(member.id);
+                mAlertView.show();
+
                 break;
 
 
@@ -204,6 +209,7 @@ public class F0_ProfileActivity extends BaseActivity implements BusinessResponse
                 /*Intent intent = new Intent(this, C0_ServiceListActivity.class);
                 //startActivity(intent);
                 setResult(Activity.RESULT_OK, intent);*/
+                ToastShow("删除成功！");
                 finish();
                 Message msg = new Message();
                 msg.what = MessageConstant.REFRESH_LIST;
@@ -217,6 +223,8 @@ public class F0_ProfileActivity extends BaseActivity implements BusinessResponse
             memberaddResponse response = new memberaddResponse();
             response.fromJson(jo);
             if (response.succeed == 1) {
+                ToastShow("保存成功！");
+                finish();
                 Message msg = new Message();
                 msg.what = MessageConstant.REFRESH_LIST;
                 EventBus.getDefault().post(msg);
@@ -226,5 +234,16 @@ public class F0_ProfileActivity extends BaseActivity implements BusinessResponse
                 }
             }
         }
+    }
+    @Override
+    public void onItemClick(Object o,int position) {
+        if(position!=AlertView.CANCELPOSITION){
+            mMemberModel.del(member.id);
+        }
+    }
+
+    @Override
+    public void onDismiss(Object o) {
+
     }
 }

@@ -14,6 +14,9 @@ import android.widget.TextView;
 import com.BeeFramework.activity.BaseActivity;
 import com.BeeFramework.model.BusinessResponse;
 import com.BeeFramework.view.ToastView;
+import com.external.alertview.AlertView;
+import com.external.alertview.OnDismissListener;
+import com.external.alertview.OnItemClickListener;
 import com.external.androidquery.callback.AjaxStatus;
 import com.external.eventbus.EventBus;
 import com.firesoft.member.APIErrorCode;
@@ -29,15 +32,15 @@ import com.firesoft.member.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class S0_ProductTypeUpdateActivity extends BaseActivity implements BusinessResponse, View.OnClickListener {
-
+public class S0_ProductTypeUpdateActivity extends BaseActivity implements BusinessResponse, View.OnClickListener,OnItemClickListener, OnDismissListener {
+    private AlertView mAlertView;//避免创建重复View，先创建View，然后需要的时候show出来，推荐这个做法
     private ProductTypeModel mProductTypeModel;
     private EditText type_name;
     private EditText type_bz;
     private EditText type_id;
     private SIMPLE_PRODUCTTYPE mProductType;
-    private TextView mDelComplete;
-    private LinearLayout mUpdateComplete;
+    private LinearLayout  mDelComplete;
+    private TextView mUpdateComplete;
 
     private SharedPreferences mShared;
     @Override
@@ -48,6 +51,7 @@ public class S0_ProductTypeUpdateActivity extends BaseActivity implements Busine
         Intent intent = getIntent();
         mProductType=(SIMPLE_PRODUCTTYPE)intent.getSerializableExtra("producttype");
         init(mProductType);
+        mAlertView = new AlertView("信息提示", "确定删除该条记录！", "取消", new String[]{"确定"}, null, this, AlertView.Style.Alert, this).setCancelable(true).setOnDismissListener(this);
 
         mShared =getSharedPreferences(MemberAppConst.USERINFO, 0);
 
@@ -62,8 +66,8 @@ public class S0_ProductTypeUpdateActivity extends BaseActivity implements Busine
         type_bz = (EditText) findViewById(R.id.type_bz);
         type_id = (EditText) findViewById(R.id.type_id);
 
-        mDelComplete = (TextView) findViewById(R.id.c0_del_button);
-        mUpdateComplete = (LinearLayout) findViewById(R.id.top_member_upate);
+        mDelComplete = (LinearLayout) findViewById(R.id.c0_del_button);
+        mUpdateComplete = (TextView) findViewById(R.id.top_member_upate);
 
         mUpdateComplete.setOnClickListener(this);
         mDelComplete.setOnClickListener(this);
@@ -88,9 +92,7 @@ public class S0_ProductTypeUpdateActivity extends BaseActivity implements Busine
                 String nShopname=mShared.getString("shopname", "");
 
                 if ("".equals(name)) {
-                    ToastView toast = new ToastView(S0_ProductTypeUpdateActivity.this, "项目分类名称不能为空！");
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
+                    ToastShow("项目分类名称不能为空！");
                     type_name.setText("");
                     type_name.requestFocus();
                 }
@@ -106,7 +108,8 @@ public class S0_ProductTypeUpdateActivity extends BaseActivity implements Busine
                 break;
 
             case R.id.c0_del_button:{
-                mProductTypeModel.del(mProductType.id);
+                mAlertView.show();
+
                 break;
             }
         }
@@ -126,6 +129,12 @@ public class S0_ProductTypeUpdateActivity extends BaseActivity implements Busine
 
     }
 
+    public  void ToastShow(String atr){
+        ToastView toast = new ToastView(S0_ProductTypeUpdateActivity.this, atr);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
+    }
+
     public void OnMessageResponse(String url, JSONObject jo, AjaxStatus status)
             throws JSONException {
         // TODO Auto-generated method stub
@@ -136,6 +145,7 @@ public class S0_ProductTypeUpdateActivity extends BaseActivity implements Busine
                 Intent intent = new Intent(this, S0_ProductTypeListActivity.class);
                 //startActivity(intent);
                 setResult(Activity.RESULT_OK, intent);
+                ToastShow("删除成功！");
                 finish();
                 Message msg = new Message();
                 msg.what = MessageConstant.REFRESH_LIST;
@@ -149,6 +159,8 @@ public class S0_ProductTypeUpdateActivity extends BaseActivity implements Busine
             producttypeaddResponse response = new producttypeaddResponse();
             response.fromJson(jo);
             if (response.succeed == 1) {
+                ToastShow("保存成功！");
+                finish();
                 Message msg = new Message();
                 msg.what = MessageConstant.REFRESH_LIST;
                 EventBus.getDefault().post(msg);
@@ -158,5 +170,16 @@ public class S0_ProductTypeUpdateActivity extends BaseActivity implements Busine
                 }
             }
         }
+    }
+    @Override
+    public void onItemClick(Object o,int position) {
+        if(position!=AlertView.CANCELPOSITION){
+            mProductTypeModel.del(mProductType.id);
+        }
+    }
+
+    @Override
+    public void onDismiss(Object o) {
+
     }
 }
