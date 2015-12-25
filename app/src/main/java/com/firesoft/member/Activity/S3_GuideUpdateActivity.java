@@ -39,13 +39,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class S3_GuideUpdateActivity extends BaseActivity implements BusinessResponse, View.OnClickListener,OnItemClickListener, OnDismissListener {
-    private AlertView mAlertView;//±ÜÃâ´´½¨ÖØ¸´View£¬ÏÈ´´½¨View£¬È»ºóĞèÒªµÄÊ±ºòshow³öÀ´£¬ÍÆ¼öÕâ¸ö×ö·¨
+    private AlertView mAlertView;//é¿å…åˆ›å»ºé‡å¤Viewï¼Œå…ˆåˆ›å»ºViewï¼Œç„¶åéœ€è¦çš„æ—¶å€™showå‡ºæ¥ï¼Œæ¨èè¿™ä¸ªåšæ³•
     private GuideModel mGuideModel;
     private EditText guide_name;
     private EditText guide_phone;
     private EditText password,re_password;
-    private CompoundButton user_flag;
-    private LinearLayout layout_user;
+    private CompoundButton user_flag,user_reset;
+    private LinearLayout layout_user,layout_rem;
     private TextView userID;
 
     private LinearLayout  mDelComplete;
@@ -66,20 +66,24 @@ public class S3_GuideUpdateActivity extends BaseActivity implements BusinessResp
         password = (EditText) findViewById(R.id.user_password);
         re_password = (EditText) findViewById(R.id.user_repassword);
         user_flag = (CompoundButton) findViewById(R.id.user_flag);
+        user_reset= (CompoundButton) findViewById(R.id.user_reset);
+        layout_rem = (LinearLayout) findViewById(R.id.layout_rem);
         layout_user = (LinearLayout) findViewById(R.id.layout_user);
         mUpdateComplete = (TextView) findViewById(R.id.c0_publish_button);
         mDelComplete = (LinearLayout) findViewById(R.id.c0_del_button);
         userID=(TextView) findViewById(R.id.userId);
 
+
+        mUpdateComplete.setOnClickListener(this);
+        mDelComplete.setOnClickListener(this);
+
         Intent intent = getIntent();
         guideId=intent.getStringExtra("guideId");
 
         mShared =getSharedPreferences(MemberAppConst.USERINFO, 0);
-        mAlertView = new AlertView("ĞÅÏ¢ÌáÊ¾", "È·¶¨É¾³ı¸ÃÌõ¼ÇÂ¼£¡", "È¡Ïû", new String[]{"È·¶¨"}, null, this, AlertView.Style.Alert, this).setCancelable(true).setOnDismissListener(this);
+        mAlertView = new AlertView("ä¿¡æ¯æç¤º", "ç¡®å®šåˆ é™¤è¯¥æ¡è®°å½•ï¼", "å–æ¶ˆ", new String[]{"ç¡®å®š"}, null, this, AlertView.Style.Alert, this).setCancelable(true).setOnDismissListener(this);
 
-        mGuideModel = new GuideModel(this);
-        mGuideModel.addResponseListener(this);
-        mGuideModel.getinfo(Integer.parseInt(guideId));
+
 
         guide_phone.addTextChangedListener(new TextWatcher() {
             @Override
@@ -105,13 +109,27 @@ public class S3_GuideUpdateActivity extends BaseActivity implements BusinessResp
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    layout_user.setVisibility(View.VISIBLE);
+                    if("1".equals(mGuide.user_flag)){
+                        user_reset.setVisibility(View.VISIBLE);
+                        layout_rem.setVisibility(View.VISIBLE);
+                        layout_user.setVisibility(View.GONE);
+                    }else{
+                        user_reset.setVisibility(View.GONE);
+                        layout_rem.setVisibility(View.GONE);
+                        layout_user.setVisibility(View.VISIBLE);
+                    }
+
                 } else {
                     layout_user.setVisibility(View.GONE);
+                    user_reset.setVisibility(View.GONE);
+                    layout_rem.setVisibility(View.GONE);
                 }
             }
         });
 
+        mGuideModel = new GuideModel(this);
+        mGuideModel.addResponseListener(this);
+        mGuideModel.getinfo(Integer.parseInt(guideId));
     }
 
     private void init(SIMPLE_GUIDE obj){
@@ -121,12 +139,17 @@ public class S3_GuideUpdateActivity extends BaseActivity implements BusinessResp
         password.setText(obj.password);
         re_password.setText(obj.password);
 
-        if(obj.user_flag=="1"){
+
+        if("1".equals(obj.user_flag)){
             user_flag.setChecked(true);
-            layout_user.setVisibility(View.VISIBLE);
+            layout_rem.setVisibility(View.VISIBLE);
+            user_reset.setVisibility(View.VISIBLE);
+            layout_user.setVisibility(View.GONE);
         }else{
             user_flag.setChecked(false);
+            user_reset.setVisibility(View.GONE);
             layout_user.setVisibility(View.GONE);
+            layout_rem.setVisibility(View.GONE);
         }
 
     }
@@ -138,7 +161,7 @@ public class S3_GuideUpdateActivity extends BaseActivity implements BusinessResp
             case R.id.top_view_back:
                 finish();
                 break;
-            case R.id.top_member_upate:
+            case R.id.c0_publish_button:
                 String name = guide_name.getText().toString();
                 String phone = guide_phone.getText().toString();
                 String nShopid = mShared.getString("shopid", "0");
@@ -152,25 +175,31 @@ public class S3_GuideUpdateActivity extends BaseActivity implements BusinessResp
 
 
                 if ("".equals(name)) {
-                    ToastShow("µêÔ±Ãû³Æ²»ÄÜÎª¿Õ");
+                    ToastShow("åº—å‘˜åç§°ä¸èƒ½ä¸ºç©º");
                     guide_name.setText("");
                     guide_name.requestFocus();
                 } else if ("".equals(phone)) {
-                    ToastShow("ÊÖ»úºÅÂë²»ÄÜÎª¿Õ");
+                    ToastShow("æ‰‹æœºå·ç ä¸èƒ½ä¸ºç©º");
                     guide_phone.setText("");
                     guide_phone.requestFocus();
                 } else if (!mf.matches()) {
-                    ToastShow("ÊÖ»úºÅÂëÊäÈëÓĞÎó£¬ÇëÖØĞÂÊäÈë£¡");
+                    ToastShow("æ‰‹æœºå·ç è¾“å…¥æœ‰è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥ï¼");
                     guide_phone.requestFocus();
-                } else {
+                }else {
                     if (user_flag.isChecked()) {
                         user_falg = "1";
-                        str_userId = userID.getText().toString();
-                        str_password = password.getText().toString();
-                        str_repassword = re_password.getText().toString();
 
+                        if("1".equals(mGuide.user_flag)){
+                            str_userId =phone ;
+                            str_password = "111111";
+                            str_repassword = "111111";
+                        }else{
+                            str_userId = userID.getText().toString();
+                            str_password = password.getText().toString();
+                            str_repassword = re_password.getText().toString();
+                        }
                         if ("".equals(str_userId)) {
-                            ToastShow("ÓÃ»§Ãû²»ÄÜÎª¿Õ");
+                            ToastShow("ç”¨æˆ·åä¸èƒ½ä¸ºç©º");
                             userID.requestFocus();
                             flag = "1";
                         } else if ("".equals(str_password)) {
@@ -187,7 +216,7 @@ public class S3_GuideUpdateActivity extends BaseActivity implements BusinessResp
                             flag = "1";
                         }
                     }
-                    if (flag == "0") {
+                    if ( "0".equals(flag)) {
                         SIMPLE_GUIDE guide = new SIMPLE_GUIDE();
                         guide.name = name;
                         guide.phone = phone;
@@ -225,7 +254,7 @@ public class S3_GuideUpdateActivity extends BaseActivity implements BusinessResp
                 Intent intent = new Intent(this, S0_ProductTypeListActivity.class);
                 //startActivity(intent);
                 setResult(Activity.RESULT_OK, intent);
-                ToastShow("É¾³ı³É¹¦£¡");
+                ToastShow("åˆ é™¤æˆåŠŸ");
                 finish();
                 Message msg = new Message();
                 msg.what = MessageConstant.REFRESH_LIST;
@@ -239,7 +268,7 @@ public class S3_GuideUpdateActivity extends BaseActivity implements BusinessResp
             guideaddResponse response = new guideaddResponse();
             response.fromJson(jo);
             if (response.succeed == 1) {
-                ToastShow("±£´æ³É¹¦£¡");
+                ToastShow("ä¿å­˜æˆåŠŸ");
                 finish();
                 Message msg = new Message();
                 msg.what = MessageConstant.REFRESH_LIST;
@@ -261,11 +290,11 @@ public class S3_GuideUpdateActivity extends BaseActivity implements BusinessResp
                     if(null !=mGuide.name) {
                         init(mGuide);
                     } else {
-                        ToastShow("ÎŞ´ËÔ±¹¤ĞÅÏ¢£¡");
+                        ToastShow("æ— æ­¤å‘˜å·¥ä¿¡æ¯");
                         finish();
                     }
                 } else {
-                    ToastShow("ÎŞ´ËÔ±¹¤ĞÅÏ¢£¡");
+                    ToastShow("æ— æ­¤å‘˜å·¥ä¿¡æ¯");
                     finish();
                 }
             }

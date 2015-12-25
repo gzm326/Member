@@ -100,7 +100,7 @@ public class A1_ShopAddActivity extends BaseActivity implements BusinessResponse
             nFlag="1";
         }
 
-        ToastShow(nShopid);
+
         if(nFlag=="0"){
             address.setText(mShared.getString("naddress", ""));
         }
@@ -190,7 +190,7 @@ public class A1_ShopAddActivity extends BaseActivity implements BusinessResponse
                     lxdh.requestFocus();
 
                 }else {
-                    ToastShow(Integer.toString(userId));
+
                     SIMPLE_SHOP shop = new SIMPLE_SHOP();
                     shop.id=Integer.parseInt(nShopid);
                     shop.userid=userId;
@@ -231,25 +231,25 @@ public class A1_ShopAddActivity extends BaseActivity implements BusinessResponse
         birth_discount.setText(nshop.birth_discount);
         shop_credit.setText(nshop.shop_credit);
         shop_discount.setText(nshop.shop_discount);
-        if(nshop.grade_credit=="1"){
+        if("1".equals(nshop.grade_credit)){
             grade_credit.setChecked(true);
         }else{
             grade_credit.setChecked(false);
         }
 
-        if(nshop.grade_discount=="1"){
+        if("1".equals(nshop.grade_discount)){
             grade_discount.setChecked(true);
         }else{
             grade_discount.setChecked(false);
         }
 
-        if(nshop.sale_credit=="1"){
+        if("1".equals(nshop.sale_credit)){
             sale_credit.setChecked(true);
         }else{
             sale_credit.setChecked(false);
         }
 
-        if(nshop.sale_discount=="1"){
+        if("1".equals(nshop.sale_discount)){
             sale_discount.setChecked(true);
         }else{
             sale_discount.setChecked(false);

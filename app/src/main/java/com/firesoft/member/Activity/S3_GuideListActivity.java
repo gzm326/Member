@@ -67,9 +67,9 @@ public class S3_GuideListActivity extends BaseActivity implements BusinessRespon
                 if (position - 1 >= 0 && position - 1 < mDataModel.dataList.size()) {
                     SIMPLE_GUIDE guide = mDataModel.dataList.get(position - 1);
 
-                    Intent intent_profile = new Intent(S3_GuideListActivity.this, S0_ProductTypeUpdateActivity.class);
+                    Intent intent_profile = new Intent(S3_GuideListActivity.this, S3_GuideUpdateActivity.class);
                     Bundle bundle = new Bundle();
-                    bundle.putSerializable("guide", guide);
+                    bundle.putSerializable("guideId", Integer.toString(guide.id));
                     intent_profile.putExtras(bundle);
 
                     startActivityForResult(intent_profile, REQUESTCODE1);

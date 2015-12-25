@@ -40,7 +40,7 @@ public class SIMPLE_GUIDE extends DataBaseModel {
         if(null == jsonObject){
             return ;
         }
-        this.id = jsonObject.optInt("uid");
+        this.id = jsonObject.optInt("id");
         this.name = jsonObject.optString("name");
         this.phone = jsonObject.optString("phone");
         this.shopid = jsonObject.optString("shopid");
@@ -54,7 +54,7 @@ public class SIMPLE_GUIDE extends DataBaseModel {
     {
         JSONObject localItemObject = new JSONObject();
 
-        localItemObject.put("uid", id);
+        localItemObject.put("id", id);
         localItemObject.put("name", name);
         localItemObject.put("phone", phone);
         localItemObject.put("shopid", shopid);

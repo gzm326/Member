@@ -180,6 +180,43 @@
                     app:stateMaskDrawable="@mipmap/switch_state_mask"
                     app:sliderDrawable="@drawable/selector_switch_slider"/>
 
+                <com.external.switchbutton.SwitchButton
+                    style="@style/item"
+                    android:id="@+id/user_reset"
+                    android:text="是否重置系统操作员密码"
+                    android:checked="false"
+                    android:visibility="gone"
+                    android:background="@drawable/selector_preference_center"
+                    app:withTextInterval="16dp"
+                    app:frameDrawable="@mipmap/switch_frame"
+                    app:stateDrawable="@drawable/selector_switch_state"
+                    app:stateMaskDrawable="@mipmap/switch_state_mask"
+                    app:sliderDrawable="@drawable/selector_switch_slider"/>
+            <LinearLayout
+                android:id="@+id/layout_rem"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+
+                    android:background="@drawable/selector_preference_footer"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="1dp"
+                        android:text="默认用户名为联系电话，重置后默认密码：111111"
+                        android:textColor="#666666"
+                        android:textSize="16dp" />
+                </LinearLayout>
+            </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/layout_user"

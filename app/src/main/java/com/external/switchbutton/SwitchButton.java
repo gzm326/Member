@@ -22,6 +22,8 @@ import android.view.ViewConfiguration;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.CompoundButton;
 import android.widget.Scroller;
+
+import com.external.activeandroid.util.Log;
 import com.firesoft.member.R;
 
 /**
@@ -333,6 +335,7 @@ public class SwitchButton extends CompoundButton {
      public void setChecked(boolean checked) {
         boolean changed = checked != isChecked();
         super.setChecked(checked);
+
         if(changed){
             if(getWidth() > 0 && switchScroller != null){   //如果已经绘制完成
                 switchScroller.startScroll(checked);
